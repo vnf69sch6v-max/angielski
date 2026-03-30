@@ -43,6 +43,19 @@ export const metadata: Metadata = {
   description:
     "Inteligentna aplikacja do nauki angielskiego. Spaced repetition, ćwiczenia kontekstowe i adaptacyjny system nauki.",
   keywords: ["angielski", "nauka", "spaced repetition", "B1", "B2", "FluentFlow"],
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 1,
+    userScalable: false,
+    viewportFit: "cover",
+  },
+  themeColor: "#0A0A0C",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "FluentFlow",
+  },
 };
 
 export default function RootLayout({

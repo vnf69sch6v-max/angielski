@@ -36,7 +36,7 @@ export default function FlashCard({ wordProgress, onAnswer }: FlashCardProps) {
       {/* Card container with perspective */}
       <div
         className="relative w-full cursor-pointer"
-        style={{ perspective: 1000, minHeight: 320 }}
+        style={{ perspective: 1000, minHeight: 280 }}
         onClick={() => !isFlipped && setIsFlipped(true)}
       >
         <motion.div
@@ -48,7 +48,7 @@ export default function FlashCard({ wordProgress, onAnswer }: FlashCardProps) {
           {/* Front */}
           <div
             className="absolute inset-0 w-full glass-card p-8 flex flex-col items-center justify-center"
-            style={{ backfaceVisibility: "hidden", minHeight: 320 }}
+            style={{ backfaceVisibility: "hidden", minHeight: 280 }}
           >
             <DomainTag domain={wordProgress.domain} size="md" className="mb-4" />
             <h2 className="text-4xl sm:text-5xl font-heading text-text-primary mb-3 text-center">
@@ -68,7 +68,7 @@ export default function FlashCard({ wordProgress, onAnswer }: FlashCardProps) {
             style={{
               backfaceVisibility: "hidden",
               transform: "rotateY(180deg)",
-              minHeight: 320,
+              minHeight: 280,
             }}
           >
             <p className="text-sm font-body text-text-secondary mb-2">
@@ -97,7 +97,7 @@ export default function FlashCard({ wordProgress, onAnswer }: FlashCardProps) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
             transition={{ duration: 0.3, delay: 0.2 }}
-            className="grid grid-cols-4 gap-2 mt-6"
+            className="grid grid-cols-2 sm:grid-cols-4 gap-2 mt-6"
           >
             {ratingButtons.map((btn) => (
               <motion.button

@@ -64,8 +64,8 @@ export default function Navbar() {
     <>
       {/* Mobile: Bottom Navigation */}
       <nav className="fixed bottom-0 left-0 right-0 z-50 md:hidden">
-        <div className="bg-bg-surface/95 backdrop-blur-xl border-t border-border">
-          <div className="flex items-center justify-around px-2 py-1">
+        <div className="bg-bg-surface/95 backdrop-blur-xl border-t border-border safe-bottom">
+          <div className="flex items-center justify-around px-2 py-2">
             {navItems.map((item) => {
               const isActive = pathname === item.href;
               return (
@@ -101,7 +101,7 @@ export default function Navbar() {
           </div>
         </div>
         {/* Safe area for mobile */}
-        <div className="h-[env(safe-area-inset-bottom)] bg-bg-surface/95" />
+        <div className="h-[env(safe-area-inset-bottom)] bg-bg-surface/95 hidden" />
       </nav>
 
       {/* Desktop: Sidebar */}

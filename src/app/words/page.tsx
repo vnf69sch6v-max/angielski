@@ -139,7 +139,7 @@ export default function WordsPage() {
           </div>
 
           {/* Filters */}
-          <div className="flex flex-wrap gap-2 mb-6">
+          <div className="flex gap-2 mb-6 overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 sm:flex-wrap scrollbar-hide">
             {/* Domain filters */}
             {(Object.keys(DOMAIN_CONFIG) as Domain[]).map((domain) => (
               <button
@@ -162,7 +162,7 @@ export default function WordsPage() {
               </button>
             ))}
 
-            <span className="w-px h-6 bg-border self-center mx-1" />
+            <span className="w-px h-6 bg-border self-center mx-1 flex-shrink-0" />
 
             {/* State filters */}
             {(Object.keys(MASTERY_LABELS) as WordState[]).map((state) => (
@@ -186,7 +186,7 @@ export default function WordsPage() {
               </button>
             ))}
 
-            <span className="w-px h-6 bg-border self-center mx-1" />
+            <span className="w-px h-6 bg-border self-center mx-1 flex-shrink-0" />
 
             {/* Level filters */}
             {["B1", "B2", "C1"].map((level) => (
