@@ -1,0 +1,19 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Odcięcie globalnego dostępu - nikt nie ma nadanego dostępu domyślnego
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Pozwalamy użytkownikom czytać i modyfikować tylko swoje własne dokumenty (w obrębie kolekcji users/uid)
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+      
+      // I wszystkie ich podkolekcje jak 'progress', 'sessions', 'profile', 'stats'
+      match /{document=**} {
+        allow read, write: if request.auth != null && request.auth.uid == userId;
+      }
+    }
+  }
+}
