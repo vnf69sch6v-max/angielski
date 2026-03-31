@@ -70,9 +70,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       } else {
         await signInWithPopup(auth, googleProvider);
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error("Google sign-in failed:", error);
-      alert("Wystąpił błąd podczas logowania. Spróbuj ponownie.");
+      alert(`Wystąpił błąd podczas logowania: ${error?.message || "Nieznany błąd"}. 
+      Jeśli testujesz na nowym linku (np. Vercel preview), musisz dodać ten dres URL do autoryzowanych domen w Firebase Console -> Authentication -> Settings -> Authorized domains.`);
     }
   };
 
