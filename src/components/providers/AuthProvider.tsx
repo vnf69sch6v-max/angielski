@@ -70,10 +70,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       } else {
         await signInWithPopup(auth, googleProvider);
       }
-    } catch (error: any) {
+    } catch (error) {
       console.error("Google sign-in failed:", error);
-      alert(`Wystąpił błąd podczas logowania: ${error?.message || "Nieznany błąd"}. 
-      Jeśli testujesz na nowym linku (np. Vercel preview), musisz dodać ten dres URL do autoryzowanych domen w Firebase Console -> Authentication -> Settings -> Authorized domains.`);
+      const errorMessage = error instanceof Error ? error.message : "Nieznany błąd";
+      alert(`Wystąpił błąd podczas logowania: ${errorMessage}. 
+      Jeśli testujesz na nowym linku (np. Vercel preview), musisz dodać ten adres URL do autoryzowanych domen w Firebase Console -> Authentication -> Settings -> Authorized domains.`);
     }
   };
 
