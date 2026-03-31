@@ -1,14 +1,9 @@
-const CACHE_NAME = "fluentflow-v1";
+const CACHE_NAME = "fluentflow-v2";
 const STATIC_ASSETS = [
-  "/",
-  "/learn",
-  "/stats",
-  "/words",
-  "/settings",
   "/login",
 ];
 
-// Install: pre-cache shell
+// Install: pre-cache only login shell
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
@@ -18,7 +13,7 @@ self.addEventListener("install", (event) => {
   self.skipWaiting();
 });
 
-// Activate: clean old caches
+// Activate: clean old caches immediately
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches.keys().then((keys) => {
@@ -32,8 +27,8 @@ self.addEventListener("activate", (event) => {
   self.clients.claim();
 });
 
-// Fetch: Network-first with cache fallback for navigations,
-// Cache-first for static assets
+// Fetch: Always network-first for navigation (HTML pages)
+// Cache-first only for static assets (JS, CSS, images, fonts)
 self.addEventListener("fetch", (event) => {
   const { request } = event;
   const url = new URL(request.url);
@@ -41,19 +36,28 @@ self.addEventListener("fetch", (event) => {
   // Skip non-GET and cross-origin
   if (request.method !== "GET" || url.origin !== location.origin) return;
 
-  // Skip API and Firestore calls
-  if (url.pathname.startsWith("/api/") || url.pathname.includes("firestore")) return;
+  // Skip API, Firestore, and auth-related calls entirely
+  if (
+    url.pathname.startsWith("/api/") || 
+    url.pathname.includes("firestore") ||
+    url.pathname.includes("__/auth/") ||
+    url.hostname.includes("googleapis.com") ||
+    url.hostname.includes("google.com")
+  ) return;
 
-  // Navigation requests: network-first
+  // Navigation requests: ALWAYS network-first, no cache fallback for auth pages
   if (request.mode === "navigate") {
     event.respondWith(
       fetch(request)
         .then((response) => {
-          const clone = response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
+          // Only cache successful responses
+          if (response.ok) {
+            const clone = response.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
+          }
           return response;
         })
-        .catch(() => caches.match(request).then((r) => r || caches.match("/")))
+        .catch(() => caches.match(request).then((r) => r || caches.match("/login")))
     );
     return;
   }

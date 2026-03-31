@@ -4,7 +4,6 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import {
   onAuthStateChanged,
   signInWithPopup,
-  signInWithRedirect,
   signOut as firebaseSignOut,
   User,
 } from "firebase/auth";
