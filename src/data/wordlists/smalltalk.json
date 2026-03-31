@@ -1,228 +1,3228 @@
 {
   "domain": "smalltalk",
   "words": [
-    { "word": "actually", "translation": "właściwie/tak naprawdę", "partOfSpeech": "adverb", "level": "B1", "frequency": 10, "tags": ["filler", "conversation"] },
-    { "word": "fair enough", "translation": "w porządku/ok", "partOfSpeech": "phrase", "level": "B1", "frequency": 9, "tags": ["agreement", "conversation"] },
-    { "word": "to be honest", "translation": "szczerze mówiąc", "partOfSpeech": "phrase", "level": "B1", "frequency": 9, "tags": ["filler", "opinion"] },
-    { "word": "by the way", "translation": "przy okazji/nawiasem", "partOfSpeech": "phrase", "level": "B1", "frequency": 9, "tags": ["transition", "conversation"] },
-    { "word": "kind of", "translation": "w pewnym sensie/trochę", "partOfSpeech": "phrase", "level": "B1", "frequency": 9, "tags": ["hedging", "conversation"] },
-    { "word": "sort of", "translation": "poniekąd/w pewnym sensie", "partOfSpeech": "phrase", "level": "B1", "frequency": 8, "tags": ["hedging", "conversation"] },
-    { "word": "literally", "translation": "dosłownie", "partOfSpeech": "adverb", "level": "B1", "frequency": 8, "tags": ["emphasis", "conversation"] },
-    { "word": "apparently", "translation": "najwyraźniej/podobno", "partOfSpeech": "adverb", "level": "B1", "frequency": 8, "tags": ["reporting", "conversation"] },
-    { "word": "figure out", "translation": "dowiedzieć się/rozgryźć", "partOfSpeech": "phrasal verb", "level": "B1", "frequency": 9, "tags": ["problem_solving", "general"] },
-    { "word": "come up with", "translation": "wymyślić/wpaść na", "partOfSpeech": "phrasal verb", "level": "B1", "frequency": 8, "tags": ["creativity", "general"] },
-    { "word": "turn out", "translation": "okazać się", "partOfSpeech": "phrasal verb", "level": "B1", "frequency": 8, "tags": ["results", "general"] },
-    { "word": "look forward to", "translation": "nie móc się doczekać", "partOfSpeech": "phrasal verb", "level": "B1", "frequency": 8, "tags": ["emotions", "formal"] },
-    { "word": "get along with", "translation": "dogadywać się z", "partOfSpeech": "phrasal verb", "level": "B1", "frequency": 7, "tags": ["relationships", "general"] },
-    { "word": "catch up", "translation": "nadrobić/spotkać się", "partOfSpeech": "phrasal verb", "level": "B1", "frequency": 8, "tags": ["social", "work"] },
-    { "word": "bring up", "translation": "poruszyć (temat)/wychować", "partOfSpeech": "phrasal verb", "level": "B1", "frequency": 7, "tags": ["conversation", "general"] },
-    { "word": "break down", "translation": "zepsuć się/rozłożyć na części", "partOfSpeech": "phrasal verb", "level": "B1", "frequency": 8, "tags": ["problems", "analysis"] },
-    { "word": "put off", "translation": "odłożyć/zniechęcić", "partOfSpeech": "phrasal verb", "level": "B1", "frequency": 7, "tags": ["procrastination", "general"] },
-    { "word": "give up", "translation": "poddać się/zrezygnować", "partOfSpeech": "phrasal verb", "level": "B1", "frequency": 9, "tags": ["resilience", "general"] },
-    { "word": "go through", "translation": "przechodzić przez/przeglądać", "partOfSpeech": "phrasal verb", "level": "B1", "frequency": 8, "tags": ["experience", "process"] },
-    { "word": "keep up with", "translation": "nadążać za", "partOfSpeech": "phrasal verb", "level": "B1", "frequency": 8, "tags": ["pace", "learning"] },
-    { "word": "run into", "translation": "wpaść na (kogoś)/natknąć się", "partOfSpeech": "phrasal verb", "level": "B1", "frequency": 7, "tags": ["encounters", "problems"] },
-    { "word": "work out", "translation": "ćwiczyć/rozwiązać się", "partOfSpeech": "phrasal verb", "level": "B1", "frequency": 8, "tags": ["fitness", "solutions"] },
-    { "word": "end up", "translation": "skończyć/wylądować", "partOfSpeech": "phrasal verb", "level": "B1", "frequency": 8, "tags": ["results", "general"] },
-    { "word": "pick up", "translation": "odebrać/podnieść/nauczyć się", "partOfSpeech": "phrasal verb", "level": "B1", "frequency": 9, "tags": ["learning", "general"] },
-    { "word": "set up", "translation": "ustawić/zorganizować", "partOfSpeech": "phrasal verb", "level": "B1", "frequency": 8, "tags": ["organization", "tech"] },
-    { "word": "check out", "translation": "sprawdzić/wymeldować się", "partOfSpeech": "phrasal verb", "level": "B1", "frequency": 8, "tags": ["discovery", "travel"] },
-    { "word": "point out", "translation": "wskazać/zwrócić uwagę", "partOfSpeech": "phrasal verb", "level": "B1", "frequency": 7, "tags": ["observation", "discussion"] },
-    { "word": "cut down on", "translation": "ograniczyć (coś)", "partOfSpeech": "phrasal verb", "level": "B2", "frequency": 6, "tags": ["health", "habits"] },
-    { "word": "look into", "translation": "zbadać/przyjrzeć się", "partOfSpeech": "phrasal verb", "level": "B1", "frequency": 7, "tags": ["research", "work"] },
-    { "word": "take over", "translation": "przejąć (kontrolę)", "partOfSpeech": "phrasal verb", "level": "B1", "frequency": 7, "tags": ["work", "business"] },
-    { "word": "it depends", "translation": "to zależy", "partOfSpeech": "phrase", "level": "B1", "frequency": 9, "tags": ["hedging", "conversation"] },
-    { "word": "no worries", "translation": "nie ma sprawy/luz", "partOfSpeech": "phrase", "level": "B1", "frequency": 9, "tags": ["reassurance", "casual"] },
-    { "word": "that makes sense", "translation": "to ma sens", "partOfSpeech": "phrase", "level": "B1", "frequency": 9, "tags": ["agreement", "understanding"] },
-    { "word": "I see what you mean", "translation": "rozumiem co masz na myśli", "partOfSpeech": "phrase", "level": "B1", "frequency": 8, "tags": ["understanding", "conversation"] },
-    { "word": "I was wondering", "translation": "zastanawiałem się", "partOfSpeech": "phrase", "level": "B1", "frequency": 8, "tags": ["polite_request", "conversation"] },
-    { "word": "as far as I know", "translation": "o ile wiem/z tego co wiem", "partOfSpeech": "phrase", "level": "B1", "frequency": 7, "tags": ["hedging", "knowledge"] },
-    { "word": "to a certain extent", "translation": "do pewnego stopnia", "partOfSpeech": "phrase", "level": "B2", "frequency": 6, "tags": ["nuance", "academic"] },
-    { "word": "on the other hand", "translation": "z drugiej strony", "partOfSpeech": "phrase", "level": "B1", "frequency": 8, "tags": ["contrast", "argumentation"] },
-    { "word": "nevertheless", "translation": "niemniej jednak", "partOfSpeech": "adverb", "level": "B2", "frequency": 6, "tags": ["contrast", "formal"] },
-    { "word": "meanwhile", "translation": "tymczasem/w międzyczasie", "partOfSpeech": "adverb", "level": "B1", "frequency": 7, "tags": ["time", "narrative"] },
-    { "word": "eventually", "translation": "ostatecznie/w końcu", "partOfSpeech": "adverb", "level": "B1", "frequency": 8, "tags": ["time", "results"] },
-    { "word": "obviously", "translation": "oczywiście/ewidentnie", "partOfSpeech": "adverb", "level": "B1", "frequency": 8, "tags": ["certainty", "emphasis"] },
-    { "word": "basically", "translation": "w zasadzie/w skrócie", "partOfSpeech": "adverb", "level": "B1", "frequency": 9, "tags": ["simplification", "filler"] },
-    { "word": "unfortunately", "translation": "niestety", "partOfSpeech": "adverb", "level": "B1", "frequency": 8, "tags": ["negative", "formal"] },
-    { "word": "definitely", "translation": "zdecydowanie/na pewno", "partOfSpeech": "adverb", "level": "B1", "frequency": 9, "tags": ["certainty", "agreement"] },
-    { "word": "stuff", "translation": "rzeczy/sprawy", "partOfSpeech": "noun", "level": "B1", "frequency": 9, "tags": ["general", "informal"] },
-    { "word": "deal with", "translation": "radzić sobie z/zajmować się", "partOfSpeech": "phrasal verb", "level": "B1", "frequency": 9, "tags": ["problem_solving", "work"] },
-    { "word": "hang out", "translation": "spędzać czas/wychodzić", "partOfSpeech": "phrasal verb", "level": "B1", "frequency": 8, "tags": ["social", "casual"] },
-    { "word": "show up", "translation": "pojawić się/przyjść", "partOfSpeech": "phrasal verb", "level": "B1", "frequency": 8, "tags": ["arrival", "general"] },
-    { "word": "go for it", "translation": "działaj!/śmiało!", "partOfSpeech": "phrase", "level": "B1", "frequency": 8, "tags": ["encouragement", "casual"] },
-    { "word": "it's up to you", "translation": "to zależy od ciebie", "partOfSpeech": "phrase", "level": "B1", "frequency": 8, "tags": ["decision", "conversation"] },
-    { "word": "get rid of", "translation": "pozbyć się", "partOfSpeech": "phrasal verb", "level": "B1", "frequency": 8, "tags": ["removal", "general"] },
-    { "word": "take into account", "translation": "wziąć pod uwagę", "partOfSpeech": "phrase", "level": "B2", "frequency": 7, "tags": ["consideration", "formal"] },
-    { "word": "keep in mind", "translation": "mieć na uwadze/pamiętać", "partOfSpeech": "phrase", "level": "B1", "frequency": 8, "tags": ["reminder", "general"] },
-    { "word": "make up one's mind", "translation": "zdecydować się", "partOfSpeech": "phrase", "level": "B2", "frequency": 6, "tags": ["decision", "general"] },
-    { "word": "be in charge of", "translation": "być odpowiedzialnym za", "partOfSpeech": "phrase", "level": "B1", "frequency": 7, "tags": ["responsibility", "work"] },
-    { "word": "overwhelmed", "translation": "przytłoczony", "partOfSpeech": "adjective", "level": "B1", "frequency": 7, "tags": ["emotions", "stress"] },
-    { "word": "exhausted", "translation": "wyczerpany", "partOfSpeech": "adjective", "level": "B1", "frequency": 7, "tags": ["physical", "emotions"] },
-    { "word": "awkward", "translation": "niezręczny/dziwny", "partOfSpeech": "adjective", "level": "B1", "frequency": 7, "tags": ["social", "emotions"] },
-    { "word": "genuine", "translation": "prawdziwy/szczery", "partOfSpeech": "adjective", "level": "B1", "frequency": 7, "tags": ["character", "quality"] },
-    { "word": "straightforward", "translation": "prosty/bezpośredni", "partOfSpeech": "adjective", "level": "B1", "frequency": 7, "tags": ["clarity", "character"] },
-    { "word": "reliable", "translation": "niezawodny/rzetelny", "partOfSpeech": "adjective", "level": "B1", "frequency": 8, "tags": ["character", "quality"] },
-    { "word": "reasonable", "translation": "rozsądny/sensowny", "partOfSpeech": "adjective", "level": "B1", "frequency": 8, "tags": ["judgment", "general"] },
-    { "word": "appropriate", "translation": "odpowiedni/właściwy", "partOfSpeech": "adjective", "level": "B1", "frequency": 7, "tags": ["behavior", "formal"] },
-    { "word": "convenient", "translation": "wygodny/dogodny", "partOfSpeech": "adjective", "level": "B1", "frequency": 7, "tags": ["practical", "general"] },
-    { "word": "frustrated", "translation": "sfrustrowany", "partOfSpeech": "adjective", "level": "B1", "frequency": 7, "tags": ["emotions", "work"] },
-    { "word": "grateful", "translation": "wdzięczny", "partOfSpeech": "adjective", "level": "B1", "frequency": 7, "tags": ["emotions", "positive"] },
-    { "word": "impressed", "translation": "pod wrażeniem", "partOfSpeech": "adjective", "level": "B1", "frequency": 7, "tags": ["emotions", "positive"] },
-    { "word": "hilarious", "translation": "przezabawny", "partOfSpeech": "adjective", "level": "B2", "frequency": 6, "tags": ["humor", "description"] },
-    { "word": "ridiculous", "translation": "absurdalny/śmieszny", "partOfSpeech": "adjective", "level": "B1", "frequency": 7, "tags": ["opinion", "emphasis"] },
-    { "word": "gorgeous", "translation": "przepiękny/wspaniały", "partOfSpeech": "adjective", "level": "B1", "frequency": 6, "tags": ["appearance", "compliment"] },
-    { "word": "decent", "translation": "przyzwoity/niezły", "partOfSpeech": "adjective", "level": "B1", "frequency": 7, "tags": ["quality", "casual"] },
-    { "word": "binge-watch", "translation": "oglądać seriale ciągiem", "partOfSpeech": "verb", "level": "B2", "frequency": 6, "tags": ["entertainment", "modern"] },
-    { "word": "procrastinate", "translation": "zwlekać/prokrastynować", "partOfSpeech": "verb", "level": "B2", "frequency": 6, "tags": ["habits", "psychology"] },
-    { "word": "multitask", "translation": "robić kilka rzeczy naraz", "partOfSpeech": "verb", "level": "B2", "frequency": 6, "tags": ["work", "productivity"] },
-    { "word": "commute", "translation": "dojeżdżać do pracy", "partOfSpeech": "verb/noun", "level": "B1", "frequency": 7, "tags": ["work", "transport"] },
-    { "word": "relocate", "translation": "przeprowadzić się/przenieść", "partOfSpeech": "verb", "level": "B2", "frequency": 6, "tags": ["life_changes", "work"] },
-    { "word": "brainstorm", "translation": "burza mózgów", "partOfSpeech": "verb/noun", "level": "B1", "frequency": 7, "tags": ["creativity", "work"] },
-    { "word": "prioritize", "translation": "ustalać priorytety", "partOfSpeech": "verb", "level": "B2", "frequency": 7, "tags": ["productivity", "work"] },
-    { "word": "delegate", "translation": "delegować (zadania)", "partOfSpeech": "verb", "level": "B2", "frequency": 6, "tags": ["management", "work"] },
-    { "word": "compromise", "translation": "kompromis/iść na kompromis", "partOfSpeech": "noun/verb", "level": "B1", "frequency": 7, "tags": ["negotiation", "relationships"] },
-    { "word": "flexible", "translation": "elastyczny", "partOfSpeech": "adjective", "level": "B1", "frequency": 8, "tags": ["work", "character"] },
-    { "word": "productive", "translation": "produktywny/wydajny", "partOfSpeech": "adjective", "level": "B1", "frequency": 8, "tags": ["work", "quality"] },
-    { "word": "sustainable", "translation": "zrównoważony/trwały", "partOfSpeech": "adjective", "level": "B2", "frequency": 7, "tags": ["environment", "business"] },
-    { "word": "affordable", "translation": "przystępny cenowo", "partOfSpeech": "adjective", "level": "B1", "frequency": 7, "tags": ["money", "shopping"] },
-    { "word": "deadline", "translation": "termin/deadline", "partOfSpeech": "noun", "level": "B1", "frequency": 9, "tags": ["work", "time"] },
-    { "word": "feedback", "translation": "informacja zwrotna", "partOfSpeech": "noun", "level": "B1", "frequency": 9, "tags": ["work", "communication"] },
-    { "word": "challenge", "translation": "wyzwanie", "partOfSpeech": "noun", "level": "B1", "frequency": 9, "tags": ["work", "motivation"] },
-    { "word": "opportunity", "translation": "okazja/możliwość", "partOfSpeech": "noun", "level": "B1", "frequency": 9, "tags": ["career", "general"] },
-    { "word": "mindset", "translation": "nastawienie/mentalność", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["psychology", "growth"] },
-    { "word": "boundaries", "translation": "granice (osobiste)", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["relationships", "wellbeing"] },
-    { "word": "perspective", "translation": "perspektywa/punkt widzenia", "partOfSpeech": "noun", "level": "B1", "frequency": 8, "tags": ["thinking", "discussion"] },
-    { "word": "take for granted", "translation": "brać za pewnik", "partOfSpeech": "phrase", "level": "B2", "frequency": 6, "tags": ["attitudes", "idiom"] },
-    { "word": "the bottom line", "translation": "konkluzja/w gruncie rzeczy", "partOfSpeech": "phrase", "level": "B2", "frequency": 6, "tags": ["summary", "business"] },
-    { "word": "at the end of the day", "translation": "koniec końców/ostatecznie", "partOfSpeech": "phrase", "level": "B1", "frequency": 8, "tags": ["summary", "filler"] },
-    { "word": "in the long run", "translation": "na dłuższą metę", "partOfSpeech": "phrase", "level": "B2", "frequency": 6, "tags": ["time", "planning"] },
-    { "word": "from scratch", "translation": "od zera/od podstaw", "partOfSpeech": "phrase", "level": "B1", "frequency": 7, "tags": ["beginning", "work"] },
-    { "word": "pros and cons", "translation": "wady i zalety", "partOfSpeech": "phrase", "level": "B1", "frequency": 8, "tags": ["analysis", "decision"] },
-    { "word": "hands-on", "translation": "praktyczny/konkretny", "partOfSpeech": "adjective", "level": "B2", "frequency": 6, "tags": ["experience", "work"] },
-    { "word": "cutting-edge", "translation": "najnowocześniejszy", "partOfSpeech": "adjective", "level": "B2", "frequency": 6, "tags": ["technology", "innovation"] },
-    { "word": "behind the scenes", "translation": "za kulisami", "partOfSpeech": "phrase", "level": "B2", "frequency": 6, "tags": ["work", "insight"] },
-    { "word": "once in a while", "translation": "od czasu do czasu", "partOfSpeech": "phrase", "level": "B1", "frequency": 7, "tags": ["frequency", "general"] },
-    { "word": "off the top of my head", "translation": "z głowy/bez przygotowania", "partOfSpeech": "phrase", "level": "B2", "frequency": 5, "tags": ["spontaneous", "conversation"] },
-    { "word": "bear in mind", "translation": "mieć na uwadze", "partOfSpeech": "phrase", "level": "B2", "frequency": 6, "tags": ["reminder", "formal"] },
-    { "word": "a matter of time", "translation": "kwestia czasu", "partOfSpeech": "phrase", "level": "B1", "frequency": 7, "tags": ["prediction", "general"] },
-    { "word": "in terms of", "translation": "pod względem/jeśli chodzi o", "partOfSpeech": "phrase", "level": "B2", "frequency": 8, "tags": ["specification", "formal"] },
-    { "word": "as soon as possible", "translation": "jak najszybciej/ASAP", "partOfSpeech": "phrase", "level": "B1", "frequency": 8, "tags": ["urgency", "work"] },
-    { "word": "for the time being", "translation": "na razie/tymczasowo", "partOfSpeech": "phrase", "level": "B2", "frequency": 6, "tags": ["time", "planning"] },
-    { "word": "on behalf of", "translation": "w imieniu (kogoś)", "partOfSpeech": "phrase", "level": "B2", "frequency": 7, "tags": ["formal", "business"] },
-    { "word": "no wonder", "translation": "nic dziwnego", "partOfSpeech": "phrase", "level": "B1", "frequency": 7, "tags": ["reaction", "conversation"] },
-    { "word": "get used to", "translation": "przyzwyczaić się do", "partOfSpeech": "phrase", "level": "B1", "frequency": 8, "tags": ["adaptation", "general"] },
-    { "word": "look up to", "translation": "podziwiać (kogoś)", "partOfSpeech": "phrasal verb", "level": "B2", "frequency": 5, "tags": ["respect", "relationships"] },
-    { "word": "come across", "translation": "natknąć się na/wypaść", "partOfSpeech": "phrasal verb", "level": "B1", "frequency": 7, "tags": ["encounters", "impression"] },
-    { "word": "carry on", "translation": "kontynuować", "partOfSpeech": "phrasal verb", "level": "B1", "frequency": 7, "tags": ["continuation", "general"] },
-    { "word": "turn down", "translation": "odrzucić/odmówić", "partOfSpeech": "phrasal verb", "level": "B1", "frequency": 7, "tags": ["rejection", "decision"] },
-    { "word": "pull off", "translation": "udać się/dokonać", "partOfSpeech": "phrasal verb", "level": "B2", "frequency": 5, "tags": ["achievement", "informal"] },
-    { "word": "put up with", "translation": "znosić/tolerować", "partOfSpeech": "phrasal verb", "level": "B2", "frequency": 6, "tags": ["tolerance", "general"] },
-    { "word": "rely on", "translation": "polegać na", "partOfSpeech": "phrasal verb", "level": "B1", "frequency": 8, "tags": ["trust", "general"] },
-    { "word": "settle down", "translation": "ustatkować się/uspokoić", "partOfSpeech": "phrasal verb", "level": "B2", "frequency": 6, "tags": ["life_changes", "general"] },
-    { "word": "stand out", "translation": "wyróżniać się", "partOfSpeech": "phrasal verb", "level": "B1", "frequency": 7, "tags": ["distinction", "general"] },
-    { "word": "rule out", "translation": "wykluczyć", "partOfSpeech": "phrasal verb", "level": "B2", "frequency": 6, "tags": ["elimination", "analysis"] },
-    { "word": "drop out", "translation": "zrezygnować/rzucić (studia)", "partOfSpeech": "phrasal verb", "level": "B2", "frequency": 5, "tags": ["education", "decision"] },
-    { "word": "pass away", "translation": "odejść/umrzeć (eufemizm)", "partOfSpeech": "phrasal verb", "level": "B2", "frequency": 5, "tags": ["euphemism", "life"] },
-    { "word": "grow up", "translation": "dorastać/dorosnąć", "partOfSpeech": "phrasal verb", "level": "B1", "frequency": 8, "tags": ["life", "general"] },
-    { "word": "move on", "translation": "iść dalej/przejść do", "partOfSpeech": "phrasal verb", "level": "B1", "frequency": 8, "tags": ["progress", "emotions"] },
-    { "word": "wrap up", "translation": "zakończyć/podsumować", "partOfSpeech": "phrasal verb", "level": "B2", "frequency": 6, "tags": ["conclusion", "meetings"] },
-    { "word": "be about to", "translation": "mieć zamiar/zaraz coś zrobić", "partOfSpeech": "phrase", "level": "B1", "frequency": 7, "tags": ["intention", "time"] },
-    { "word": "get the hang of", "translation": "opanować/nauczyć się", "partOfSpeech": "phrase", "level": "B2", "frequency": 6, "tags": ["learning", "skill"] },
-    { "word": "be worth it", "translation": "być wartym tego", "partOfSpeech": "phrase", "level": "B1", "frequency": 8, "tags": ["value", "general"] },
-    { "word": "make a difference", "translation": "mieć znaczenie/zrobić różnicę", "partOfSpeech": "phrase", "level": "B1", "frequency": 7, "tags": ["impact", "general"] },
-    { "word": "let alone", "translation": "nie wspominając o", "partOfSpeech": "phrase", "level": "B2", "frequency": 5, "tags": ["emphasis", "comparison"] },
-    { "word": "on purpose", "translation": "celowo/umyślnie", "partOfSpeech": "phrase", "level": "B1", "frequency": 7, "tags": ["intention", "general"] },
-    { "word": "on the spot", "translation": "na miejscu/od ręki", "partOfSpeech": "phrase", "level": "B2", "frequency": 5, "tags": ["immediacy", "general"] },
-    { "word": "big deal", "translation": "wielka sprawa/ważne", "partOfSpeech": "phrase", "level": "B1", "frequency": 7, "tags": ["importance", "casual"] },
-    { "word": "peace of mind", "translation": "spokój ducha", "partOfSpeech": "phrase", "level": "B2", "frequency": 6, "tags": ["wellbeing", "general"] },
-    { "word": "in a nutshell", "translation": "w skrócie/w pigułce", "partOfSpeech": "phrase", "level": "B2", "frequency": 5, "tags": ["summary", "idiom"] },
-    { "word": "that being said", "translation": "mimo to/biorąc to pod uwagę", "partOfSpeech": "phrase", "level": "B2", "frequency": 6, "tags": ["transition", "formal"] },
-    { "word": "the thing is", "translation": "chodzi o to, że", "partOfSpeech": "phrase", "level": "B1", "frequency": 8, "tags": ["explanation", "casual"] },
-    { "word": "I mean", "translation": "to znaczy/chodzi mi o to", "partOfSpeech": "phrase", "level": "B1", "frequency": 10, "tags": ["clarification", "filler"] },
-    { "word": "I suppose", "translation": "przypuszczam/sądzę", "partOfSpeech": "phrase", "level": "B1", "frequency": 7, "tags": ["hedging", "opinion"] },
-    { "word": "I assume", "translation": "zakładam/domniemywam", "partOfSpeech": "phrase", "level": "B1", "frequency": 7, "tags": ["assumption", "formal"] },
-    { "word": "I can relate", "translation": "rozumiem to/czuję to samo", "partOfSpeech": "phrase", "level": "B2", "frequency": 5, "tags": ["empathy", "casual"] },
-    { "word": "How come?", "translation": "Jak to?/Dlaczego?", "partOfSpeech": "phrase", "level": "B1", "frequency": 7, "tags": ["question", "casual"] },
-    { "word": "no offense", "translation": "bez obrazy", "partOfSpeech": "phrase", "level": "B2", "frequency": 5, "tags": ["politeness", "casual"] },
-    { "word": "to sum up", "translation": "podsumowując", "partOfSpeech": "phrase", "level": "B1", "frequency": 7, "tags": ["summary", "formal"] },
-    { "word": "whatsoever", "translation": "jakikolwiek/w ogóle", "partOfSpeech": "adverb", "level": "B2", "frequency": 6, "tags": ["emphasis", "negation"] },
-    { "word": "whereas", "translation": "podczas gdy/natomiast", "partOfSpeech": "conjunction", "level": "B2", "frequency": 6, "tags": ["contrast", "formal"] },
-    { "word": "therefore", "translation": "dlatego/zatem", "partOfSpeech": "adverb", "level": "B1", "frequency": 8, "tags": ["logic", "formal"] },
-    { "word": "moreover", "translation": "ponadto/co więcej", "partOfSpeech": "adverb", "level": "B2", "frequency": 6, "tags": ["addition", "formal"] },
-    { "word": "regardless", "translation": "bez względu na", "partOfSpeech": "adverb", "level": "B2", "frequency": 6, "tags": ["determination", "formal"] },
-    { "word": "significantly", "translation": "znacząco/znacznie", "partOfSpeech": "adverb", "level": "B2", "frequency": 7, "tags": ["degree", "formal"] },
-    { "word": "roughly", "translation": "z grubsza/mniej więcej", "partOfSpeech": "adverb", "level": "B1", "frequency": 7, "tags": ["approximation", "general"] },
-    { "word": "slightly", "translation": "lekko/nieznacznie", "partOfSpeech": "adverb", "level": "B1", "frequency": 7, "tags": ["degree", "general"] },
-    { "word": "particularly", "translation": "szczególnie/zwłaszcza", "partOfSpeech": "adverb", "level": "B1", "frequency": 7, "tags": ["emphasis", "specification"] },
-    { "word": "take advantage of", "translation": "wykorzystać/skorzystać z", "partOfSpeech": "phrase", "level": "B2", "frequency": 7, "tags": ["opportunity", "strategy"] },
-    { "word": "struggle with", "translation": "zmagać się z", "partOfSpeech": "phrasal verb", "level": "B1", "frequency": 8, "tags": ["difficulty", "general"] },
-    { "word": "cope with", "translation": "radzić sobie z", "partOfSpeech": "phrasal verb", "level": "B2", "frequency": 6, "tags": ["resilience", "stress"] },
-    { "word": "contribute to", "translation": "przyczyniać się do", "partOfSpeech": "verb", "level": "B2", "frequency": 7, "tags": ["impact", "general"] },
-    { "word": "regardless of", "translation": "niezależnie od", "partOfSpeech": "phrase", "level": "B2", "frequency": 6, "tags": ["independence", "formal"] },
-    { "word": "aside from", "translation": "oprócz/poza", "partOfSpeech": "phrase", "level": "B2", "frequency": 6, "tags": ["exception", "general"] },
-    { "word": "as a matter of fact", "translation": "w rzeczywistości/tak naprawdę", "partOfSpeech": "phrase", "level": "B2", "frequency": 5, "tags": ["emphasis", "fact"] },
-    { "word": "get away with", "translation": "ujść na sucho/uniknąć kary", "partOfSpeech": "phrasal verb", "level": "B2", "frequency": 5, "tags": ["consequence", "idiom"] },
-    { "word": "keep track of", "translation": "śledzić/notować", "partOfSpeech": "phrase", "level": "B2", "frequency": 6, "tags": ["organization", "work"] },
-    { "word": "on a daily basis", "translation": "codziennie/na co dzień", "partOfSpeech": "phrase", "level": "B2", "frequency": 6, "tags": ["frequency", "formal"] },
-    { "word": "take a break", "translation": "zrobić przerwę", "partOfSpeech": "phrase", "level": "B1", "frequency": 8, "tags": ["rest", "general"] },
-    { "word": "side hustle", "translation": "dodatkowe zajęcie zarobkowe", "partOfSpeech": "noun", "level": "B2", "frequency": 6, "tags": ["work", "modern"] },
-    { "word": "burnout", "translation": "wypalenie zawodowe", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["work", "health"] },
-    { "word": "work-life balance", "translation": "równowaga praca-życie", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["wellbeing", "work"] },
-    { "word": "networking", "translation": "budowanie sieci kontaktów", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["career", "social"] },
-    { "word": "small talk", "translation": "rozmowa o niczym/pogawędka", "partOfSpeech": "noun", "level": "B1", "frequency": 7, "tags": ["social", "conversation"] },
-    { "word": "comfort zone", "translation": "strefa komfortu", "partOfSpeech": "noun", "level": "B2", "frequency": 6, "tags": ["growth", "psychology"] },
-    { "word": "red flag", "translation": "sygnał ostrzegawczy", "partOfSpeech": "noun", "level": "B2", "frequency": 6, "tags": ["warning", "modern"] },
-    { "word": "trigger", "translation": "wyzwalacz/wywołać", "partOfSpeech": "noun/verb", "level": "B2", "frequency": 7, "tags": ["psychology", "general"] },
-    { "word": "resonate", "translation": "rezonować/przemawiać do", "partOfSpeech": "verb", "level": "C1", "frequency": 5, "tags": ["impact", "formal"] },
-    { "word": "empathy", "translation": "empatia", "partOfSpeech": "noun", "level": "B2", "frequency": 6, "tags": ["psychology", "relationships"] },
-    { "word": "vulnerable", "translation": "wrażliwy/podatny", "partOfSpeech": "adjective", "level": "B2", "frequency": 6, "tags": ["emotions", "character"] },
-    { "word": "authentic", "translation": "autentyczny/prawdziwy", "partOfSpeech": "adjective", "level": "B2", "frequency": 6, "tags": ["character", "modern"] },
-    { "word": "toxic", "translation": "toksyczny", "partOfSpeech": "adjective", "level": "B2", "frequency": 7, "tags": ["relationships", "modern"] },
-    { "word": "biased", "translation": "stronniczy/uprzedzony", "partOfSpeech": "adjective", "level": "B2", "frequency": 6, "tags": ["thinking", "media"] },
-    { "word": "diverse", "translation": "różnorodny", "partOfSpeech": "adjective", "level": "B2", "frequency": 7, "tags": ["society", "work"] },
-    { "word": "inclusive", "translation": "inkluzywny/włączający", "partOfSpeech": "adjective", "level": "B2", "frequency": 6, "tags": ["society", "modern"] },
-    { "word": "stereotype", "translation": "stereotyp", "partOfSpeech": "noun", "level": "B2", "frequency": 6, "tags": ["society", "thinking"] },
-    { "word": "assumption", "translation": "założenie/przypuszczenie", "partOfSpeech": "noun", "level": "B1", "frequency": 7, "tags": ["thinking", "general"] },
-    { "word": "overrated", "translation": "przereklamowany", "partOfSpeech": "adjective", "level": "B2", "frequency": 5, "tags": ["opinion", "casual"] },
-    { "word": "underrated", "translation": "niedoceniany", "partOfSpeech": "adjective", "level": "B2", "frequency": 5, "tags": ["opinion", "casual"] },
-    { "word": "to each their own", "translation": "każdy ma swoje zdanie", "partOfSpeech": "phrase", "level": "C1", "frequency": 4, "tags": ["tolerance", "idiom"] },
-    { "word": "better safe than sorry", "translation": "lepiej dmuchać na zimne", "partOfSpeech": "phrase", "level": "B2", "frequency": 5, "tags": ["caution", "proverb"] },
-    { "word": "easier said than done", "translation": "łatwiej powiedzieć niż zrobić", "partOfSpeech": "phrase", "level": "B1", "frequency": 7, "tags": ["difficulty", "proverb"] },
-    { "word": "speak of the devil", "translation": "o wilku mowa", "partOfSpeech": "phrase", "level": "B2", "frequency": 5, "tags": ["humor", "idiom"] },
-    { "word": "break the ice", "translation": "przełamać lody", "partOfSpeech": "phrase", "level": "B1", "frequency": 7, "tags": ["social", "idiom"] },
-    { "word": "on the same page", "translation": "na tej samej stronie/zgodzić się", "partOfSpeech": "phrase", "level": "B2", "frequency": 6, "tags": ["agreement", "work"] },
-    { "word": "think outside the box", "translation": "myśleć nieszablonowo", "partOfSpeech": "phrase", "level": "B2", "frequency": 6, "tags": ["creativity", "business"] },
-    { "word": "go the extra mile", "translation": "dać z siebie więcej", "partOfSpeech": "phrase", "level": "B2", "frequency": 5, "tags": ["effort", "work"] },
-    { "word": "hit the nail on the head", "translation": "trafić w sedno", "partOfSpeech": "phrase", "level": "B2", "frequency": 5, "tags": ["accuracy", "idiom"] },
-    { "word": "it's not the end of the world", "translation": "to nie koniec świata", "partOfSpeech": "phrase", "level": "B1", "frequency": 7, "tags": ["reassurance", "idiom"] },
-    { "word": "sleep on it", "translation": "przemyśleć (przespać się z tym)", "partOfSpeech": "phrase", "level": "B2", "frequency": 5, "tags": ["decision", "idiom"] },
-    { "word": "a blessing in disguise", "translation": "coś złego na coś dobrego", "partOfSpeech": "phrase", "level": "C1", "frequency": 4, "tags": ["perspective", "idiom"] },
-    { "word": "call it a day", "translation": "kończyć na dziś", "partOfSpeech": "phrase", "level": "B2", "frequency": 5, "tags": ["work", "idiom"] },
-    { "word": "get cold feet", "translation": "stchórzyć/mieć wątpliwości", "partOfSpeech": "phrase", "level": "C1", "frequency": 4, "tags": ["fear", "idiom"] },
-    { "word": "ring a bell", "translation": "kojarzyć się/brzmieć znajomo", "partOfSpeech": "phrase", "level": "B2", "frequency": 5, "tags": ["memory", "idiom"] },
-    { "word": "food for thought", "translation": "coś do przemyślenia", "partOfSpeech": "phrase", "level": "B2", "frequency": 5, "tags": ["reflection", "idiom"] },
-    { "word": "keep one's fingers crossed", "translation": "trzymać kciuki", "partOfSpeech": "phrase", "level": "B1", "frequency": 7, "tags": ["hope", "idiom"] },
-    { "word": "a piece of cake", "translation": "bułka z masłem/łatwizna", "partOfSpeech": "phrase", "level": "B1", "frequency": 7, "tags": ["ease", "idiom"] },
-    { "word": "to make matters worse", "translation": "na dodatek/co gorsza", "partOfSpeech": "phrase", "level": "B2", "frequency": 5, "tags": ["escalation", "narrative"] },
-    { "word": "see eye to eye", "translation": "zgadzać się (z kimś)", "partOfSpeech": "phrase", "level": "C1", "frequency": 4, "tags": ["agreement", "idiom"] },
-    { "word": "as luck would have it", "translation": "jak na złość/tak się składa", "partOfSpeech": "phrase", "level": "C1", "frequency": 4, "tags": ["coincidence", "narrative"] },
-    { "word": "hustle", "translation": "harówka/działanie", "partOfSpeech": "noun/verb", "level": "B2", "frequency": 6, "tags": ["work", "modern"] },
-    { "word": "vibe", "translation": "klimat/atmosfera", "partOfSpeech": "noun", "level": "B2", "frequency": 6, "tags": ["atmosphere", "modern"] },
-    { "word": "cringe", "translation": "żenada/żenujący", "partOfSpeech": "noun/adjective", "level": "B2", "frequency": 5, "tags": ["reaction", "modern"] },
-    { "word": "FOMO", "translation": "strach przed przegapieniem czegoś", "partOfSpeech": "noun", "level": "C1", "frequency": 5, "tags": ["psychology", "modern"] },
-    { "word": "ghosting", "translation": "nagłe zerwanie kontaktu", "partOfSpeech": "noun", "level": "C1", "frequency": 5, "tags": ["dating", "modern"] },
-    { "word": "influencer", "translation": "influencer/osoba wpływowa", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["social_media", "modern"] },
-    { "word": "mindful", "translation": "uważny/świadomy", "partOfSpeech": "adjective", "level": "B2", "frequency": 6, "tags": ["wellbeing", "psychology"] },
-    { "word": "random", "translation": "losowy/przypadkowy", "partOfSpeech": "adjective", "level": "B1", "frequency": 8, "tags": ["general", "casual"] },
-    { "word": "vague", "translation": "niejasny/mglisty", "partOfSpeech": "adjective", "level": "B2", "frequency": 5, "tags": ["clarity", "description"] },
-    { "word": "peak", "translation": "szczyt/szczytowy", "partOfSpeech": "noun/adjective", "level": "B1", "frequency": 7, "tags": ["maximum", "general"] },
-    { "word": "thrive", "translation": "prosperować/kwitnąć", "partOfSpeech": "verb", "level": "B2", "frequency": 6, "tags": ["success", "growth"] },
-    { "word": "hesitate", "translation": "wahać się", "partOfSpeech": "verb", "level": "B1", "frequency": 7, "tags": ["decision", "general"] },
-    { "word": "resemble", "translation": "przypominać/być podobnym", "partOfSpeech": "verb", "level": "B2", "frequency": 5, "tags": ["comparison", "general"] },
-    { "word": "acknowledge", "translation": "przyznać/uznać", "partOfSpeech": "verb", "level": "B2", "frequency": 7, "tags": ["recognition", "formal"] },
-    { "word": "worth mentioning", "translation": "wart wspomnienia", "partOfSpeech": "phrase", "level": "B2", "frequency": 5, "tags": ["emphasis", "formal"] },
-    { "word": "to put it simply", "translation": "mówiąc prosto", "partOfSpeech": "phrase", "level": "B2", "frequency": 6, "tags": ["simplification", "explanation"] },
-    { "word": "you know what I mean", "translation": "wiesz o co mi chodzi", "partOfSpeech": "phrase", "level": "B1", "frequency": 8, "tags": ["confirmation", "casual"] }
+    {
+      "word": "actually",
+      "translation": "właściwie/tak naprawdę",
+      "partOfSpeech": "adverb",
+      "level": "B1",
+      "frequency": 10,
+      "tags": [
+        "filler",
+        "conversation"
+      ]
+    },
+    {
+      "word": "fair enough",
+      "translation": "w porządku/ok",
+      "partOfSpeech": "phrase",
+      "level": "B1",
+      "frequency": 9,
+      "tags": [
+        "agreement",
+        "conversation"
+      ]
+    },
+    {
+      "word": "to be honest",
+      "translation": "szczerze mówiąc",
+      "partOfSpeech": "phrase",
+      "level": "B1",
+      "frequency": 9,
+      "tags": [
+        "filler",
+        "opinion"
+      ]
+    },
+    {
+      "word": "by the way",
+      "translation": "przy okazji/nawiasem",
+      "partOfSpeech": "phrase",
+      "level": "B1",
+      "frequency": 9,
+      "tags": [
+        "transition",
+        "conversation"
+      ]
+    },
+    {
+      "word": "kind of",
+      "translation": "w pewnym sensie/trochę",
+      "partOfSpeech": "phrase",
+      "level": "B1",
+      "frequency": 9,
+      "tags": [
+        "hedging",
+        "conversation"
+      ]
+    },
+    {
+      "word": "sort of",
+      "translation": "poniekąd/w pewnym sensie",
+      "partOfSpeech": "phrase",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "hedging",
+        "conversation"
+      ]
+    },
+    {
+      "word": "literally",
+      "translation": "dosłownie",
+      "partOfSpeech": "adverb",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "emphasis",
+        "conversation"
+      ]
+    },
+    {
+      "word": "apparently",
+      "translation": "najwyraźniej/podobno",
+      "partOfSpeech": "adverb",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "reporting",
+        "conversation"
+      ]
+    },
+    {
+      "word": "figure out",
+      "translation": "dowiedzieć się/rozgryźć",
+      "partOfSpeech": "phrasal verb",
+      "level": "B1",
+      "frequency": 9,
+      "tags": [
+        "problem_solving",
+        "general"
+      ]
+    },
+    {
+      "word": "come up with",
+      "translation": "wymyślić/wpaść na",
+      "partOfSpeech": "phrasal verb",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "creativity",
+        "general"
+      ]
+    },
+    {
+      "word": "turn out",
+      "translation": "okazać się",
+      "partOfSpeech": "phrasal verb",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "results",
+        "general"
+      ]
+    },
+    {
+      "word": "look forward to",
+      "translation": "nie móc się doczekać",
+      "partOfSpeech": "phrasal verb",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "emotions",
+        "formal"
+      ]
+    },
+    {
+      "word": "get along with",
+      "translation": "dogadywać się z",
+      "partOfSpeech": "phrasal verb",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "relationships",
+        "general"
+      ]
+    },
+    {
+      "word": "catch up",
+      "translation": "nadrobić/spotkać się",
+      "partOfSpeech": "phrasal verb",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "social",
+        "work"
+      ]
+    },
+    {
+      "word": "bring up",
+      "translation": "poruszyć (temat)/wychować",
+      "partOfSpeech": "phrasal verb",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "conversation",
+        "general"
+      ]
+    },
+    {
+      "word": "break down",
+      "translation": "zepsuć się/rozłożyć na części",
+      "partOfSpeech": "phrasal verb",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "problems",
+        "analysis"
+      ]
+    },
+    {
+      "word": "put off",
+      "translation": "odłożyć/zniechęcić",
+      "partOfSpeech": "phrasal verb",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "procrastination",
+        "general"
+      ]
+    },
+    {
+      "word": "give up",
+      "translation": "poddać się/zrezygnować",
+      "partOfSpeech": "phrasal verb",
+      "level": "B1",
+      "frequency": 9,
+      "tags": [
+        "resilience",
+        "general"
+      ]
+    },
+    {
+      "word": "go through",
+      "translation": "przechodzić przez/przeglądać",
+      "partOfSpeech": "phrasal verb",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "experience",
+        "process"
+      ]
+    },
+    {
+      "word": "keep up with",
+      "translation": "nadążać za",
+      "partOfSpeech": "phrasal verb",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "pace",
+        "learning"
+      ]
+    },
+    {
+      "word": "run into",
+      "translation": "wpaść na (kogoś)/natknąć się",
+      "partOfSpeech": "phrasal verb",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "encounters",
+        "problems"
+      ]
+    },
+    {
+      "word": "work out",
+      "translation": "ćwiczyć/rozwiązać się",
+      "partOfSpeech": "phrasal verb",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "fitness",
+        "solutions"
+      ]
+    },
+    {
+      "word": "end up",
+      "translation": "skończyć/wylądować",
+      "partOfSpeech": "phrasal verb",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "results",
+        "general"
+      ]
+    },
+    {
+      "word": "pick up",
+      "translation": "odebrać/podnieść/nauczyć się",
+      "partOfSpeech": "phrasal verb",
+      "level": "B1",
+      "frequency": 9,
+      "tags": [
+        "learning",
+        "general"
+      ]
+    },
+    {
+      "word": "set up",
+      "translation": "ustawić/zorganizować",
+      "partOfSpeech": "phrasal verb",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "organization",
+        "tech"
+      ]
+    },
+    {
+      "word": "check out",
+      "translation": "sprawdzić/wymeldować się",
+      "partOfSpeech": "phrasal verb",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "discovery",
+        "travel"
+      ]
+    },
+    {
+      "word": "point out",
+      "translation": "wskazać/zwrócić uwagę",
+      "partOfSpeech": "phrasal verb",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "observation",
+        "discussion"
+      ]
+    },
+    {
+      "word": "cut down on",
+      "translation": "ograniczyć (coś)",
+      "partOfSpeech": "phrasal verb",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "health",
+        "habits"
+      ]
+    },
+    {
+      "word": "look into",
+      "translation": "zbadać/przyjrzeć się",
+      "partOfSpeech": "phrasal verb",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "research",
+        "work"
+      ]
+    },
+    {
+      "word": "take over",
+      "translation": "przejąć (kontrolę)",
+      "partOfSpeech": "phrasal verb",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "work",
+        "business"
+      ]
+    },
+    {
+      "word": "it depends",
+      "translation": "to zależy",
+      "partOfSpeech": "phrase",
+      "level": "B1",
+      "frequency": 9,
+      "tags": [
+        "hedging",
+        "conversation"
+      ]
+    },
+    {
+      "word": "no worries",
+      "translation": "nie ma sprawy/luz",
+      "partOfSpeech": "phrase",
+      "level": "B1",
+      "frequency": 9,
+      "tags": [
+        "reassurance",
+        "casual"
+      ]
+    },
+    {
+      "word": "that makes sense",
+      "translation": "to ma sens",
+      "partOfSpeech": "phrase",
+      "level": "B1",
+      "frequency": 9,
+      "tags": [
+        "agreement",
+        "understanding"
+      ]
+    },
+    {
+      "word": "I see what you mean",
+      "translation": "rozumiem co masz na myśli",
+      "partOfSpeech": "phrase",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "understanding",
+        "conversation"
+      ]
+    },
+    {
+      "word": "I was wondering",
+      "translation": "zastanawiałem się",
+      "partOfSpeech": "phrase",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "polite_request",
+        "conversation"
+      ]
+    },
+    {
+      "word": "as far as I know",
+      "translation": "o ile wiem/z tego co wiem",
+      "partOfSpeech": "phrase",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "hedging",
+        "knowledge"
+      ]
+    },
+    {
+      "word": "to a certain extent",
+      "translation": "do pewnego stopnia",
+      "partOfSpeech": "phrase",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "nuance",
+        "academic"
+      ]
+    },
+    {
+      "word": "on the other hand",
+      "translation": "z drugiej strony",
+      "partOfSpeech": "phrase",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "contrast",
+        "argumentation"
+      ]
+    },
+    {
+      "word": "nevertheless",
+      "translation": "niemniej jednak",
+      "partOfSpeech": "adverb",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "contrast",
+        "formal"
+      ]
+    },
+    {
+      "word": "meanwhile",
+      "translation": "tymczasem/w międzyczasie",
+      "partOfSpeech": "adverb",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "time",
+        "narrative"
+      ]
+    },
+    {
+      "word": "eventually",
+      "translation": "ostatecznie/w końcu",
+      "partOfSpeech": "adverb",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "time",
+        "results"
+      ]
+    },
+    {
+      "word": "obviously",
+      "translation": "oczywiście/ewidentnie",
+      "partOfSpeech": "adverb",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "certainty",
+        "emphasis"
+      ]
+    },
+    {
+      "word": "basically",
+      "translation": "w zasadzie/w skrócie",
+      "partOfSpeech": "adverb",
+      "level": "B1",
+      "frequency": 9,
+      "tags": [
+        "simplification",
+        "filler"
+      ]
+    },
+    {
+      "word": "unfortunately",
+      "translation": "niestety",
+      "partOfSpeech": "adverb",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "negative",
+        "formal"
+      ]
+    },
+    {
+      "word": "definitely",
+      "translation": "zdecydowanie/na pewno",
+      "partOfSpeech": "adverb",
+      "level": "B1",
+      "frequency": 9,
+      "tags": [
+        "certainty",
+        "agreement"
+      ]
+    },
+    {
+      "word": "stuff",
+      "translation": "rzeczy/sprawy",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 9,
+      "tags": [
+        "general",
+        "informal"
+      ]
+    },
+    {
+      "word": "deal with",
+      "translation": "radzić sobie z/zajmować się",
+      "partOfSpeech": "phrasal verb",
+      "level": "B1",
+      "frequency": 9,
+      "tags": [
+        "problem_solving",
+        "work"
+      ]
+    },
+    {
+      "word": "hang out",
+      "translation": "spędzać czas/wychodzić",
+      "partOfSpeech": "phrasal verb",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "social",
+        "casual"
+      ]
+    },
+    {
+      "word": "show up",
+      "translation": "pojawić się/przyjść",
+      "partOfSpeech": "phrasal verb",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "arrival",
+        "general"
+      ]
+    },
+    {
+      "word": "go for it",
+      "translation": "działaj!/śmiało!",
+      "partOfSpeech": "phrase",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "encouragement",
+        "casual"
+      ]
+    },
+    {
+      "word": "it's up to you",
+      "translation": "to zależy od ciebie",
+      "partOfSpeech": "phrase",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "decision",
+        "conversation"
+      ]
+    },
+    {
+      "word": "get rid of",
+      "translation": "pozbyć się",
+      "partOfSpeech": "phrasal verb",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "removal",
+        "general"
+      ]
+    },
+    {
+      "word": "take into account",
+      "translation": "wziąć pod uwagę",
+      "partOfSpeech": "phrase",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "consideration",
+        "formal"
+      ]
+    },
+    {
+      "word": "keep in mind",
+      "translation": "mieć na uwadze/pamiętać",
+      "partOfSpeech": "phrase",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "reminder",
+        "general"
+      ]
+    },
+    {
+      "word": "make up one's mind",
+      "translation": "zdecydować się",
+      "partOfSpeech": "phrase",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "decision",
+        "general"
+      ]
+    },
+    {
+      "word": "be in charge of",
+      "translation": "być odpowiedzialnym za",
+      "partOfSpeech": "phrase",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "responsibility",
+        "work"
+      ]
+    },
+    {
+      "word": "overwhelmed",
+      "translation": "przytłoczony",
+      "partOfSpeech": "adjective",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "emotions",
+        "stress"
+      ]
+    },
+    {
+      "word": "exhausted",
+      "translation": "wyczerpany",
+      "partOfSpeech": "adjective",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "physical",
+        "emotions"
+      ]
+    },
+    {
+      "word": "awkward",
+      "translation": "niezręczny/dziwny",
+      "partOfSpeech": "adjective",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "social",
+        "emotions"
+      ]
+    },
+    {
+      "word": "genuine",
+      "translation": "prawdziwy/szczery",
+      "partOfSpeech": "adjective",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "character",
+        "quality"
+      ]
+    },
+    {
+      "word": "straightforward",
+      "translation": "prosty/bezpośredni",
+      "partOfSpeech": "adjective",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "clarity",
+        "character"
+      ]
+    },
+    {
+      "word": "reliable",
+      "translation": "niezawodny/rzetelny",
+      "partOfSpeech": "adjective",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "character",
+        "quality"
+      ]
+    },
+    {
+      "word": "reasonable",
+      "translation": "rozsądny/sensowny",
+      "partOfSpeech": "adjective",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "judgment",
+        "general"
+      ]
+    },
+    {
+      "word": "appropriate",
+      "translation": "odpowiedni/właściwy",
+      "partOfSpeech": "adjective",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "behavior",
+        "formal"
+      ]
+    },
+    {
+      "word": "convenient",
+      "translation": "wygodny/dogodny",
+      "partOfSpeech": "adjective",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "practical",
+        "general"
+      ]
+    },
+    {
+      "word": "frustrated",
+      "translation": "sfrustrowany",
+      "partOfSpeech": "adjective",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "emotions",
+        "work"
+      ]
+    },
+    {
+      "word": "grateful",
+      "translation": "wdzięczny",
+      "partOfSpeech": "adjective",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "emotions",
+        "positive"
+      ]
+    },
+    {
+      "word": "impressed",
+      "translation": "pod wrażeniem",
+      "partOfSpeech": "adjective",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "emotions",
+        "positive"
+      ]
+    },
+    {
+      "word": "hilarious",
+      "translation": "przezabawny",
+      "partOfSpeech": "adjective",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "humor",
+        "description"
+      ]
+    },
+    {
+      "word": "ridiculous",
+      "translation": "absurdalny/śmieszny",
+      "partOfSpeech": "adjective",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "opinion",
+        "emphasis"
+      ]
+    },
+    {
+      "word": "gorgeous",
+      "translation": "przepiękny/wspaniały",
+      "partOfSpeech": "adjective",
+      "level": "B1",
+      "frequency": 6,
+      "tags": [
+        "appearance",
+        "compliment"
+      ]
+    },
+    {
+      "word": "decent",
+      "translation": "przyzwoity/niezły",
+      "partOfSpeech": "adjective",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "quality",
+        "casual"
+      ]
+    },
+    {
+      "word": "binge-watch",
+      "translation": "oglądać seriale ciągiem",
+      "partOfSpeech": "verb",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "entertainment",
+        "modern"
+      ]
+    },
+    {
+      "word": "procrastinate",
+      "translation": "zwlekać/prokrastynować",
+      "partOfSpeech": "verb",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "habits",
+        "psychology"
+      ]
+    },
+    {
+      "word": "multitask",
+      "translation": "robić kilka rzeczy naraz",
+      "partOfSpeech": "verb",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "work",
+        "productivity"
+      ]
+    },
+    {
+      "word": "commute",
+      "translation": "dojeżdżać do pracy",
+      "partOfSpeech": "verb/noun",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "work",
+        "transport"
+      ]
+    },
+    {
+      "word": "relocate",
+      "translation": "przeprowadzić się/przenieść",
+      "partOfSpeech": "verb",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "life_changes",
+        "work"
+      ]
+    },
+    {
+      "word": "brainstorm",
+      "translation": "burza mózgów",
+      "partOfSpeech": "verb/noun",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "creativity",
+        "work"
+      ]
+    },
+    {
+      "word": "prioritize",
+      "translation": "ustalać priorytety",
+      "partOfSpeech": "verb",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "productivity",
+        "work"
+      ]
+    },
+    {
+      "word": "delegate",
+      "translation": "delegować (zadania)",
+      "partOfSpeech": "verb",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "management",
+        "work"
+      ]
+    },
+    {
+      "word": "compromise",
+      "translation": "kompromis/iść na kompromis",
+      "partOfSpeech": "noun/verb",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "negotiation",
+        "relationships"
+      ]
+    },
+    {
+      "word": "flexible",
+      "translation": "elastyczny",
+      "partOfSpeech": "adjective",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "work",
+        "character"
+      ]
+    },
+    {
+      "word": "productive",
+      "translation": "produktywny/wydajny",
+      "partOfSpeech": "adjective",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "work",
+        "quality"
+      ]
+    },
+    {
+      "word": "sustainable",
+      "translation": "zrównoważony/trwały",
+      "partOfSpeech": "adjective",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "environment",
+        "business"
+      ]
+    },
+    {
+      "word": "affordable",
+      "translation": "przystępny cenowo",
+      "partOfSpeech": "adjective",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "money",
+        "shopping"
+      ]
+    },
+    {
+      "word": "deadline",
+      "translation": "termin/deadline",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 9,
+      "tags": [
+        "work",
+        "time"
+      ]
+    },
+    {
+      "word": "feedback",
+      "translation": "informacja zwrotna",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 9,
+      "tags": [
+        "work",
+        "communication"
+      ]
+    },
+    {
+      "word": "challenge",
+      "translation": "wyzwanie",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 9,
+      "tags": [
+        "work",
+        "motivation"
+      ]
+    },
+    {
+      "word": "opportunity",
+      "translation": "okazja/możliwość",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 9,
+      "tags": [
+        "career",
+        "general"
+      ]
+    },
+    {
+      "word": "mindset",
+      "translation": "nastawienie/mentalność",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "psychology",
+        "growth"
+      ]
+    },
+    {
+      "word": "boundaries",
+      "translation": "granice (osobiste)",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "relationships",
+        "wellbeing"
+      ]
+    },
+    {
+      "word": "perspective",
+      "translation": "perspektywa/punkt widzenia",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "thinking",
+        "discussion"
+      ]
+    },
+    {
+      "word": "take for granted",
+      "translation": "brać za pewnik",
+      "partOfSpeech": "phrase",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "attitudes",
+        "idiom"
+      ]
+    },
+    {
+      "word": "the bottom line",
+      "translation": "konkluzja/w gruncie rzeczy",
+      "partOfSpeech": "phrase",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "summary",
+        "business"
+      ]
+    },
+    {
+      "word": "at the end of the day",
+      "translation": "koniec końców/ostatecznie",
+      "partOfSpeech": "phrase",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "summary",
+        "filler"
+      ]
+    },
+    {
+      "word": "in the long run",
+      "translation": "na dłuższą metę",
+      "partOfSpeech": "phrase",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "time",
+        "planning"
+      ]
+    },
+    {
+      "word": "from scratch",
+      "translation": "od zera/od podstaw",
+      "partOfSpeech": "phrase",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "beginning",
+        "work"
+      ]
+    },
+    {
+      "word": "pros and cons",
+      "translation": "wady i zalety",
+      "partOfSpeech": "phrase",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "analysis",
+        "decision"
+      ]
+    },
+    {
+      "word": "hands-on",
+      "translation": "praktyczny/konkretny",
+      "partOfSpeech": "adjective",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "experience",
+        "work"
+      ]
+    },
+    {
+      "word": "cutting-edge",
+      "translation": "najnowocześniejszy",
+      "partOfSpeech": "adjective",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "technology",
+        "innovation"
+      ]
+    },
+    {
+      "word": "behind the scenes",
+      "translation": "za kulisami",
+      "partOfSpeech": "phrase",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "work",
+        "insight"
+      ]
+    },
+    {
+      "word": "once in a while",
+      "translation": "od czasu do czasu",
+      "partOfSpeech": "phrase",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "frequency",
+        "general"
+      ]
+    },
+    {
+      "word": "off the top of my head",
+      "translation": "z głowy/bez przygotowania",
+      "partOfSpeech": "phrase",
+      "level": "B2",
+      "frequency": 5,
+      "tags": [
+        "spontaneous",
+        "conversation"
+      ]
+    },
+    {
+      "word": "bear in mind",
+      "translation": "mieć na uwadze",
+      "partOfSpeech": "phrase",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "reminder",
+        "formal"
+      ]
+    },
+    {
+      "word": "a matter of time",
+      "translation": "kwestia czasu",
+      "partOfSpeech": "phrase",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "prediction",
+        "general"
+      ]
+    },
+    {
+      "word": "in terms of",
+      "translation": "pod względem/jeśli chodzi o",
+      "partOfSpeech": "phrase",
+      "level": "B2",
+      "frequency": 8,
+      "tags": [
+        "specification",
+        "formal"
+      ]
+    },
+    {
+      "word": "as soon as possible",
+      "translation": "jak najszybciej/ASAP",
+      "partOfSpeech": "phrase",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "urgency",
+        "work"
+      ]
+    },
+    {
+      "word": "for the time being",
+      "translation": "na razie/tymczasowo",
+      "partOfSpeech": "phrase",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "time",
+        "planning"
+      ]
+    },
+    {
+      "word": "on behalf of",
+      "translation": "w imieniu (kogoś)",
+      "partOfSpeech": "phrase",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "formal",
+        "business"
+      ]
+    },
+    {
+      "word": "no wonder",
+      "translation": "nic dziwnego",
+      "partOfSpeech": "phrase",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "reaction",
+        "conversation"
+      ]
+    },
+    {
+      "word": "get used to",
+      "translation": "przyzwyczaić się do",
+      "partOfSpeech": "phrase",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "adaptation",
+        "general"
+      ]
+    },
+    {
+      "word": "look up to",
+      "translation": "podziwiać (kogoś)",
+      "partOfSpeech": "phrasal verb",
+      "level": "B2",
+      "frequency": 5,
+      "tags": [
+        "respect",
+        "relationships"
+      ]
+    },
+    {
+      "word": "come across",
+      "translation": "natknąć się na/wypaść",
+      "partOfSpeech": "phrasal verb",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "encounters",
+        "impression"
+      ]
+    },
+    {
+      "word": "carry on",
+      "translation": "kontynuować",
+      "partOfSpeech": "phrasal verb",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "continuation",
+        "general"
+      ]
+    },
+    {
+      "word": "turn down",
+      "translation": "odrzucić/odmówić",
+      "partOfSpeech": "phrasal verb",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "rejection",
+        "decision"
+      ]
+    },
+    {
+      "word": "pull off",
+      "translation": "udać się/dokonać",
+      "partOfSpeech": "phrasal verb",
+      "level": "B2",
+      "frequency": 5,
+      "tags": [
+        "achievement",
+        "informal"
+      ]
+    },
+    {
+      "word": "put up with",
+      "translation": "znosić/tolerować",
+      "partOfSpeech": "phrasal verb",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "tolerance",
+        "general"
+      ]
+    },
+    {
+      "word": "rely on",
+      "translation": "polegać na",
+      "partOfSpeech": "phrasal verb",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "trust",
+        "general"
+      ]
+    },
+    {
+      "word": "settle down",
+      "translation": "ustatkować się/uspokoić",
+      "partOfSpeech": "phrasal verb",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "life_changes",
+        "general"
+      ]
+    },
+    {
+      "word": "stand out",
+      "translation": "wyróżniać się",
+      "partOfSpeech": "phrasal verb",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "distinction",
+        "general"
+      ]
+    },
+    {
+      "word": "rule out",
+      "translation": "wykluczyć",
+      "partOfSpeech": "phrasal verb",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "elimination",
+        "analysis"
+      ]
+    },
+    {
+      "word": "drop out",
+      "translation": "zrezygnować/rzucić (studia)",
+      "partOfSpeech": "phrasal verb",
+      "level": "B2",
+      "frequency": 5,
+      "tags": [
+        "education",
+        "decision"
+      ]
+    },
+    {
+      "word": "pass away",
+      "translation": "odejść/umrzeć (eufemizm)",
+      "partOfSpeech": "phrasal verb",
+      "level": "B2",
+      "frequency": 5,
+      "tags": [
+        "euphemism",
+        "life"
+      ]
+    },
+    {
+      "word": "grow up",
+      "translation": "dorastać/dorosnąć",
+      "partOfSpeech": "phrasal verb",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "life",
+        "general"
+      ]
+    },
+    {
+      "word": "move on",
+      "translation": "iść dalej/przejść do",
+      "partOfSpeech": "phrasal verb",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "progress",
+        "emotions"
+      ]
+    },
+    {
+      "word": "wrap up",
+      "translation": "zakończyć/podsumować",
+      "partOfSpeech": "phrasal verb",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "conclusion",
+        "meetings"
+      ]
+    },
+    {
+      "word": "be about to",
+      "translation": "mieć zamiar/zaraz coś zrobić",
+      "partOfSpeech": "phrase",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "intention",
+        "time"
+      ]
+    },
+    {
+      "word": "get the hang of",
+      "translation": "opanować/nauczyć się",
+      "partOfSpeech": "phrase",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "learning",
+        "skill"
+      ]
+    },
+    {
+      "word": "be worth it",
+      "translation": "być wartym tego",
+      "partOfSpeech": "phrase",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "value",
+        "general"
+      ]
+    },
+    {
+      "word": "make a difference",
+      "translation": "mieć znaczenie/zrobić różnicę",
+      "partOfSpeech": "phrase",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "impact",
+        "general"
+      ]
+    },
+    {
+      "word": "let alone",
+      "translation": "nie wspominając o",
+      "partOfSpeech": "phrase",
+      "level": "B2",
+      "frequency": 5,
+      "tags": [
+        "emphasis",
+        "comparison"
+      ]
+    },
+    {
+      "word": "on purpose",
+      "translation": "celowo/umyślnie",
+      "partOfSpeech": "phrase",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "intention",
+        "general"
+      ]
+    },
+    {
+      "word": "on the spot",
+      "translation": "na miejscu/od ręki",
+      "partOfSpeech": "phrase",
+      "level": "B2",
+      "frequency": 5,
+      "tags": [
+        "immediacy",
+        "general"
+      ]
+    },
+    {
+      "word": "big deal",
+      "translation": "wielka sprawa/ważne",
+      "partOfSpeech": "phrase",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "importance",
+        "casual"
+      ]
+    },
+    {
+      "word": "peace of mind",
+      "translation": "spokój ducha",
+      "partOfSpeech": "phrase",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "wellbeing",
+        "general"
+      ]
+    },
+    {
+      "word": "in a nutshell",
+      "translation": "w skrócie/w pigułce",
+      "partOfSpeech": "phrase",
+      "level": "B2",
+      "frequency": 5,
+      "tags": [
+        "summary",
+        "idiom"
+      ]
+    },
+    {
+      "word": "that being said",
+      "translation": "mimo to/biorąc to pod uwagę",
+      "partOfSpeech": "phrase",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "transition",
+        "formal"
+      ]
+    },
+    {
+      "word": "the thing is",
+      "translation": "chodzi o to, że",
+      "partOfSpeech": "phrase",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "explanation",
+        "casual"
+      ]
+    },
+    {
+      "word": "I mean",
+      "translation": "to znaczy/chodzi mi o to",
+      "partOfSpeech": "phrase",
+      "level": "B1",
+      "frequency": 10,
+      "tags": [
+        "clarification",
+        "filler"
+      ]
+    },
+    {
+      "word": "I suppose",
+      "translation": "przypuszczam/sądzę",
+      "partOfSpeech": "phrase",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "hedging",
+        "opinion"
+      ]
+    },
+    {
+      "word": "I assume",
+      "translation": "zakładam/domniemywam",
+      "partOfSpeech": "phrase",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "assumption",
+        "formal"
+      ]
+    },
+    {
+      "word": "I can relate",
+      "translation": "rozumiem to/czuję to samo",
+      "partOfSpeech": "phrase",
+      "level": "B2",
+      "frequency": 5,
+      "tags": [
+        "empathy",
+        "casual"
+      ]
+    },
+    {
+      "word": "How come?",
+      "translation": "Jak to?/Dlaczego?",
+      "partOfSpeech": "phrase",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "question",
+        "casual"
+      ]
+    },
+    {
+      "word": "no offense",
+      "translation": "bez obrazy",
+      "partOfSpeech": "phrase",
+      "level": "B2",
+      "frequency": 5,
+      "tags": [
+        "politeness",
+        "casual"
+      ]
+    },
+    {
+      "word": "to sum up",
+      "translation": "podsumowując",
+      "partOfSpeech": "phrase",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "summary",
+        "formal"
+      ]
+    },
+    {
+      "word": "whatsoever",
+      "translation": "jakikolwiek/w ogóle",
+      "partOfSpeech": "adverb",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "emphasis",
+        "negation"
+      ]
+    },
+    {
+      "word": "whereas",
+      "translation": "podczas gdy/natomiast",
+      "partOfSpeech": "conjunction",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "contrast",
+        "formal"
+      ]
+    },
+    {
+      "word": "therefore",
+      "translation": "dlatego/zatem",
+      "partOfSpeech": "adverb",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "logic",
+        "formal"
+      ]
+    },
+    {
+      "word": "moreover",
+      "translation": "ponadto/co więcej",
+      "partOfSpeech": "adverb",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "addition",
+        "formal"
+      ]
+    },
+    {
+      "word": "regardless",
+      "translation": "bez względu na",
+      "partOfSpeech": "adverb",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "determination",
+        "formal"
+      ]
+    },
+    {
+      "word": "significantly",
+      "translation": "znacząco/znacznie",
+      "partOfSpeech": "adverb",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "degree",
+        "formal"
+      ]
+    },
+    {
+      "word": "roughly",
+      "translation": "z grubsza/mniej więcej",
+      "partOfSpeech": "adverb",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "approximation",
+        "general"
+      ]
+    },
+    {
+      "word": "slightly",
+      "translation": "lekko/nieznacznie",
+      "partOfSpeech": "adverb",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "degree",
+        "general"
+      ]
+    },
+    {
+      "word": "particularly",
+      "translation": "szczególnie/zwłaszcza",
+      "partOfSpeech": "adverb",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "emphasis",
+        "specification"
+      ]
+    },
+    {
+      "word": "take advantage of",
+      "translation": "wykorzystać/skorzystać z",
+      "partOfSpeech": "phrase",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "opportunity",
+        "strategy"
+      ]
+    },
+    {
+      "word": "struggle with",
+      "translation": "zmagać się z",
+      "partOfSpeech": "phrasal verb",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "difficulty",
+        "general"
+      ]
+    },
+    {
+      "word": "cope with",
+      "translation": "radzić sobie z",
+      "partOfSpeech": "phrasal verb",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "resilience",
+        "stress"
+      ]
+    },
+    {
+      "word": "contribute to",
+      "translation": "przyczyniać się do",
+      "partOfSpeech": "verb",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "impact",
+        "general"
+      ]
+    },
+    {
+      "word": "regardless of",
+      "translation": "niezależnie od",
+      "partOfSpeech": "phrase",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "independence",
+        "formal"
+      ]
+    },
+    {
+      "word": "aside from",
+      "translation": "oprócz/poza",
+      "partOfSpeech": "phrase",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "exception",
+        "general"
+      ]
+    },
+    {
+      "word": "as a matter of fact",
+      "translation": "w rzeczywistości/tak naprawdę",
+      "partOfSpeech": "phrase",
+      "level": "B2",
+      "frequency": 5,
+      "tags": [
+        "emphasis",
+        "fact"
+      ]
+    },
+    {
+      "word": "get away with",
+      "translation": "ujść na sucho/uniknąć kary",
+      "partOfSpeech": "phrasal verb",
+      "level": "B2",
+      "frequency": 5,
+      "tags": [
+        "consequence",
+        "idiom"
+      ]
+    },
+    {
+      "word": "keep track of",
+      "translation": "śledzić/notować",
+      "partOfSpeech": "phrase",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "organization",
+        "work"
+      ]
+    },
+    {
+      "word": "on a daily basis",
+      "translation": "codziennie/na co dzień",
+      "partOfSpeech": "phrase",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "frequency",
+        "formal"
+      ]
+    },
+    {
+      "word": "take a break",
+      "translation": "zrobić przerwę",
+      "partOfSpeech": "phrase",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "rest",
+        "general"
+      ]
+    },
+    {
+      "word": "side hustle",
+      "translation": "dodatkowe zajęcie zarobkowe",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "work",
+        "modern"
+      ]
+    },
+    {
+      "word": "burnout",
+      "translation": "wypalenie zawodowe",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "work",
+        "health"
+      ]
+    },
+    {
+      "word": "work-life balance",
+      "translation": "równowaga praca-życie",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "wellbeing",
+        "work"
+      ]
+    },
+    {
+      "word": "networking",
+      "translation": "budowanie sieci kontaktów",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "career",
+        "social"
+      ]
+    },
+    {
+      "word": "small talk",
+      "translation": "rozmowa o niczym/pogawędka",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "social",
+        "conversation"
+      ]
+    },
+    {
+      "word": "comfort zone",
+      "translation": "strefa komfortu",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "growth",
+        "psychology"
+      ]
+    },
+    {
+      "word": "red flag",
+      "translation": "sygnał ostrzegawczy",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "warning",
+        "modern"
+      ]
+    },
+    {
+      "word": "trigger",
+      "translation": "wyzwalacz/wywołać",
+      "partOfSpeech": "noun/verb",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "psychology",
+        "general"
+      ]
+    },
+    {
+      "word": "resonate",
+      "translation": "rezonować/przemawiać do",
+      "partOfSpeech": "verb",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "impact",
+        "formal"
+      ]
+    },
+    {
+      "word": "empathy",
+      "translation": "empatia",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "psychology",
+        "relationships"
+      ]
+    },
+    {
+      "word": "vulnerable",
+      "translation": "wrażliwy/podatny",
+      "partOfSpeech": "adjective",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "emotions",
+        "character"
+      ]
+    },
+    {
+      "word": "authentic",
+      "translation": "autentyczny/prawdziwy",
+      "partOfSpeech": "adjective",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "character",
+        "modern"
+      ]
+    },
+    {
+      "word": "toxic",
+      "translation": "toksyczny",
+      "partOfSpeech": "adjective",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "relationships",
+        "modern"
+      ]
+    },
+    {
+      "word": "biased",
+      "translation": "stronniczy/uprzedzony",
+      "partOfSpeech": "adjective",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "thinking",
+        "media"
+      ]
+    },
+    {
+      "word": "diverse",
+      "translation": "różnorodny",
+      "partOfSpeech": "adjective",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "society",
+        "work"
+      ]
+    },
+    {
+      "word": "inclusive",
+      "translation": "inkluzywny/włączający",
+      "partOfSpeech": "adjective",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "society",
+        "modern"
+      ]
+    },
+    {
+      "word": "stereotype",
+      "translation": "stereotyp",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "society",
+        "thinking"
+      ]
+    },
+    {
+      "word": "assumption",
+      "translation": "założenie/przypuszczenie",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "thinking",
+        "general"
+      ]
+    },
+    {
+      "word": "overrated",
+      "translation": "przereklamowany",
+      "partOfSpeech": "adjective",
+      "level": "B2",
+      "frequency": 5,
+      "tags": [
+        "opinion",
+        "casual"
+      ]
+    },
+    {
+      "word": "underrated",
+      "translation": "niedoceniany",
+      "partOfSpeech": "adjective",
+      "level": "B2",
+      "frequency": 5,
+      "tags": [
+        "opinion",
+        "casual"
+      ]
+    },
+    {
+      "word": "to each their own",
+      "translation": "każdy ma swoje zdanie",
+      "partOfSpeech": "phrase",
+      "level": "C1",
+      "frequency": 4,
+      "tags": [
+        "tolerance",
+        "idiom"
+      ]
+    },
+    {
+      "word": "better safe than sorry",
+      "translation": "lepiej dmuchać na zimne",
+      "partOfSpeech": "phrase",
+      "level": "B2",
+      "frequency": 5,
+      "tags": [
+        "caution",
+        "proverb"
+      ]
+    },
+    {
+      "word": "easier said than done",
+      "translation": "łatwiej powiedzieć niż zrobić",
+      "partOfSpeech": "phrase",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "difficulty",
+        "proverb"
+      ]
+    },
+    {
+      "word": "speak of the devil",
+      "translation": "o wilku mowa",
+      "partOfSpeech": "phrase",
+      "level": "B2",
+      "frequency": 5,
+      "tags": [
+        "humor",
+        "idiom"
+      ]
+    },
+    {
+      "word": "break the ice",
+      "translation": "przełamać lody",
+      "partOfSpeech": "phrase",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "social",
+        "idiom"
+      ]
+    },
+    {
+      "word": "on the same page",
+      "translation": "na tej samej stronie/zgodzić się",
+      "partOfSpeech": "phrase",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "agreement",
+        "work"
+      ]
+    },
+    {
+      "word": "think outside the box",
+      "translation": "myśleć nieszablonowo",
+      "partOfSpeech": "phrase",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "creativity",
+        "business"
+      ]
+    },
+    {
+      "word": "go the extra mile",
+      "translation": "dać z siebie więcej",
+      "partOfSpeech": "phrase",
+      "level": "B2",
+      "frequency": 5,
+      "tags": [
+        "effort",
+        "work"
+      ]
+    },
+    {
+      "word": "hit the nail on the head",
+      "translation": "trafić w sedno",
+      "partOfSpeech": "phrase",
+      "level": "B2",
+      "frequency": 5,
+      "tags": [
+        "accuracy",
+        "idiom"
+      ]
+    },
+    {
+      "word": "it's not the end of the world",
+      "translation": "to nie koniec świata",
+      "partOfSpeech": "phrase",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "reassurance",
+        "idiom"
+      ]
+    },
+    {
+      "word": "sleep on it",
+      "translation": "przemyśleć (przespać się z tym)",
+      "partOfSpeech": "phrase",
+      "level": "B2",
+      "frequency": 5,
+      "tags": [
+        "decision",
+        "idiom"
+      ]
+    },
+    {
+      "word": "a blessing in disguise",
+      "translation": "coś złego na coś dobrego",
+      "partOfSpeech": "phrase",
+      "level": "C1",
+      "frequency": 4,
+      "tags": [
+        "perspective",
+        "idiom"
+      ]
+    },
+    {
+      "word": "call it a day",
+      "translation": "kończyć na dziś",
+      "partOfSpeech": "phrase",
+      "level": "B2",
+      "frequency": 5,
+      "tags": [
+        "work",
+        "idiom"
+      ]
+    },
+    {
+      "word": "get cold feet",
+      "translation": "stchórzyć/mieć wątpliwości",
+      "partOfSpeech": "phrase",
+      "level": "C1",
+      "frequency": 4,
+      "tags": [
+        "fear",
+        "idiom"
+      ]
+    },
+    {
+      "word": "ring a bell",
+      "translation": "kojarzyć się/brzmieć znajomo",
+      "partOfSpeech": "phrase",
+      "level": "B2",
+      "frequency": 5,
+      "tags": [
+        "memory",
+        "idiom"
+      ]
+    },
+    {
+      "word": "food for thought",
+      "translation": "coś do przemyślenia",
+      "partOfSpeech": "phrase",
+      "level": "B2",
+      "frequency": 5,
+      "tags": [
+        "reflection",
+        "idiom"
+      ]
+    },
+    {
+      "word": "keep one's fingers crossed",
+      "translation": "trzymać kciuki",
+      "partOfSpeech": "phrase",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "hope",
+        "idiom"
+      ]
+    },
+    {
+      "word": "a piece of cake",
+      "translation": "bułka z masłem/łatwizna",
+      "partOfSpeech": "phrase",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "ease",
+        "idiom"
+      ]
+    },
+    {
+      "word": "to make matters worse",
+      "translation": "na dodatek/co gorsza",
+      "partOfSpeech": "phrase",
+      "level": "B2",
+      "frequency": 5,
+      "tags": [
+        "escalation",
+        "narrative"
+      ]
+    },
+    {
+      "word": "see eye to eye",
+      "translation": "zgadzać się (z kimś)",
+      "partOfSpeech": "phrase",
+      "level": "C1",
+      "frequency": 4,
+      "tags": [
+        "agreement",
+        "idiom"
+      ]
+    },
+    {
+      "word": "as luck would have it",
+      "translation": "jak na złość/tak się składa",
+      "partOfSpeech": "phrase",
+      "level": "C1",
+      "frequency": 4,
+      "tags": [
+        "coincidence",
+        "narrative"
+      ]
+    },
+    {
+      "word": "hustle",
+      "translation": "harówka/działanie",
+      "partOfSpeech": "noun/verb",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "work",
+        "modern"
+      ]
+    },
+    {
+      "word": "vibe",
+      "translation": "klimat/atmosfera",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "atmosphere",
+        "modern"
+      ]
+    },
+    {
+      "word": "cringe",
+      "translation": "żenada/żenujący",
+      "partOfSpeech": "noun/adjective",
+      "level": "B2",
+      "frequency": 5,
+      "tags": [
+        "reaction",
+        "modern"
+      ]
+    },
+    {
+      "word": "FOMO",
+      "translation": "strach przed przegapieniem czegoś",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "psychology",
+        "modern"
+      ]
+    },
+    {
+      "word": "ghosting",
+      "translation": "nagłe zerwanie kontaktu",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "dating",
+        "modern"
+      ]
+    },
+    {
+      "word": "influencer",
+      "translation": "influencer/osoba wpływowa",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "social_media",
+        "modern"
+      ]
+    },
+    {
+      "word": "mindful",
+      "translation": "uważny/świadomy",
+      "partOfSpeech": "adjective",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "wellbeing",
+        "psychology"
+      ]
+    },
+    {
+      "word": "random",
+      "translation": "losowy/przypadkowy",
+      "partOfSpeech": "adjective",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "general",
+        "casual"
+      ]
+    },
+    {
+      "word": "vague",
+      "translation": "niejasny/mglisty",
+      "partOfSpeech": "adjective",
+      "level": "B2",
+      "frequency": 5,
+      "tags": [
+        "clarity",
+        "description"
+      ]
+    },
+    {
+      "word": "peak",
+      "translation": "szczyt/szczytowy",
+      "partOfSpeech": "noun/adjective",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "maximum",
+        "general"
+      ]
+    },
+    {
+      "word": "thrive",
+      "translation": "prosperować/kwitnąć",
+      "partOfSpeech": "verb",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "success",
+        "growth"
+      ]
+    },
+    {
+      "word": "hesitate",
+      "translation": "wahać się",
+      "partOfSpeech": "verb",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "decision",
+        "general"
+      ]
+    },
+    {
+      "word": "resemble",
+      "translation": "przypominać/być podobnym",
+      "partOfSpeech": "verb",
+      "level": "B2",
+      "frequency": 5,
+      "tags": [
+        "comparison",
+        "general"
+      ]
+    },
+    {
+      "word": "acknowledge",
+      "translation": "przyznać/uznać",
+      "partOfSpeech": "verb",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "recognition",
+        "formal"
+      ]
+    },
+    {
+      "word": "worth mentioning",
+      "translation": "wart wspomnienia",
+      "partOfSpeech": "phrase",
+      "level": "B2",
+      "frequency": 5,
+      "tags": [
+        "emphasis",
+        "formal"
+      ]
+    },
+    {
+      "word": "to put it simply",
+      "translation": "mówiąc prosto",
+      "partOfSpeech": "phrase",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "simplification",
+        "explanation"
+      ]
+    },
+    {
+      "word": "you know what I mean",
+      "translation": "wiesz o co mi chodzi",
+      "partOfSpeech": "phrase",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "confirmation",
+        "casual"
+      ]
+    },
+    {
+      "word": "broke",
+      "translation": "spłukany/bez kasy",
+      "partOfSpeech": "adjective",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "slang"
+      ]
+    },
+    {
+      "word": "bummed out",
+      "translation": "przygnębiony",
+      "partOfSpeech": "adjective",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "feelings"
+      ]
+    },
+    {
+      "word": "chill out",
+      "translation": "wyluzować się",
+      "partOfSpeech": "phrasal verb",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "lifestyle"
+      ]
+    },
+    {
+      "word": "come across as",
+      "translation": "sprawiać wrażenie",
+      "partOfSpeech": "phrasal verb",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "opinions"
+      ]
+    },
+    {
+      "word": "considerate",
+      "translation": "taktowny/uprzejmy",
+      "partOfSpeech": "adjective",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "personality"
+      ]
+    },
+    {
+      "word": "day off",
+      "translation": "dzień wolny",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 9,
+      "tags": [
+        "work"
+      ]
+    },
+    {
+      "word": "demanding",
+      "translation": "wymagający",
+      "partOfSpeech": "adjective",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "work"
+      ]
+    },
+    {
+      "word": "exhausting",
+      "translation": "wyczerpujący",
+      "partOfSpeech": "adjective",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "feelings"
+      ]
+    },
+    {
+      "word": "fed up with",
+      "translation": "mieć dosyć czegoś",
+      "partOfSpeech": "phrasal verb",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "feelings"
+      ]
+    },
+    {
+      "word": "freak out",
+      "translation": "spanikować",
+      "partOfSpeech": "phrasal verb",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "feelings"
+      ]
+    },
+    {
+      "word": "give up on",
+      "translation": "zrezygnować z",
+      "partOfSpeech": "phrasal verb",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "general"
+      ]
+    },
+    {
+      "word": "go viral",
+      "translation": "stać się viralem",
+      "partOfSpeech": "verb",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "social media"
+      ]
+    },
+    {
+      "word": "gutted",
+      "translation": "zdruzgotany",
+      "partOfSpeech": "adjective",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "feelings"
+      ]
+    },
+    {
+      "word": "hassle",
+      "translation": "kłopot/zawracanie głowy",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "general"
+      ]
+    },
+    {
+      "word": "hit it off",
+      "translation": "dogadać się od razu",
+      "partOfSpeech": "phrasal verb",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "social"
+      ]
+    },
+    {
+      "word": "homesick",
+      "translation": "tęsknić za domem",
+      "partOfSpeech": "adjective",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "feelings"
+      ]
+    },
+    {
+      "word": "hyped",
+      "translation": "nakręcony/podekscytowany",
+      "partOfSpeech": "adjective",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "slang"
+      ]
+    },
+    {
+      "word": "it rings a bell",
+      "translation": "coś mi mówi/brzmi znajomo",
+      "partOfSpeech": "idiom",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "expressions"
+      ]
+    },
+    {
+      "word": "keep in touch",
+      "translation": "utrzymywać kontakt",
+      "partOfSpeech": "phrasal verb",
+      "level": "B1",
+      "frequency": 9,
+      "tags": [
+        "social"
+      ]
+    },
+    {
+      "word": "laid-back",
+      "translation": "wyluzowany",
+      "partOfSpeech": "adjective",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "personality"
+      ]
+    },
+    {
+      "word": "let down",
+      "translation": "zawieść kogoś",
+      "partOfSpeech": "phrasal verb",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "feelings"
+      ]
+    },
+    {
+      "word": "make up for",
+      "translation": "nadrobić/zrekompensować",
+      "partOfSpeech": "phrasal verb",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "general"
+      ]
+    },
+    {
+      "word": "mind-blowing",
+      "translation": "oszałamiający",
+      "partOfSpeech": "adjective",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "opinions"
+      ]
+    },
+    {
+      "word": "moody",
+      "translation": "humorzasty",
+      "partOfSpeech": "adjective",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "personality"
+      ]
+    },
+    {
+      "word": "no big deal",
+      "translation": "nic wielkiego",
+      "partOfSpeech": "idiom",
+      "level": "B1",
+      "frequency": 9,
+      "tags": [
+        "expressions"
+      ]
+    },
+    {
+      "word": "nostalgic",
+      "translation": "nostalgiczny",
+      "partOfSpeech": "adjective",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "feelings"
+      ]
+    },
+    {
+      "word": "open-minded",
+      "translation": "otwarty na nowe",
+      "partOfSpeech": "adjective",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "personality"
+      ]
+    },
+    {
+      "word": "pass out",
+      "translation": "zemdleć",
+      "partOfSpeech": "phrasal verb",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "health"
+      ]
+    },
+    {
+      "word": "picky",
+      "translation": "wybredny",
+      "partOfSpeech": "adjective",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "personality"
+      ]
+    },
+    {
+      "word": "pull an all-nighter",
+      "translation": "zarwać noc",
+      "partOfSpeech": "verb",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "lifestyle"
+      ]
+    },
+    {
+      "word": "rip-off",
+      "translation": "zdzierstwo/oszustwo cenowe",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "shopping"
+      ]
+    },
+    {
+      "word": "show off",
+      "translation": "popisywać się",
+      "partOfSpeech": "phrasal verb",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "personality"
+      ]
+    },
+    {
+      "word": "sleep in",
+      "translation": "pospać dłużej",
+      "partOfSpeech": "phrasal verb",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "lifestyle"
+      ]
+    },
+    {
+      "word": "small world",
+      "translation": "świat jest mały",
+      "partOfSpeech": "idiom",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "expressions"
+      ]
+    },
+    {
+      "word": "spill the tea",
+      "translation": "wygadać plotki",
+      "partOfSpeech": "idiom",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "slang"
+      ]
+    },
+    {
+      "word": "spot on",
+      "translation": "w punkt/idealnie",
+      "partOfSpeech": "adverb",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "expressions"
+      ]
+    },
+    {
+      "word": "stressed out",
+      "translation": "zestresowany",
+      "partOfSpeech": "adjective",
+      "level": "B1",
+      "frequency": 9,
+      "tags": [
+        "feelings"
+      ]
+    },
+    {
+      "word": "the last straw",
+      "translation": "ostatnia kropla",
+      "partOfSpeech": "idiom",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "expressions"
+      ]
+    },
+    {
+      "word": "thrilled",
+      "translation": "zachwycony",
+      "partOfSpeech": "adjective",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "feelings"
+      ]
+    },
+    {
+      "word": "time flies",
+      "translation": "czas leci",
+      "partOfSpeech": "idiom",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "expressions"
+      ]
+    },
+    {
+      "word": "tone-deaf",
+      "translation": "bez wyczucia/nietaktowny",
+      "partOfSpeech": "adjective",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "opinions"
+      ]
+    },
+    {
+      "word": "under the weather",
+      "translation": "niedomagać/źle się czuć",
+      "partOfSpeech": "idiom",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "health"
+      ]
+    },
+    {
+      "word": "wind down",
+      "translation": "wyciszać się/relaksować",
+      "partOfSpeech": "phrasal verb",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "lifestyle"
+      ]
+    },
+    {
+      "word": "zone out",
+      "translation": "wyłączyć się/odpłynąć",
+      "partOfSpeech": "phrasal verb",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "lifestyle"
+      ]
+    },
+    {
+      "word": "ASAP",
+      "translation": "jak najszybciej",
+      "partOfSpeech": "adverb",
+      "level": "B1",
+      "frequency": 9,
+      "tags": [
+        "work"
+      ]
+    },
+    {
+      "word": "deal breaker",
+      "translation": "czynnik dyskwalifikujący",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "opinions"
+      ]
+    },
+    {
+      "word": "down-to-earth",
+      "translation": "przyziemny/konkretny",
+      "partOfSpeech": "adjective",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "personality"
+      ]
+    },
+    {
+      "word": "game changer",
+      "translation": "przełom",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 8,
+      "tags": [
+        "opinions"
+      ]
+    },
+    {
+      "word": "heads up",
+      "translation": "uprzedzenie/uwaga",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "work"
+      ]
+    },
+    {
+      "word": "I couldn't agree more",
+      "translation": "w pełni się zgadzam",
+      "partOfSpeech": "idiom",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "opinions"
+      ]
+    },
+    {
+      "word": "it's on the tip of my tongue",
+      "translation": "mam to na końcu języka",
+      "partOfSpeech": "idiom",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "expressions"
+      ]
+    },
+    {
+      "word": "keep me posted",
+      "translation": "trzymaj mnie na bieżąco",
+      "partOfSpeech": "idiom",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "work"
+      ]
+    },
+    {
+      "word": "low-key",
+      "translation": "trochę/po cichu",
+      "partOfSpeech": "adverb",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "slang"
+      ]
+    },
+    {
+      "word": "blew my mind",
+      "translation": "zrobiło na mnie wrażenie",
+      "partOfSpeech": "idiom",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "expressions"
+      ]
+    },
+    {
+      "word": "cut corners",
+      "translation": "iść na skróty",
+      "partOfSpeech": "idiom",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "work"
+      ]
+    },
+    {
+      "word": "drained",
+      "translation": "wykończony/wycieńczony",
+      "partOfSpeech": "adjective",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "feelings"
+      ]
+    },
+    {
+      "word": "follow through",
+      "translation": "doprowadzić do końca",
+      "partOfSpeech": "phrasal verb",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "work"
+      ]
+    },
+    {
+      "word": "go-getter",
+      "translation": "osoba ambitna/zaradna",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "personality"
+      ]
+    },
+    {
+      "word": "I'm all ears",
+      "translation": "zamieniam się w słuch",
+      "partOfSpeech": "idiom",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "expressions"
+      ]
+    },
+    {
+      "word": "jot down",
+      "translation": "szybko zanotować",
+      "partOfSpeech": "phrasal verb",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "work"
+      ]
+    },
+    {
+      "word": "know-how",
+      "translation": "wiedza praktyczna",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "work"
+      ]
+    },
+    {
+      "word": "level with someone",
+      "translation": "być szczerym z kimś",
+      "partOfSpeech": "phrasal verb",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "social"
+      ]
+    },
+    {
+      "word": "miss out on",
+      "translation": "przegapić/stracić okazję",
+      "partOfSpeech": "phrasal verb",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "general"
+      ]
+    },
+    {
+      "word": "nailed it",
+      "translation": "udało się/trafiłem",
+      "partOfSpeech": "idiom",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "slang"
+      ]
+    },
+    {
+      "word": "piece of cake",
+      "translation": "bułka z masłem",
+      "partOfSpeech": "idiom",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "expressions"
+      ]
+    },
+    {
+      "word": "quality time",
+      "translation": "czas dla siebie/bliskich",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "lifestyle"
+      ]
+    },
+    {
+      "word": "the elephant in the room",
+      "translation": "niewygodny temat",
+      "partOfSpeech": "idiom",
+      "level": "C1",
+      "frequency": 6,
+      "tags": [
+        "expressions"
+      ]
+    },
+    {
+      "word": "up to speed",
+      "translation": "na bieżąco/zorientowany",
+      "partOfSpeech": "adjective",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "work"
+      ]
+    },
+    {
+      "word": "way to go",
+      "translation": "tak trzymaj/brawo",
+      "partOfSpeech": "idiom",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "expressions"
+      ]
+    },
+    {
+      "word": "you name it",
+      "translation": "co tylko chcesz",
+      "partOfSpeech": "idiom",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "expressions"
+      ]
+    },
+    {
+      "word": "burning out",
+      "translation": "wypalenie zawodowe",
+      "partOfSpeech": "gerund",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "work"
+      ]
+    },
+    {
+      "word": "can't wrap my head around",
+      "translation": "nie mogę tego ogarnąć",
+      "partOfSpeech": "idiom",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "expressions"
+      ]
+    },
+    {
+      "word": "drop a line",
+      "translation": "napisać/odezwać się",
+      "partOfSpeech": "idiom",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "social"
+      ]
+    },
+    {
+      "word": "get out of hand",
+      "translation": "wymknąć się spod kontroli",
+      "partOfSpeech": "phrasal verb",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "general"
+      ]
+    },
+    {
+      "word": "live up to expectations",
+      "translation": "sprostać oczekiwaniom",
+      "partOfSpeech": "phrasal verb",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "general"
+      ]
+    },
+    {
+      "word": "read the room",
+      "translation": "wyczuć atmosferę",
+      "partOfSpeech": "idiom",
+      "level": "C1",
+      "frequency": 6,
+      "tags": [
+        "social"
+      ]
+    },
+    {
+      "word": "the ball is in your court",
+      "translation": "twój ruch/twoja kolej",
+      "partOfSpeech": "idiom",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "expressions"
+      ]
+    }
   ]
 }

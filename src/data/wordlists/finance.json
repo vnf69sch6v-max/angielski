@@ -1,183 +1,2183 @@
 {
   "domain": "finance",
   "words": [
-    { "word": "yield", "translation": "zysk/rentowność", "partOfSpeech": "noun/verb", "level": "B1", "frequency": 9, "tags": ["bonds", "investing"] },
-    { "word": "equity", "translation": "kapitał własny", "partOfSpeech": "noun", "level": "B2", "frequency": 8, "tags": ["stocks", "accounting"] },
-    { "word": "leverage", "translation": "dźwignia finansowa", "partOfSpeech": "noun", "level": "B2", "frequency": 8, "tags": ["investing", "risk"] },
-    { "word": "hedge", "translation": "zabezpieczenie/hedging", "partOfSpeech": "noun/verb", "level": "B2", "frequency": 7, "tags": ["risk", "derivatives"] },
-    { "word": "liquidity", "translation": "płynność finansowa", "partOfSpeech": "noun", "level": "B1", "frequency": 9, "tags": ["banking", "markets"] },
-    { "word": "bearish", "translation": "niedźwiedzi (spadkowy)", "partOfSpeech": "adjective", "level": "B2", "frequency": 6, "tags": ["markets", "sentiment"] },
-    { "word": "bullish", "translation": "byczy (wzrostowy)", "partOfSpeech": "adjective", "level": "B2", "frequency": 6, "tags": ["markets", "sentiment"] },
-    { "word": "dovish", "translation": "gołębi (łagodna polityka)", "partOfSpeech": "adjective", "level": "C1", "frequency": 5, "tags": ["monetary", "central_bank"] },
-    { "word": "hawkish", "translation": "jastrzębi (restrykcyjna polityka)", "partOfSpeech": "adjective", "level": "C1", "frequency": 5, "tags": ["monetary", "central_bank"] },
-    { "word": "maturity", "translation": "termin zapadalności", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["bonds", "lending"] },
-    { "word": "asset", "translation": "aktywo/zasób", "partOfSpeech": "noun", "level": "B1", "frequency": 10, "tags": ["accounting", "general"] },
-    { "word": "liability", "translation": "zobowiązanie/pasywo", "partOfSpeech": "noun", "level": "B1", "frequency": 9, "tags": ["accounting", "general"] },
-    { "word": "revenue", "translation": "przychód", "partOfSpeech": "noun", "level": "B1", "frequency": 10, "tags": ["accounting", "reporting"] },
-    { "word": "profit margin", "translation": "marża zysku", "partOfSpeech": "noun", "level": "B1", "frequency": 8, "tags": ["accounting", "profitability"] },
-    { "word": "cash flow", "translation": "przepływ pieniężny", "partOfSpeech": "noun", "level": "B1", "frequency": 9, "tags": ["accounting", "valuation"] },
-    { "word": "dividend", "translation": "dywidenda", "partOfSpeech": "noun", "level": "B1", "frequency": 8, "tags": ["stocks", "income"] },
-    { "word": "portfolio", "translation": "portfel inwestycyjny", "partOfSpeech": "noun", "level": "B1", "frequency": 8, "tags": ["investing", "general"] },
-    { "word": "bond", "translation": "obligacja", "partOfSpeech": "noun", "level": "B1", "frequency": 9, "tags": ["fixed_income", "investing"] },
-    { "word": "stock", "translation": "akcja", "partOfSpeech": "noun", "level": "B1", "frequency": 10, "tags": ["equity", "investing"] },
-    { "word": "share", "translation": "udział/akcja", "partOfSpeech": "noun", "level": "B1", "frequency": 10, "tags": ["equity", "ownership"] },
-    { "word": "interest rate", "translation": "stopa procentowa", "partOfSpeech": "noun", "level": "B1", "frequency": 10, "tags": ["monetary", "banking"] },
-    { "word": "inflation", "translation": "inflacja", "partOfSpeech": "noun", "level": "B1", "frequency": 9, "tags": ["macro", "monetary"] },
-    { "word": "deflation", "translation": "deflacja", "partOfSpeech": "noun", "level": "B2", "frequency": 6, "tags": ["macro", "monetary"] },
-    { "word": "depreciation", "translation": "amortyzacja/deprecjacja", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["accounting", "macro"] },
-    { "word": "appreciation", "translation": "aprecjacja/wzrost wartości", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["macro", "investing"] },
-    { "word": "budget", "translation": "budżet", "partOfSpeech": "noun", "level": "B1", "frequency": 9, "tags": ["planning", "general"] },
-    { "word": "forecast", "translation": "prognoza", "partOfSpeech": "noun/verb", "level": "B1", "frequency": 8, "tags": ["analysis", "planning"] },
-    { "word": "expenditure", "translation": "wydatek", "partOfSpeech": "noun", "level": "B1", "frequency": 8, "tags": ["accounting", "budgeting"] },
-    { "word": "investment", "translation": "inwestycja", "partOfSpeech": "noun", "level": "B1", "frequency": 10, "tags": ["investing", "general"] },
-    { "word": "return", "translation": "zwrot/stopa zwrotu", "partOfSpeech": "noun", "level": "B1", "frequency": 9, "tags": ["investing", "performance"] },
-    { "word": "risk", "translation": "ryzyko", "partOfSpeech": "noun", "level": "B1", "frequency": 10, "tags": ["general", "risk"] },
-    { "word": "collateral", "translation": "zabezpieczenie/zastaw", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["lending", "risk"] },
-    { "word": "default", "translation": "niewypłacalność/default", "partOfSpeech": "noun/verb", "level": "B2", "frequency": 7, "tags": ["credit", "risk"] },
-    { "word": "underwrite", "translation": "gwarantować emisję", "partOfSpeech": "verb", "level": "B2", "frequency": 6, "tags": ["investment_banking", "insurance"] },
-    { "word": "amortize", "translation": "amortyzować", "partOfSpeech": "verb", "level": "B2", "frequency": 6, "tags": ["accounting", "loans"] },
-    { "word": "audit", "translation": "audyt/rewizja", "partOfSpeech": "noun/verb", "level": "B1", "frequency": 8, "tags": ["accounting", "compliance"] },
-    { "word": "balance sheet", "translation": "bilans", "partOfSpeech": "noun", "level": "B1", "frequency": 9, "tags": ["accounting", "reporting"] },
-    { "word": "income statement", "translation": "rachunek zysków i strat", "partOfSpeech": "noun", "level": "B1", "frequency": 8, "tags": ["accounting", "reporting"] },
-    { "word": "fiscal", "translation": "fiskalny/skarbowy", "partOfSpeech": "adjective", "level": "B1", "frequency": 7, "tags": ["government", "taxation"] },
-    { "word": "monetary", "translation": "monetarny", "partOfSpeech": "adjective", "level": "B1", "frequency": 8, "tags": ["central_bank", "macro"] },
-    { "word": "volatility", "translation": "zmienność", "partOfSpeech": "noun", "level": "B2", "frequency": 8, "tags": ["markets", "risk"] },
-    { "word": "benchmark", "translation": "punkt odniesienia/benchmark", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["investing", "performance"] },
-    { "word": "diversification", "translation": "dywersyfikacja", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["investing", "risk"] },
-    { "word": "allocation", "translation": "alokacja", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["investing", "strategy"] },
-    { "word": "derivative", "translation": "instrument pochodny", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["derivatives", "trading"] },
-    { "word": "option", "translation": "opcja (instrument)", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["derivatives", "trading"] },
-    { "word": "futures", "translation": "kontrakty terminowe", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["derivatives", "trading"] },
-    { "word": "swap", "translation": "swap/zamiana", "partOfSpeech": "noun", "level": "C1", "frequency": 5, "tags": ["derivatives", "fixed_income"] },
-    { "word": "commodity", "translation": "surowiec/towar", "partOfSpeech": "noun", "level": "B1", "frequency": 8, "tags": ["markets", "trading"] },
-    { "word": "currency", "translation": "waluta", "partOfSpeech": "noun", "level": "B1", "frequency": 9, "tags": ["forex", "general"] },
-    { "word": "exchange rate", "translation": "kurs wymiany walut", "partOfSpeech": "noun", "level": "B1", "frequency": 8, "tags": ["forex", "macro"] },
-    { "word": "mortgage", "translation": "kredyt hipoteczny", "partOfSpeech": "noun", "level": "B1", "frequency": 8, "tags": ["banking", "lending"] },
-    { "word": "loan", "translation": "pożyczka/kredyt", "partOfSpeech": "noun", "level": "B1", "frequency": 9, "tags": ["banking", "lending"] },
-    { "word": "deposit", "translation": "depozyt/lokata", "partOfSpeech": "noun", "level": "B1", "frequency": 8, "tags": ["banking", "saving"] },
-    { "word": "withdrawal", "translation": "wypłata", "partOfSpeech": "noun", "level": "B1", "frequency": 7, "tags": ["banking", "general"] },
-    { "word": "transaction", "translation": "transakcja", "partOfSpeech": "noun", "level": "B1", "frequency": 9, "tags": ["banking", "general"] },
-    { "word": "GDP", "translation": "PKB (produkt krajowy brutto)", "partOfSpeech": "noun", "level": "B1", "frequency": 9, "tags": ["macro", "indicators"] },
-    { "word": "recession", "translation": "recesja", "partOfSpeech": "noun", "level": "B1", "frequency": 8, "tags": ["macro", "cycles"] },
-    { "word": "surplus", "translation": "nadwyżka", "partOfSpeech": "noun", "level": "B1", "frequency": 7, "tags": ["macro", "budgeting"] },
-    { "word": "deficit", "translation": "deficyt", "partOfSpeech": "noun", "level": "B1", "frequency": 8, "tags": ["macro", "budgeting"] },
-    { "word": "subsidy", "translation": "dotacja/subsydium", "partOfSpeech": "noun", "level": "B2", "frequency": 6, "tags": ["government", "policy"] },
-    { "word": "tariff", "translation": "cło/taryfa", "partOfSpeech": "noun", "level": "B2", "frequency": 6, "tags": ["trade", "policy"] },
-    { "word": "quota", "translation": "kwota/kontyngent", "partOfSpeech": "noun", "level": "B2", "frequency": 6, "tags": ["trade", "policy"] },
-    { "word": "deregulation", "translation": "deregulacja", "partOfSpeech": "noun", "level": "C1", "frequency": 5, "tags": ["policy", "markets"] },
-    { "word": "privatization", "translation": "prywatyzacja", "partOfSpeech": "noun", "level": "B2", "frequency": 6, "tags": ["policy", "government"] },
-    { "word": "acquisition", "translation": "przejęcie/akwizycja", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["m&a", "corporate"] },
-    { "word": "merger", "translation": "fuzja/połączenie", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["m&a", "corporate"] },
-    { "word": "IPO", "translation": "pierwsza oferta publiczna", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["equity", "markets"] },
-    { "word": "shareholder", "translation": "akcjonariusz/udziałowiec", "partOfSpeech": "noun", "level": "B1", "frequency": 8, "tags": ["corporate", "ownership"] },
-    { "word": "stakeholder", "translation": "interesariusz", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["corporate", "governance"] },
-    { "word": "due diligence", "translation": "analiza due diligence", "partOfSpeech": "noun", "level": "C1", "frequency": 6, "tags": ["m&a", "investing"] },
-    { "word": "valuation", "translation": "wycena", "partOfSpeech": "noun", "level": "B2", "frequency": 8, "tags": ["investing", "analysis"] },
-    { "word": "compound interest", "translation": "procent składany", "partOfSpeech": "noun", "level": "B1", "frequency": 7, "tags": ["banking", "investing"] },
-    { "word": "principal", "translation": "kapitał/kwota główna", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["lending", "bonds"] },
-    { "word": "coupon", "translation": "kupon (odsetkowy)", "partOfSpeech": "noun", "level": "B2", "frequency": 6, "tags": ["bonds", "fixed_income"] },
-    { "word": "premium", "translation": "premia/składka", "partOfSpeech": "noun", "level": "B1", "frequency": 8, "tags": ["insurance", "investing"] },
-    { "word": "discount rate", "translation": "stopa dyskontowa", "partOfSpeech": "noun", "level": "B2", "frequency": 6, "tags": ["valuation", "central_bank"] },
-    { "word": "credit rating", "translation": "ocena/rating kredytowy", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["credit", "bonds"] },
-    { "word": "insolvency", "translation": "niewypłacalność", "partOfSpeech": "noun", "level": "C1", "frequency": 5, "tags": ["credit", "risk"] },
-    { "word": "bankruptcy", "translation": "bankructwo/upadłość", "partOfSpeech": "noun", "level": "B1", "frequency": 7, "tags": ["credit", "legal"] },
-    { "word": "tax", "translation": "podatek", "partOfSpeech": "noun", "level": "B1", "frequency": 10, "tags": ["taxation", "general"] },
-    { "word": "deduction", "translation": "odliczenie (podatkowe)", "partOfSpeech": "noun", "level": "B2", "frequency": 6, "tags": ["taxation", "accounting"] },
-    { "word": "exemption", "translation": "zwolnienie (podatkowe)", "partOfSpeech": "noun", "level": "B2", "frequency": 6, "tags": ["taxation", "regulation"] },
-    { "word": "capital gains", "translation": "zyski kapitałowe", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["taxation", "investing"] },
-    { "word": "turnover", "translation": "obrót", "partOfSpeech": "noun", "level": "B1", "frequency": 8, "tags": ["accounting", "business"] },
-    { "word": "overhead", "translation": "koszty ogólne", "partOfSpeech": "noun", "level": "B2", "frequency": 6, "tags": ["accounting", "operations"] },
-    { "word": "payroll", "translation": "lista płac", "partOfSpeech": "noun", "level": "B1", "frequency": 7, "tags": ["hr", "accounting"] },
-    { "word": "accounts receivable", "translation": "należności", "partOfSpeech": "noun", "level": "B2", "frequency": 6, "tags": ["accounting", "operations"] },
-    { "word": "accounts payable", "translation": "zobowiązania handlowe", "partOfSpeech": "noun", "level": "B2", "frequency": 6, "tags": ["accounting", "operations"] },
-    { "word": "accrual", "translation": "rozliczenie memoriałowe", "partOfSpeech": "noun", "level": "C1", "frequency": 5, "tags": ["accounting", "reporting"] },
-    { "word": "write-off", "translation": "odpis", "partOfSpeech": "noun", "level": "B2", "frequency": 6, "tags": ["accounting", "taxation"] },
-    { "word": "goodwill", "translation": "wartość firmy/goodwill", "partOfSpeech": "noun", "level": "C1", "frequency": 5, "tags": ["accounting", "m&a"] },
-    { "word": "tangible asset", "translation": "aktywo materialne", "partOfSpeech": "noun", "level": "B2", "frequency": 6, "tags": ["accounting", "valuation"] },
-    { "word": "intangible asset", "translation": "aktywo niematerialne", "partOfSpeech": "noun", "level": "B2", "frequency": 6, "tags": ["accounting", "valuation"] },
-    { "word": "net worth", "translation": "wartość netto", "partOfSpeech": "noun", "level": "B1", "frequency": 7, "tags": ["personal_finance", "accounting"] },
-    { "word": "break-even", "translation": "próg rentowności", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["business", "analysis"] },
-    { "word": "scalable", "translation": "skalowalny", "partOfSpeech": "adjective", "level": "B2", "frequency": 7, "tags": ["business", "startups"] },
-    { "word": "refinance", "translation": "refinansować", "partOfSpeech": "verb", "level": "B2", "frequency": 6, "tags": ["banking", "lending"] },
-    { "word": "divestiture", "translation": "dezinwestycja/zbycie", "partOfSpeech": "noun", "level": "C1", "frequency": 4, "tags": ["corporate", "m&a"] },
-    { "word": "capitalization", "translation": "kapitalizacja", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["markets", "valuation"] },
-    { "word": "outperform", "translation": "osiągać lepsze wyniki", "partOfSpeech": "verb", "level": "B2", "frequency": 7, "tags": ["investing", "performance"] },
-    { "word": "underperform", "translation": "osiągać gorsze wyniki", "partOfSpeech": "verb", "level": "B2", "frequency": 6, "tags": ["investing", "performance"] },
-    { "word": "securitize", "translation": "sekurytyzować", "partOfSpeech": "verb", "level": "C1", "frequency": 4, "tags": ["structured_finance", "banking"] },
-    { "word": "margin call", "translation": "wezwanie do uzupełnienia depozytu", "partOfSpeech": "noun", "level": "C1", "frequency": 5, "tags": ["trading", "risk"] },
-    { "word": "short selling", "translation": "krótka sprzedaż", "partOfSpeech": "noun", "level": "B2", "frequency": 6, "tags": ["trading", "strategy"] },
-    { "word": "index fund", "translation": "fundusz indeksowy", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["investing", "funds"] },
-    { "word": "mutual fund", "translation": "fundusz inwestycyjny otwarty", "partOfSpeech": "noun", "level": "B1", "frequency": 7, "tags": ["investing", "funds"] },
-    { "word": "ETF", "translation": "fundusz notowany na giełdzie", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["investing", "funds"] },
-    { "word": "P/E ratio", "translation": "wskaźnik cena/zysk", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["valuation", "analysis"] },
-    { "word": "ROI", "translation": "zwrot z inwestycji", "partOfSpeech": "noun", "level": "B1", "frequency": 8, "tags": ["investing", "performance"] },
-    { "word": "EBITDA", "translation": "zysk operacyjny + amortyzacja", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["accounting", "valuation"] },
-    { "word": "quantitative easing", "translation": "luzowanie ilościowe", "partOfSpeech": "noun", "level": "C1", "frequency": 5, "tags": ["monetary", "central_bank"] },
-    { "word": "tighten", "translation": "zaostrzać (politykę monetarną)", "partOfSpeech": "verb", "level": "B2", "frequency": 6, "tags": ["monetary", "central_bank"] },
-    { "word": "ease", "translation": "łagodzić (politykę)", "partOfSpeech": "verb", "level": "B2", "frequency": 6, "tags": ["monetary", "central_bank"] },
-    { "word": "bailout", "translation": "pomoc finansowa/ratunek", "partOfSpeech": "noun", "level": "B2", "frequency": 6, "tags": ["government", "crisis"] },
-    { "word": "stimulus", "translation": "stymulacja (gospodarcza)", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["government", "macro"] },
-    { "word": "austerity", "translation": "polityka oszczędnościowa", "partOfSpeech": "noun", "level": "C1", "frequency": 5, "tags": ["government", "policy"] },
-    { "word": "liquidity trap", "translation": "pułapka płynności", "partOfSpeech": "noun", "level": "C1", "frequency": 4, "tags": ["monetary", "theory"] },
-    { "word": "stagflation", "translation": "stagflacja", "partOfSpeech": "noun", "level": "C1", "frequency": 5, "tags": ["macro", "crisis"] },
-    { "word": "hedge fund", "translation": "fundusz hedgingowy", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["investing", "funds"] },
-    { "word": "venture capital", "translation": "kapitał podwyższonego ryzyka", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["startups", "investing"] },
-    { "word": "angel investor", "translation": "anioł biznesu", "partOfSpeech": "noun", "level": "B2", "frequency": 6, "tags": ["startups", "investing"] },
-    { "word": "seed funding", "translation": "finansowanie początkowe", "partOfSpeech": "noun", "level": "B2", "frequency": 6, "tags": ["startups", "investing"] },
-    { "word": "runway", "translation": "rezerwa finansowa (startupu)", "partOfSpeech": "noun", "level": "C1", "frequency": 5, "tags": ["startups", "planning"] },
-    { "word": "burn rate", "translation": "tempo wydawania pieniędzy", "partOfSpeech": "noun", "level": "C1", "frequency": 5, "tags": ["startups", "operations"] },
-    { "word": "disbursement", "translation": "wypłata/wydatkowanie", "partOfSpeech": "noun", "level": "C1", "frequency": 4, "tags": ["banking", "operations"] },
-    { "word": "remittance", "translation": "przekaz pieniężny", "partOfSpeech": "noun", "level": "C1", "frequency": 4, "tags": ["banking", "international"] },
-    { "word": "compliance", "translation": "zgodność z przepisami", "partOfSpeech": "noun", "level": "B2", "frequency": 8, "tags": ["regulation", "governance"] },
-    { "word": "fiduciary", "translation": "powierniczy", "partOfSpeech": "adjective", "level": "C1", "frequency": 4, "tags": ["legal", "governance"] },
-    { "word": "escrow", "translation": "depozyt powierniczy", "partOfSpeech": "noun", "level": "C1", "frequency": 4, "tags": ["legal", "transactions"] },
-    { "word": "arbitrage", "translation": "arbitraż", "partOfSpeech": "noun", "level": "C1", "frequency": 5, "tags": ["trading", "strategy"] },
-    { "word": "spread", "translation": "spread/rozpiętość", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["trading", "bonds"] },
-    { "word": "blue chip", "translation": "spółka pierwszorzędna", "partOfSpeech": "noun", "level": "B2", "frequency": 6, "tags": ["stocks", "investing"] },
-    { "word": "market cap", "translation": "kapitalizacja rynkowa", "partOfSpeech": "noun", "level": "B1", "frequency": 8, "tags": ["stocks", "markets"] },
-    { "word": "bear market", "translation": "rynek niedźwiedzia", "partOfSpeech": "noun", "level": "B2", "frequency": 6, "tags": ["markets", "cycles"] },
-    { "word": "bull market", "translation": "rynek byka", "partOfSpeech": "noun", "level": "B2", "frequency": 6, "tags": ["markets", "cycles"] },
-    { "word": "rally", "translation": "zwyżka/rajd", "partOfSpeech": "noun", "level": "B2", "frequency": 6, "tags": ["markets", "trading"] },
-    { "word": "correction", "translation": "korekta (rynkowa)", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["markets", "cycles"] },
-    { "word": "rebalance", "translation": "równoważyć (portfel)", "partOfSpeech": "verb", "level": "B2", "frequency": 5, "tags": ["investing", "strategy"] },
-    { "word": "undervalue", "translation": "niedowartościować", "partOfSpeech": "verb", "level": "B2", "frequency": 6, "tags": ["valuation", "investing"] },
-    { "word": "overvalue", "translation": "przewartościować", "partOfSpeech": "verb", "level": "B2", "frequency": 6, "tags": ["valuation", "investing"] },
-    { "word": "working capital", "translation": "kapitał obrotowy", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["accounting", "operations"] },
-    { "word": "retained earnings", "translation": "zyski zatrzymane", "partOfSpeech": "noun", "level": "B2", "frequency": 6, "tags": ["accounting", "reporting"] },
-    { "word": "dilution", "translation": "rozwodnienie (akcji)", "partOfSpeech": "noun", "level": "C1", "frequency": 5, "tags": ["equity", "corporate"] },
-    { "word": "buyback", "translation": "skup akcji własnych", "partOfSpeech": "noun", "level": "B2", "frequency": 6, "tags": ["corporate", "strategy"] },
-    { "word": "payout ratio", "translation": "wskaźnik wypłaty dywidendy", "partOfSpeech": "noun", "level": "C1", "frequency": 5, "tags": ["dividends", "analysis"] },
-    { "word": "current ratio", "translation": "wskaźnik płynności bieżącej", "partOfSpeech": "noun", "level": "B2", "frequency": 6, "tags": ["analysis", "liquidity"] },
-    { "word": "debt-to-equity", "translation": "wskaźnik zadłużenia", "partOfSpeech": "noun", "level": "B2", "frequency": 6, "tags": ["analysis", "leverage"] },
-    { "word": "amortization", "translation": "amortyzacja", "partOfSpeech": "noun", "level": "B2", "frequency": 6, "tags": ["accounting", "loans"] },
-    { "word": "depreciate", "translation": "tracić na wartości", "partOfSpeech": "verb", "level": "B1", "frequency": 7, "tags": ["accounting", "macro"] },
-    { "word": "appreciate", "translation": "zyskiwać na wartości", "partOfSpeech": "verb", "level": "B1", "frequency": 7, "tags": ["investing", "macro"] },
-    { "word": "accrue", "translation": "narastać/naliczać", "partOfSpeech": "verb", "level": "C1", "frequency": 5, "tags": ["accounting", "legal"] },
-    { "word": "invoice", "translation": "faktura", "partOfSpeech": "noun", "level": "B1", "frequency": 8, "tags": ["business", "accounting"] },
-    { "word": "procurement", "translation": "zaopatrzenie/zamówienia", "partOfSpeech": "noun", "level": "B2", "frequency": 6, "tags": ["operations", "business"] },
-    { "word": "fiscal year", "translation": "rok obrotowy", "partOfSpeech": "noun", "level": "B1", "frequency": 7, "tags": ["accounting", "reporting"] },
-    { "word": "quarter", "translation": "kwartał", "partOfSpeech": "noun", "level": "B1", "frequency": 8, "tags": ["reporting", "general"] },
-    { "word": "annualize", "translation": "annualizować/przeliczać rocznie", "partOfSpeech": "verb", "level": "C1", "frequency": 4, "tags": ["analysis", "performance"] },
-    { "word": "drawdown", "translation": "obsunięcie (portfela)", "partOfSpeech": "noun", "level": "C1", "frequency": 5, "tags": ["risk", "performance"] },
-    { "word": "Sharpe ratio", "translation": "wskaźnik Sharpe'a", "partOfSpeech": "noun", "level": "C1", "frequency": 5, "tags": ["risk", "analysis"] },
-    { "word": "alpha", "translation": "alfa (dodatkowa stopa zwrotu)", "partOfSpeech": "noun", "level": "C1", "frequency": 5, "tags": ["investing", "performance"] },
-    { "word": "beta", "translation": "beta (miara ryzyka rynkowego)", "partOfSpeech": "noun", "level": "C1", "frequency": 5, "tags": ["investing", "risk"] },
-    { "word": "retail investor", "translation": "inwestor detaliczny", "partOfSpeech": "noun", "level": "B1", "frequency": 7, "tags": ["investing", "markets"] },
-    { "word": "institutional investor", "translation": "inwestor instytucjonalny", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["investing", "markets"] },
-    { "word": "brokerage", "translation": "dom maklerski/prowizja", "partOfSpeech": "noun", "level": "B2", "frequency": 6, "tags": ["trading", "investing"] },
-    { "word": "custodian", "translation": "depozytariusz/powiernik", "partOfSpeech": "noun", "level": "C1", "frequency": 4, "tags": ["governance", "funds"] },
-    { "word": "face value", "translation": "wartość nominalna", "partOfSpeech": "noun", "level": "B1", "frequency": 7, "tags": ["bonds", "general"] },
-    { "word": "sovereign debt", "translation": "dług publiczny/państwowy", "partOfSpeech": "noun", "level": "C1", "frequency": 5, "tags": ["macro", "bonds"] },
-    { "word": "treasury bond", "translation": "obligacja skarbowa", "partOfSpeech": "noun", "level": "B2", "frequency": 6, "tags": ["bonds", "government"] },
-    { "word": "yield curve", "translation": "krzywa dochodowości", "partOfSpeech": "noun", "level": "C1", "frequency": 5, "tags": ["bonds", "macro"] },
-    { "word": "consolidation", "translation": "konsolidacja", "partOfSpeech": "noun", "level": "B2", "frequency": 6, "tags": ["markets", "corporate"] },
-    { "word": "sector rotation", "translation": "rotacja sektorowa", "partOfSpeech": "noun", "level": "C1", "frequency": 4, "tags": ["investing", "strategy"] },
-    { "word": "market maker", "translation": "animator rynku", "partOfSpeech": "noun", "level": "C1", "frequency": 4, "tags": ["trading", "markets"] },
-    { "word": "bid-ask spread", "translation": "spread kupna-sprzedaży", "partOfSpeech": "noun", "level": "C1", "frequency": 4, "tags": ["trading", "markets"] },
-    { "word": "supply and demand", "translation": "podaż i popyt", "partOfSpeech": "noun", "level": "B1", "frequency": 9, "tags": ["economics", "general"] },
-    { "word": "purchasing power", "translation": "siła nabywcza", "partOfSpeech": "noun", "level": "B1", "frequency": 7, "tags": ["economics", "macro"] },
-    { "word": "trade balance", "translation": "bilans handlowy", "partOfSpeech": "noun", "level": "B2", "frequency": 6, "tags": ["macro", "trade"] },
-    { "word": "protectionism", "translation": "protekcjonizm", "partOfSpeech": "noun", "level": "C1", "frequency": 4, "tags": ["trade", "policy"] },
-    { "word": "free trade", "translation": "wolny handel", "partOfSpeech": "noun", "level": "B1", "frequency": 7, "tags": ["trade", "policy"] }
+    {
+      "word": "yield",
+      "translation": "zysk/rentowność",
+      "partOfSpeech": "noun/verb",
+      "level": "B1",
+      "frequency": 9,
+      "tags": [
+        "bonds",
+        "investing"
+      ]
+    },
+    {
+      "word": "equity",
+      "translation": "kapitał własny",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 8,
+      "tags": [
+        "stocks",
+        "accounting"
+      ]
+    },
+    {
+      "word": "leverage",
+      "translation": "dźwignia finansowa",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 8,
+      "tags": [
+        "investing",
+        "risk"
+      ]
+    },
+    {
+      "word": "hedge",
+      "translation": "zabezpieczenie/hedging",
+      "partOfSpeech": "noun/verb",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "risk",
+        "derivatives"
+      ]
+    },
+    {
+      "word": "liquidity",
+      "translation": "płynność finansowa",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 9,
+      "tags": [
+        "banking",
+        "markets"
+      ]
+    },
+    {
+      "word": "bearish",
+      "translation": "niedźwiedzi (spadkowy)",
+      "partOfSpeech": "adjective",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "markets",
+        "sentiment"
+      ]
+    },
+    {
+      "word": "bullish",
+      "translation": "byczy (wzrostowy)",
+      "partOfSpeech": "adjective",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "markets",
+        "sentiment"
+      ]
+    },
+    {
+      "word": "dovish",
+      "translation": "gołębi (łagodna polityka)",
+      "partOfSpeech": "adjective",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "monetary",
+        "central_bank"
+      ]
+    },
+    {
+      "word": "hawkish",
+      "translation": "jastrzębi (restrykcyjna polityka)",
+      "partOfSpeech": "adjective",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "monetary",
+        "central_bank"
+      ]
+    },
+    {
+      "word": "maturity",
+      "translation": "termin zapadalności",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "bonds",
+        "lending"
+      ]
+    },
+    {
+      "word": "asset",
+      "translation": "aktywo/zasób",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 10,
+      "tags": [
+        "accounting",
+        "general"
+      ]
+    },
+    {
+      "word": "liability",
+      "translation": "zobowiązanie/pasywo",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 9,
+      "tags": [
+        "accounting",
+        "general"
+      ]
+    },
+    {
+      "word": "revenue",
+      "translation": "przychód",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 10,
+      "tags": [
+        "accounting",
+        "reporting"
+      ]
+    },
+    {
+      "word": "profit margin",
+      "translation": "marża zysku",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "accounting",
+        "profitability"
+      ]
+    },
+    {
+      "word": "cash flow",
+      "translation": "przepływ pieniężny",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 9,
+      "tags": [
+        "accounting",
+        "valuation"
+      ]
+    },
+    {
+      "word": "dividend",
+      "translation": "dywidenda",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "stocks",
+        "income"
+      ]
+    },
+    {
+      "word": "portfolio",
+      "translation": "portfel inwestycyjny",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "investing",
+        "general"
+      ]
+    },
+    {
+      "word": "bond",
+      "translation": "obligacja",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 9,
+      "tags": [
+        "fixed_income",
+        "investing"
+      ]
+    },
+    {
+      "word": "stock",
+      "translation": "akcja",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 10,
+      "tags": [
+        "equity",
+        "investing"
+      ]
+    },
+    {
+      "word": "share",
+      "translation": "udział/akcja",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 10,
+      "tags": [
+        "equity",
+        "ownership"
+      ]
+    },
+    {
+      "word": "interest rate",
+      "translation": "stopa procentowa",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 10,
+      "tags": [
+        "monetary",
+        "banking"
+      ]
+    },
+    {
+      "word": "inflation",
+      "translation": "inflacja",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 9,
+      "tags": [
+        "macro",
+        "monetary"
+      ]
+    },
+    {
+      "word": "deflation",
+      "translation": "deflacja",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "macro",
+        "monetary"
+      ]
+    },
+    {
+      "word": "depreciation",
+      "translation": "amortyzacja/deprecjacja",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "accounting",
+        "macro"
+      ]
+    },
+    {
+      "word": "appreciation",
+      "translation": "aprecjacja/wzrost wartości",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "macro",
+        "investing"
+      ]
+    },
+    {
+      "word": "budget",
+      "translation": "budżet",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 9,
+      "tags": [
+        "planning",
+        "general"
+      ]
+    },
+    {
+      "word": "forecast",
+      "translation": "prognoza",
+      "partOfSpeech": "noun/verb",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "analysis",
+        "planning"
+      ]
+    },
+    {
+      "word": "expenditure",
+      "translation": "wydatek",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "accounting",
+        "budgeting"
+      ]
+    },
+    {
+      "word": "investment",
+      "translation": "inwestycja",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 10,
+      "tags": [
+        "investing",
+        "general"
+      ]
+    },
+    {
+      "word": "return",
+      "translation": "zwrot/stopa zwrotu",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 9,
+      "tags": [
+        "investing",
+        "performance"
+      ]
+    },
+    {
+      "word": "risk",
+      "translation": "ryzyko",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 10,
+      "tags": [
+        "general",
+        "risk"
+      ]
+    },
+    {
+      "word": "collateral",
+      "translation": "zabezpieczenie/zastaw",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "lending",
+        "risk"
+      ]
+    },
+    {
+      "word": "default",
+      "translation": "niewypłacalność/default",
+      "partOfSpeech": "noun/verb",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "credit",
+        "risk"
+      ]
+    },
+    {
+      "word": "underwrite",
+      "translation": "gwarantować emisję",
+      "partOfSpeech": "verb",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "investment_banking",
+        "insurance"
+      ]
+    },
+    {
+      "word": "amortize",
+      "translation": "amortyzować",
+      "partOfSpeech": "verb",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "accounting",
+        "loans"
+      ]
+    },
+    {
+      "word": "audit",
+      "translation": "audyt/rewizja",
+      "partOfSpeech": "noun/verb",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "accounting",
+        "compliance"
+      ]
+    },
+    {
+      "word": "balance sheet",
+      "translation": "bilans",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 9,
+      "tags": [
+        "accounting",
+        "reporting"
+      ]
+    },
+    {
+      "word": "income statement",
+      "translation": "rachunek zysków i strat",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "accounting",
+        "reporting"
+      ]
+    },
+    {
+      "word": "fiscal",
+      "translation": "fiskalny/skarbowy",
+      "partOfSpeech": "adjective",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "government",
+        "taxation"
+      ]
+    },
+    {
+      "word": "monetary",
+      "translation": "monetarny",
+      "partOfSpeech": "adjective",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "central_bank",
+        "macro"
+      ]
+    },
+    {
+      "word": "volatility",
+      "translation": "zmienność",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 8,
+      "tags": [
+        "markets",
+        "risk"
+      ]
+    },
+    {
+      "word": "benchmark",
+      "translation": "punkt odniesienia/benchmark",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "investing",
+        "performance"
+      ]
+    },
+    {
+      "word": "diversification",
+      "translation": "dywersyfikacja",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "investing",
+        "risk"
+      ]
+    },
+    {
+      "word": "allocation",
+      "translation": "alokacja",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "investing",
+        "strategy"
+      ]
+    },
+    {
+      "word": "derivative",
+      "translation": "instrument pochodny",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "derivatives",
+        "trading"
+      ]
+    },
+    {
+      "word": "option",
+      "translation": "opcja (instrument)",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "derivatives",
+        "trading"
+      ]
+    },
+    {
+      "word": "futures",
+      "translation": "kontrakty terminowe",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "derivatives",
+        "trading"
+      ]
+    },
+    {
+      "word": "swap",
+      "translation": "swap/zamiana",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "derivatives",
+        "fixed_income"
+      ]
+    },
+    {
+      "word": "commodity",
+      "translation": "surowiec/towar",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "markets",
+        "trading"
+      ]
+    },
+    {
+      "word": "currency",
+      "translation": "waluta",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 9,
+      "tags": [
+        "forex",
+        "general"
+      ]
+    },
+    {
+      "word": "exchange rate",
+      "translation": "kurs wymiany walut",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "forex",
+        "macro"
+      ]
+    },
+    {
+      "word": "mortgage",
+      "translation": "kredyt hipoteczny",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "banking",
+        "lending"
+      ]
+    },
+    {
+      "word": "loan",
+      "translation": "pożyczka/kredyt",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 9,
+      "tags": [
+        "banking",
+        "lending"
+      ]
+    },
+    {
+      "word": "deposit",
+      "translation": "depozyt/lokata",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "banking",
+        "saving"
+      ]
+    },
+    {
+      "word": "withdrawal",
+      "translation": "wypłata",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "banking",
+        "general"
+      ]
+    },
+    {
+      "word": "transaction",
+      "translation": "transakcja",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 9,
+      "tags": [
+        "banking",
+        "general"
+      ]
+    },
+    {
+      "word": "GDP",
+      "translation": "PKB (produkt krajowy brutto)",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 9,
+      "tags": [
+        "macro",
+        "indicators"
+      ]
+    },
+    {
+      "word": "recession",
+      "translation": "recesja",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "macro",
+        "cycles"
+      ]
+    },
+    {
+      "word": "surplus",
+      "translation": "nadwyżka",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "macro",
+        "budgeting"
+      ]
+    },
+    {
+      "word": "deficit",
+      "translation": "deficyt",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "macro",
+        "budgeting"
+      ]
+    },
+    {
+      "word": "subsidy",
+      "translation": "dotacja/subsydium",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "government",
+        "policy"
+      ]
+    },
+    {
+      "word": "tariff",
+      "translation": "cło/taryfa",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "trade",
+        "policy"
+      ]
+    },
+    {
+      "word": "quota",
+      "translation": "kwota/kontyngent",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "trade",
+        "policy"
+      ]
+    },
+    {
+      "word": "deregulation",
+      "translation": "deregulacja",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "policy",
+        "markets"
+      ]
+    },
+    {
+      "word": "privatization",
+      "translation": "prywatyzacja",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "policy",
+        "government"
+      ]
+    },
+    {
+      "word": "acquisition",
+      "translation": "przejęcie/akwizycja",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "m&a",
+        "corporate"
+      ]
+    },
+    {
+      "word": "merger",
+      "translation": "fuzja/połączenie",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "m&a",
+        "corporate"
+      ]
+    },
+    {
+      "word": "IPO",
+      "translation": "pierwsza oferta publiczna",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "equity",
+        "markets"
+      ]
+    },
+    {
+      "word": "shareholder",
+      "translation": "akcjonariusz/udziałowiec",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "corporate",
+        "ownership"
+      ]
+    },
+    {
+      "word": "stakeholder",
+      "translation": "interesariusz",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "corporate",
+        "governance"
+      ]
+    },
+    {
+      "word": "due diligence",
+      "translation": "analiza due diligence",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 6,
+      "tags": [
+        "m&a",
+        "investing"
+      ]
+    },
+    {
+      "word": "valuation",
+      "translation": "wycena",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 8,
+      "tags": [
+        "investing",
+        "analysis"
+      ]
+    },
+    {
+      "word": "compound interest",
+      "translation": "procent składany",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "banking",
+        "investing"
+      ]
+    },
+    {
+      "word": "principal",
+      "translation": "kapitał/kwota główna",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "lending",
+        "bonds"
+      ]
+    },
+    {
+      "word": "coupon",
+      "translation": "kupon (odsetkowy)",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "bonds",
+        "fixed_income"
+      ]
+    },
+    {
+      "word": "premium",
+      "translation": "premia/składka",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "insurance",
+        "investing"
+      ]
+    },
+    {
+      "word": "discount rate",
+      "translation": "stopa dyskontowa",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "valuation",
+        "central_bank"
+      ]
+    },
+    {
+      "word": "credit rating",
+      "translation": "ocena/rating kredytowy",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "credit",
+        "bonds"
+      ]
+    },
+    {
+      "word": "insolvency",
+      "translation": "niewypłacalność",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "credit",
+        "risk"
+      ]
+    },
+    {
+      "word": "bankruptcy",
+      "translation": "bankructwo/upadłość",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "credit",
+        "legal"
+      ]
+    },
+    {
+      "word": "tax",
+      "translation": "podatek",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 10,
+      "tags": [
+        "taxation",
+        "general"
+      ]
+    },
+    {
+      "word": "deduction",
+      "translation": "odliczenie (podatkowe)",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "taxation",
+        "accounting"
+      ]
+    },
+    {
+      "word": "exemption",
+      "translation": "zwolnienie (podatkowe)",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "taxation",
+        "regulation"
+      ]
+    },
+    {
+      "word": "capital gains",
+      "translation": "zyski kapitałowe",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "taxation",
+        "investing"
+      ]
+    },
+    {
+      "word": "turnover",
+      "translation": "obrót",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "accounting",
+        "business"
+      ]
+    },
+    {
+      "word": "overhead",
+      "translation": "koszty ogólne",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "accounting",
+        "operations"
+      ]
+    },
+    {
+      "word": "payroll",
+      "translation": "lista płac",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "hr",
+        "accounting"
+      ]
+    },
+    {
+      "word": "accounts receivable",
+      "translation": "należności",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "accounting",
+        "operations"
+      ]
+    },
+    {
+      "word": "accounts payable",
+      "translation": "zobowiązania handlowe",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "accounting",
+        "operations"
+      ]
+    },
+    {
+      "word": "accrual",
+      "translation": "rozliczenie memoriałowe",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "accounting",
+        "reporting"
+      ]
+    },
+    {
+      "word": "write-off",
+      "translation": "odpis",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "accounting",
+        "taxation"
+      ]
+    },
+    {
+      "word": "goodwill",
+      "translation": "wartość firmy/goodwill",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "accounting",
+        "m&a"
+      ]
+    },
+    {
+      "word": "tangible asset",
+      "translation": "aktywo materialne",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "accounting",
+        "valuation"
+      ]
+    },
+    {
+      "word": "intangible asset",
+      "translation": "aktywo niematerialne",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "accounting",
+        "valuation"
+      ]
+    },
+    {
+      "word": "net worth",
+      "translation": "wartość netto",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "personal_finance",
+        "accounting"
+      ]
+    },
+    {
+      "word": "break-even",
+      "translation": "próg rentowności",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "business",
+        "analysis"
+      ]
+    },
+    {
+      "word": "scalable",
+      "translation": "skalowalny",
+      "partOfSpeech": "adjective",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "business",
+        "startups"
+      ]
+    },
+    {
+      "word": "refinance",
+      "translation": "refinansować",
+      "partOfSpeech": "verb",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "banking",
+        "lending"
+      ]
+    },
+    {
+      "word": "divestiture",
+      "translation": "dezinwestycja/zbycie",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 4,
+      "tags": [
+        "corporate",
+        "m&a"
+      ]
+    },
+    {
+      "word": "capitalization",
+      "translation": "kapitalizacja",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "markets",
+        "valuation"
+      ]
+    },
+    {
+      "word": "outperform",
+      "translation": "osiągać lepsze wyniki",
+      "partOfSpeech": "verb",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "investing",
+        "performance"
+      ]
+    },
+    {
+      "word": "underperform",
+      "translation": "osiągać gorsze wyniki",
+      "partOfSpeech": "verb",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "investing",
+        "performance"
+      ]
+    },
+    {
+      "word": "securitize",
+      "translation": "sekurytyzować",
+      "partOfSpeech": "verb",
+      "level": "C1",
+      "frequency": 4,
+      "tags": [
+        "structured_finance",
+        "banking"
+      ]
+    },
+    {
+      "word": "margin call",
+      "translation": "wezwanie do uzupełnienia depozytu",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "trading",
+        "risk"
+      ]
+    },
+    {
+      "word": "short selling",
+      "translation": "krótka sprzedaż",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "trading",
+        "strategy"
+      ]
+    },
+    {
+      "word": "index fund",
+      "translation": "fundusz indeksowy",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "investing",
+        "funds"
+      ]
+    },
+    {
+      "word": "mutual fund",
+      "translation": "fundusz inwestycyjny otwarty",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "investing",
+        "funds"
+      ]
+    },
+    {
+      "word": "ETF",
+      "translation": "fundusz notowany na giełdzie",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "investing",
+        "funds"
+      ]
+    },
+    {
+      "word": "P/E ratio",
+      "translation": "wskaźnik cena/zysk",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "valuation",
+        "analysis"
+      ]
+    },
+    {
+      "word": "ROI",
+      "translation": "zwrot z inwestycji",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "investing",
+        "performance"
+      ]
+    },
+    {
+      "word": "EBITDA",
+      "translation": "zysk operacyjny + amortyzacja",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "accounting",
+        "valuation"
+      ]
+    },
+    {
+      "word": "quantitative easing",
+      "translation": "luzowanie ilościowe",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "monetary",
+        "central_bank"
+      ]
+    },
+    {
+      "word": "tighten",
+      "translation": "zaostrzać (politykę monetarną)",
+      "partOfSpeech": "verb",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "monetary",
+        "central_bank"
+      ]
+    },
+    {
+      "word": "ease",
+      "translation": "łagodzić (politykę)",
+      "partOfSpeech": "verb",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "monetary",
+        "central_bank"
+      ]
+    },
+    {
+      "word": "bailout",
+      "translation": "pomoc finansowa/ratunek",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "government",
+        "crisis"
+      ]
+    },
+    {
+      "word": "stimulus",
+      "translation": "stymulacja (gospodarcza)",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "government",
+        "macro"
+      ]
+    },
+    {
+      "word": "austerity",
+      "translation": "polityka oszczędnościowa",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "government",
+        "policy"
+      ]
+    },
+    {
+      "word": "liquidity trap",
+      "translation": "pułapka płynności",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 4,
+      "tags": [
+        "monetary",
+        "theory"
+      ]
+    },
+    {
+      "word": "stagflation",
+      "translation": "stagflacja",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "macro",
+        "crisis"
+      ]
+    },
+    {
+      "word": "hedge fund",
+      "translation": "fundusz hedgingowy",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "investing",
+        "funds"
+      ]
+    },
+    {
+      "word": "venture capital",
+      "translation": "kapitał podwyższonego ryzyka",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "startups",
+        "investing"
+      ]
+    },
+    {
+      "word": "angel investor",
+      "translation": "anioł biznesu",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "startups",
+        "investing"
+      ]
+    },
+    {
+      "word": "seed funding",
+      "translation": "finansowanie początkowe",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "startups",
+        "investing"
+      ]
+    },
+    {
+      "word": "runway",
+      "translation": "rezerwa finansowa (startupu)",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "startups",
+        "planning"
+      ]
+    },
+    {
+      "word": "burn rate",
+      "translation": "tempo wydawania pieniędzy",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "startups",
+        "operations"
+      ]
+    },
+    {
+      "word": "disbursement",
+      "translation": "wypłata/wydatkowanie",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 4,
+      "tags": [
+        "banking",
+        "operations"
+      ]
+    },
+    {
+      "word": "remittance",
+      "translation": "przekaz pieniężny",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 4,
+      "tags": [
+        "banking",
+        "international"
+      ]
+    },
+    {
+      "word": "compliance",
+      "translation": "zgodność z przepisami",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 8,
+      "tags": [
+        "regulation",
+        "governance"
+      ]
+    },
+    {
+      "word": "fiduciary",
+      "translation": "powierniczy",
+      "partOfSpeech": "adjective",
+      "level": "C1",
+      "frequency": 4,
+      "tags": [
+        "legal",
+        "governance"
+      ]
+    },
+    {
+      "word": "escrow",
+      "translation": "depozyt powierniczy",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 4,
+      "tags": [
+        "legal",
+        "transactions"
+      ]
+    },
+    {
+      "word": "arbitrage",
+      "translation": "arbitraż",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "trading",
+        "strategy"
+      ]
+    },
+    {
+      "word": "spread",
+      "translation": "spread/rozpiętość",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "trading",
+        "bonds"
+      ]
+    },
+    {
+      "word": "blue chip",
+      "translation": "spółka pierwszorzędna",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "stocks",
+        "investing"
+      ]
+    },
+    {
+      "word": "market cap",
+      "translation": "kapitalizacja rynkowa",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "stocks",
+        "markets"
+      ]
+    },
+    {
+      "word": "bear market",
+      "translation": "rynek niedźwiedzia",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "markets",
+        "cycles"
+      ]
+    },
+    {
+      "word": "bull market",
+      "translation": "rynek byka",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "markets",
+        "cycles"
+      ]
+    },
+    {
+      "word": "rally",
+      "translation": "zwyżka/rajd",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "markets",
+        "trading"
+      ]
+    },
+    {
+      "word": "correction",
+      "translation": "korekta (rynkowa)",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "markets",
+        "cycles"
+      ]
+    },
+    {
+      "word": "rebalance",
+      "translation": "równoważyć (portfel)",
+      "partOfSpeech": "verb",
+      "level": "B2",
+      "frequency": 5,
+      "tags": [
+        "investing",
+        "strategy"
+      ]
+    },
+    {
+      "word": "undervalue",
+      "translation": "niedowartościować",
+      "partOfSpeech": "verb",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "valuation",
+        "investing"
+      ]
+    },
+    {
+      "word": "overvalue",
+      "translation": "przewartościować",
+      "partOfSpeech": "verb",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "valuation",
+        "investing"
+      ]
+    },
+    {
+      "word": "working capital",
+      "translation": "kapitał obrotowy",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "accounting",
+        "operations"
+      ]
+    },
+    {
+      "word": "retained earnings",
+      "translation": "zyski zatrzymane",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "accounting",
+        "reporting"
+      ]
+    },
+    {
+      "word": "dilution",
+      "translation": "rozwodnienie (akcji)",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "equity",
+        "corporate"
+      ]
+    },
+    {
+      "word": "buyback",
+      "translation": "skup akcji własnych",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "corporate",
+        "strategy"
+      ]
+    },
+    {
+      "word": "payout ratio",
+      "translation": "wskaźnik wypłaty dywidendy",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "dividends",
+        "analysis"
+      ]
+    },
+    {
+      "word": "current ratio",
+      "translation": "wskaźnik płynności bieżącej",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "analysis",
+        "liquidity"
+      ]
+    },
+    {
+      "word": "debt-to-equity",
+      "translation": "wskaźnik zadłużenia",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "analysis",
+        "leverage"
+      ]
+    },
+    {
+      "word": "amortization",
+      "translation": "amortyzacja",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "accounting",
+        "loans"
+      ]
+    },
+    {
+      "word": "depreciate",
+      "translation": "tracić na wartości",
+      "partOfSpeech": "verb",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "accounting",
+        "macro"
+      ]
+    },
+    {
+      "word": "appreciate",
+      "translation": "zyskiwać na wartości",
+      "partOfSpeech": "verb",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "investing",
+        "macro"
+      ]
+    },
+    {
+      "word": "accrue",
+      "translation": "narastać/naliczać",
+      "partOfSpeech": "verb",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "accounting",
+        "legal"
+      ]
+    },
+    {
+      "word": "invoice",
+      "translation": "faktura",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "business",
+        "accounting"
+      ]
+    },
+    {
+      "word": "procurement",
+      "translation": "zaopatrzenie/zamówienia",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "operations",
+        "business"
+      ]
+    },
+    {
+      "word": "fiscal year",
+      "translation": "rok obrotowy",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "accounting",
+        "reporting"
+      ]
+    },
+    {
+      "word": "quarter",
+      "translation": "kwartał",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "reporting",
+        "general"
+      ]
+    },
+    {
+      "word": "annualize",
+      "translation": "annualizować/przeliczać rocznie",
+      "partOfSpeech": "verb",
+      "level": "C1",
+      "frequency": 4,
+      "tags": [
+        "analysis",
+        "performance"
+      ]
+    },
+    {
+      "word": "drawdown",
+      "translation": "obsunięcie (portfela)",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "risk",
+        "performance"
+      ]
+    },
+    {
+      "word": "Sharpe ratio",
+      "translation": "wskaźnik Sharpe'a",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "risk",
+        "analysis"
+      ]
+    },
+    {
+      "word": "alpha",
+      "translation": "alfa (dodatkowa stopa zwrotu)",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "investing",
+        "performance"
+      ]
+    },
+    {
+      "word": "beta",
+      "translation": "beta (miara ryzyka rynkowego)",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "investing",
+        "risk"
+      ]
+    },
+    {
+      "word": "retail investor",
+      "translation": "inwestor detaliczny",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "investing",
+        "markets"
+      ]
+    },
+    {
+      "word": "institutional investor",
+      "translation": "inwestor instytucjonalny",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "investing",
+        "markets"
+      ]
+    },
+    {
+      "word": "brokerage",
+      "translation": "dom maklerski/prowizja",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "trading",
+        "investing"
+      ]
+    },
+    {
+      "word": "custodian",
+      "translation": "depozytariusz/powiernik",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 4,
+      "tags": [
+        "governance",
+        "funds"
+      ]
+    },
+    {
+      "word": "face value",
+      "translation": "wartość nominalna",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "bonds",
+        "general"
+      ]
+    },
+    {
+      "word": "sovereign debt",
+      "translation": "dług publiczny/państwowy",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "macro",
+        "bonds"
+      ]
+    },
+    {
+      "word": "treasury bond",
+      "translation": "obligacja skarbowa",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "bonds",
+        "government"
+      ]
+    },
+    {
+      "word": "yield curve",
+      "translation": "krzywa dochodowości",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "bonds",
+        "macro"
+      ]
+    },
+    {
+      "word": "consolidation",
+      "translation": "konsolidacja",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "markets",
+        "corporate"
+      ]
+    },
+    {
+      "word": "sector rotation",
+      "translation": "rotacja sektorowa",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 4,
+      "tags": [
+        "investing",
+        "strategy"
+      ]
+    },
+    {
+      "word": "market maker",
+      "translation": "animator rynku",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 4,
+      "tags": [
+        "trading",
+        "markets"
+      ]
+    },
+    {
+      "word": "bid-ask spread",
+      "translation": "spread kupna-sprzedaży",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 4,
+      "tags": [
+        "trading",
+        "markets"
+      ]
+    },
+    {
+      "word": "supply and demand",
+      "translation": "podaż i popyt",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 9,
+      "tags": [
+        "economics",
+        "general"
+      ]
+    },
+    {
+      "word": "purchasing power",
+      "translation": "siła nabywcza",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "economics",
+        "macro"
+      ]
+    },
+    {
+      "word": "trade balance",
+      "translation": "bilans handlowy",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "macro",
+        "trade"
+      ]
+    },
+    {
+      "word": "protectionism",
+      "translation": "protekcjonizm",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 4,
+      "tags": [
+        "trade",
+        "policy"
+      ]
+    },
+    {
+      "word": "free trade",
+      "translation": "wolny handel",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "trade",
+        "policy"
+      ]
+    },
+    {
+      "word": "buyout",
+      "translation": "wykup",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 6,
+      "tags": [
+        "M&A"
+      ]
+    },
+    {
+      "word": "capitalise",
+      "translation": "kapitalizować",
+      "partOfSpeech": "verb",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "accounting"
+      ]
+    },
+    {
+      "word": "clearing",
+      "translation": "rozliczenie",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "banking"
+      ]
+    },
+    {
+      "word": "convertible",
+      "translation": "zamienny",
+      "partOfSpeech": "adjective",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "bonds"
+      ]
+    },
+    {
+      "word": "debenture",
+      "translation": "obligacja bez zabezpieczenia",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 4,
+      "tags": [
+        "bonds"
+      ]
+    },
+    {
+      "word": "deficit spending",
+      "translation": "wydatki deficytowe",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "fiscal"
+      ]
+    },
+    {
+      "word": "gross margin",
+      "translation": "marża brutto",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "accounting"
+      ]
+    },
+    {
+      "word": "leverage ratio",
+      "translation": "wskaźnik dźwigni",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "analysis"
+      ]
+    },
+    {
+      "word": "callable bond",
+      "translation": "obligacja z opcją wykupu",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "bonds"
+      ]
+    },
+    {
+      "word": "coupon rate",
+      "translation": "stopa kuponowa",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "bonds"
+      ]
+    },
+    {
+      "word": "earnings per share",
+      "translation": "zysk na akcję",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 8,
+      "tags": [
+        "stocks"
+      ]
+    },
+    {
+      "word": "factoring",
+      "translation": "faktoring",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "banking"
+      ]
+    },
+    {
+      "word": "float",
+      "translation": "akcje w obrocie/kurs płynny",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "stocks"
+      ]
+    },
+    {
+      "word": "initial public offering",
+      "translation": "pierwsza oferta publiczna",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "stocks"
+      ]
+    },
+    {
+      "word": "junk bond",
+      "translation": "obligacja śmieciowa",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 6,
+      "tags": [
+        "bonds"
+      ]
+    },
+    {
+      "word": "penny stock",
+      "translation": "akcja groszowa",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "stocks"
+      ]
+    },
+    {
+      "word": "prospectus",
+      "translation": "prospekt emisyjny",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "stocks"
+      ]
+    },
+    {
+      "word": "bearer bond",
+      "translation": "obligacja na okaziciela",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "bonds"
+      ]
+    },
+    {
+      "word": "book value",
+      "translation": "wartość księgowa",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "accounting"
+      ]
+    },
+    {
+      "word": "cost of capital",
+      "translation": "koszt kapitału",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 8,
+      "tags": [
+        "analysis"
+      ]
+    },
+    {
+      "word": "treasury bill",
+      "translation": "bon skarbowy",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "bonds"
+      ]
+    },
+    {
+      "word": "money supply",
+      "translation": "podaż pieniądza",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 8,
+      "tags": [
+        "macro"
+      ]
+    }
   ]
 }

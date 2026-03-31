@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { WordProgress } from "@/lib/types";
 import DomainTag from "@/components/ui/DomainTag";
+import { useTTS } from "@/hooks/useTTS";
 
 interface FlashCardProps {
   wordProgress: WordProgress;
@@ -13,6 +14,7 @@ interface FlashCardProps {
 export default function FlashCard({ wordProgress, onAnswer }: FlashCardProps) {
   const [isFlipped, setIsFlipped] = useState(false);
   const startTime = useRef(Date.now());
+  const { speak, isSpeaking } = useTTS();
 
   useEffect(() => {
     startTime.current = Date.now();
@@ -54,10 +56,26 @@ export default function FlashCard({ wordProgress, onAnswer }: FlashCardProps) {
             <h2 className="text-4xl sm:text-5xl font-heading text-text-primary mb-3 text-center">
               {wordProgress.word}
             </h2>
-            <p className="text-sm font-mono text-text-secondary mb-6">
+            <p className="text-sm font-mono text-text-secondary mb-3">
               {wordProgress.partOfSpeech}
             </p>
-            <p className="text-sm text-text-secondary/60 animate-pulse-soft">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                speak(wordProgress.word);
+              }}
+              className={`touch-target p-2 rounded-full transition-all duration-200 ${
+                isSpeaking
+                  ? "bg-accent/20 text-accent scale-110"
+                  : "bg-bg-surface-hover text-text-secondary hover:text-accent hover:bg-accent/10"
+              }`}
+              title="Wymowa"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+              </svg>
+            </button>
+            <p className="text-xs text-text-secondary/60 animate-pulse-soft mt-3">
               Dotknij aby odwrócić
             </p>
           </div>
@@ -74,13 +92,40 @@ export default function FlashCard({ wordProgress, onAnswer }: FlashCardProps) {
             <p className="text-sm font-body text-text-secondary mb-2">
               Tłumaczenie
             </p>
-            <h3 className="text-3xl font-heading text-accent mb-4 text-center">
+            <h3 className="text-3xl font-heading text-accent mb-2 text-center">
               {wordProgress.translation}
             </h3>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                const text = wordProgress.exampleSentences.length > 0
+                  ? `${wordProgress.word}. ${wordProgress.exampleSentences[0]}`
+                  : wordProgress.word;
+                speak(text);
+              }}
+              className={`touch-target p-2 rounded-full transition-all duration-200 mb-2 ${
+                isSpeaking
+                  ? "bg-accent/20 text-accent scale-110"
+                  : "bg-bg-surface-hover text-text-secondary hover:text-accent hover:bg-accent/10"
+              }`}
+              title="Wymowa"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+              </svg>
+            </button>
+            {wordProgress.mnemonic && (
+              <div className="w-full mt-2 p-3 rounded-xl bg-accent/10 border border-accent/20">
+                <p className="text-xs text-accent/70 mb-1">💡 Mnemotechnika:</p>
+                <p className="text-sm text-accent font-body">
+                  {wordProgress.mnemonic}
+                </p>
+              </div>
+            )}
             {wordProgress.exampleSentences.length > 0 && (
-              <div className="w-full mt-4 p-4 rounded-xl bg-bg/50 border border-border/50">
-                <p className="text-sm text-text-secondary mb-1">Przykład:</p>
-                <p className="text-base text-text-primary italic font-body">
+              <div className="w-full mt-2 p-3 rounded-xl bg-bg/50 border border-border/50">
+                <p className="text-xs text-text-secondary mb-1">Przykład:</p>
+                <p className="text-sm text-text-primary italic font-body">
                   &ldquo;{wordProgress.exampleSentences[0]}&rdquo;
                 </p>
               </div>

@@ -257,6 +257,14 @@ export async function getAllSessions(uid: string): Promise<Session[]> {
   return snapshot.docs.map((d) => d.data() as Session);
 }
 
+export async function updateSession(
+  uid: string,
+  sessionId: string,
+  data: Partial<Session>
+): Promise<void> {
+  await updateDoc(doc(db, "users", uid, "sessions", sessionId), data);
+}
+
 // ─── Helpers ──────────────────────────────────────────
 
 export function generateId(): string {

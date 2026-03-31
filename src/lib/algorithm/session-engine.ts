@@ -84,13 +84,21 @@ export function buildSession(
   // ── Phase 4: Monthly mastered spot-check (§3.6) ───
   const masteredWords = allWords.filter((w) => w.state === "mastered");
   if (masteredWords.length > 0 && session.length < SESSION_SIZE) {
-    const spotCheckCount = Math.min(5, masteredWords.length, SESSION_SIZE - session.length);
-    const shuffled = [...masteredWords].sort(() => Math.random() - 0.5);
-    for (let i = 0; i < spotCheckCount; i++) {
-      session.push({
-        wordProgress: shuffled[i],
-        exerciseType: "flashcard",
-      });
+    // Only do spot-checks once per month — check if any mastered word was reviewed in last 30 days
+    const thirtyDaysAgo = Date.now() - 30 * 24 * 60 * 60 * 1000;
+    const recentlyChecked = masteredWords.some(
+      (w) => w.lastReview && w.lastReview.toMillis() > thirtyDaysAgo
+    );
+
+    if (!recentlyChecked) {
+      const spotCheckCount = Math.min(5, masteredWords.length, SESSION_SIZE - session.length);
+      const shuffled = [...masteredWords].sort(() => Math.random() - 0.5);
+      for (let i = 0; i < spotCheckCount; i++) {
+        session.push({
+          wordProgress: shuffled[i],
+          exerciseType: "flashcard",
+        });
+      }
     }
   }
 

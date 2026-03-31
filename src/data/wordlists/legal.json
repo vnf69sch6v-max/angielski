@@ -1,161 +1,2161 @@
 {
   "domain": "legal",
   "words": [
-    { "word": "jurisdiction", "translation": "jurysdykcja", "partOfSpeech": "noun", "level": "B2", "frequency": 8, "tags": ["courts", "civil"] },
-    { "word": "liability", "translation": "odpowiedzialność prawna", "partOfSpeech": "noun", "level": "B1", "frequency": 9, "tags": ["general", "civil"] },
-    { "word": "statute", "translation": "ustawa/statut", "partOfSpeech": "noun", "level": "B2", "frequency": 8, "tags": ["legislation", "general"] },
-    { "word": "tort", "translation": "czyn niedozwolony/delikt", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["civil", "liability"] },
-    { "word": "plaintiff", "translation": "powód (strona)", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["litigation", "civil"] },
-    { "word": "defendant", "translation": "pozwany/oskarżony", "partOfSpeech": "noun", "level": "B1", "frequency": 8, "tags": ["litigation", "general"] },
-    { "word": "remedy", "translation": "środek prawny", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["civil", "general"] },
-    { "word": "breach", "translation": "naruszenie/złamanie", "partOfSpeech": "noun/verb", "level": "B1", "frequency": 9, "tags": ["contracts", "general"] },
-    { "word": "injunction", "translation": "nakaz sądowy/zakaz", "partOfSpeech": "noun", "level": "C1", "frequency": 6, "tags": ["courts", "civil"] },
-    { "word": "compliance", "translation": "zgodność z przepisami", "partOfSpeech": "noun", "level": "B1", "frequency": 9, "tags": ["regulatory", "business"] },
-    { "word": "contract", "translation": "umowa", "partOfSpeech": "noun", "level": "B1", "frequency": 10, "tags": ["contracts", "general"] },
-    { "word": "clause", "translation": "klauzula/postanowienie", "partOfSpeech": "noun", "level": "B1", "frequency": 8, "tags": ["contracts", "general"] },
-    { "word": "provision", "translation": "postanowienie/przepis", "partOfSpeech": "noun", "level": "B2", "frequency": 8, "tags": ["legislation", "contracts"] },
-    { "word": "amendment", "translation": "poprawka/zmiana", "partOfSpeech": "noun", "level": "B1", "frequency": 8, "tags": ["legislation", "contracts"] },
-    { "word": "enforce", "translation": "egzekwować/wymuszać", "partOfSpeech": "verb", "level": "B1", "frequency": 8, "tags": ["general", "courts"] },
-    { "word": "repeal", "translation": "uchylić (ustawę)", "partOfSpeech": "verb", "level": "C1", "frequency": 5, "tags": ["legislation", "government"] },
-    { "word": "enact", "translation": "uchwalić (prawo)", "partOfSpeech": "verb", "level": "B2", "frequency": 7, "tags": ["legislation", "government"] },
-    { "word": "verdict", "translation": "werdykt/wyrok", "partOfSpeech": "noun", "level": "B1", "frequency": 8, "tags": ["litigation", "courts"] },
-    { "word": "sentence", "translation": "wyrok/kara", "partOfSpeech": "noun", "level": "B1", "frequency": 8, "tags": ["criminal", "courts"] },
-    { "word": "appeal", "translation": "apelacja/odwołanie", "partOfSpeech": "noun/verb", "level": "B1", "frequency": 8, "tags": ["litigation", "courts"] },
-    { "word": "prosecution", "translation": "ściganie/oskarżenie", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["criminal", "litigation"] },
-    { "word": "defense", "translation": "obrona", "partOfSpeech": "noun", "level": "B1", "frequency": 8, "tags": ["litigation", "criminal"] },
-    { "word": "witness", "translation": "świadek", "partOfSpeech": "noun", "level": "B1", "frequency": 9, "tags": ["litigation", "general"] },
-    { "word": "testimony", "translation": "zeznanie", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["litigation", "courts"] },
-    { "word": "evidence", "translation": "dowód", "partOfSpeech": "noun", "level": "B1", "frequency": 9, "tags": ["litigation", "general"] },
-    { "word": "allegation", "translation": "zarzut/oskarżenie", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["litigation", "general"] },
-    { "word": "indictment", "translation": "akt oskarżenia", "partOfSpeech": "noun", "level": "C1", "frequency": 5, "tags": ["criminal", "litigation"] },
-    { "word": "acquittal", "translation": "uniewinnienie", "partOfSpeech": "noun", "level": "C1", "frequency": 5, "tags": ["criminal", "courts"] },
-    { "word": "conviction", "translation": "skazanie", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["criminal", "courts"] },
-    { "word": "parole", "translation": "warunkowe zwolnienie", "partOfSpeech": "noun", "level": "B2", "frequency": 6, "tags": ["criminal", "sentencing"] },
-    { "word": "probation", "translation": "okres próbny/zawiasy", "partOfSpeech": "noun", "level": "B2", "frequency": 6, "tags": ["criminal", "sentencing"] },
-    { "word": "arbitration", "translation": "arbitraż", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["dispute_resolution", "business"] },
-    { "word": "mediation", "translation": "mediacja", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["dispute_resolution", "civil"] },
-    { "word": "settlement", "translation": "ugoda/rozliczenie", "partOfSpeech": "noun", "level": "B1", "frequency": 8, "tags": ["litigation", "dispute_resolution"] },
-    { "word": "damages", "translation": "odszkodowanie", "partOfSpeech": "noun", "level": "B1", "frequency": 8, "tags": ["civil", "liability"] },
-    { "word": "compensation", "translation": "odszkodowanie/rekompensata", "partOfSpeech": "noun", "level": "B1", "frequency": 8, "tags": ["civil", "employment"] },
-    { "word": "negligence", "translation": "zaniedbanie/niedbalstwo", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["tort", "liability"] },
-    { "word": "fraud", "translation": "oszustwo", "partOfSpeech": "noun", "level": "B1", "frequency": 8, "tags": ["criminal", "business"] },
-    { "word": "embezzlement", "translation": "malwersacja/sprzeniewierzenie", "partOfSpeech": "noun", "level": "C1", "frequency": 5, "tags": ["criminal", "financial"] },
-    { "word": "bribery", "translation": "łapówkarstwo", "partOfSpeech": "noun", "level": "B2", "frequency": 6, "tags": ["criminal", "corruption"] },
-    { "word": "money laundering", "translation": "pranie pieniędzy", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["criminal", "financial"] },
-    { "word": "intellectual property", "translation": "własność intelektualna", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["ip", "business"] },
-    { "word": "patent", "translation": "patent", "partOfSpeech": "noun", "level": "B1", "frequency": 7, "tags": ["ip", "technology"] },
-    { "word": "trademark", "translation": "znak towarowy", "partOfSpeech": "noun", "level": "B1", "frequency": 7, "tags": ["ip", "business"] },
-    { "word": "copyright", "translation": "prawo autorskie", "partOfSpeech": "noun", "level": "B1", "frequency": 7, "tags": ["ip", "creative"] },
-    { "word": "power of attorney", "translation": "pełnomocnictwo", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["general", "representation"] },
-    { "word": "notary", "translation": "notariusz", "partOfSpeech": "noun", "level": "B1", "frequency": 7, "tags": ["general", "documents"] },
-    { "word": "affidavit", "translation": "oświadczenie pod przysięgą", "partOfSpeech": "noun", "level": "C1", "frequency": 5, "tags": ["litigation", "documents"] },
-    { "word": "deposition", "translation": "przesłuchanie/zeznanie", "partOfSpeech": "noun", "level": "C1", "frequency": 5, "tags": ["litigation", "discovery"] },
-    { "word": "subpoena", "translation": "wezwanie do sądu", "partOfSpeech": "noun", "level": "C1", "frequency": 5, "tags": ["litigation", "courts"] },
-    { "word": "petition", "translation": "petycja/wniosek", "partOfSpeech": "noun", "level": "B2", "frequency": 6, "tags": ["courts", "general"] },
-    { "word": "motion", "translation": "wniosek procesowy", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["litigation", "courts"] },
-    { "word": "hearing", "translation": "posiedzenie/rozprawa", "partOfSpeech": "noun", "level": "B1", "frequency": 8, "tags": ["courts", "general"] },
-    { "word": "trial", "translation": "proces sądowy", "partOfSpeech": "noun", "level": "B1", "frequency": 9, "tags": ["litigation", "courts"] },
-    { "word": "litigation", "translation": "postępowanie sądowe", "partOfSpeech": "noun", "level": "B2", "frequency": 8, "tags": ["general", "dispute_resolution"] },
-    { "word": "sue", "translation": "pozwać (kogoś)", "partOfSpeech": "verb", "level": "B1", "frequency": 8, "tags": ["litigation", "general"] },
-    { "word": "file a lawsuit", "translation": "złożyć pozew", "partOfSpeech": "verb phrase", "level": "B1", "frequency": 7, "tags": ["litigation", "general"] },
-    { "word": "dismiss", "translation": "oddalić (sprawę)", "partOfSpeech": "verb", "level": "B2", "frequency": 7, "tags": ["courts", "litigation"] },
-    { "word": "overrule", "translation": "uchylić/odrzucić", "partOfSpeech": "verb", "level": "C1", "frequency": 5, "tags": ["courts", "general"] },
-    { "word": "sustain", "translation": "utrzymać w mocy", "partOfSpeech": "verb", "level": "C1", "frequency": 5, "tags": ["courts", "litigation"] },
-    { "word": "precedent", "translation": "precedens", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["common_law", "courts"] },
-    { "word": "case law", "translation": "orzecznictwo", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["common_law", "research"] },
-    { "word": "regulation", "translation": "regulacja/rozporządzenie", "partOfSpeech": "noun", "level": "B1", "frequency": 9, "tags": ["regulatory", "general"] },
-    { "word": "legislation", "translation": "ustawodawstwo", "partOfSpeech": "noun", "level": "B1", "frequency": 8, "tags": ["legislative", "government"] },
-    { "word": "decree", "translation": "dekret/zarządzenie", "partOfSpeech": "noun", "level": "C1", "frequency": 5, "tags": ["government", "general"] },
-    { "word": "ordinance", "translation": "zarządzenie/rozporządzenie", "partOfSpeech": "noun", "level": "C1", "frequency": 5, "tags": ["government", "local"] },
-    { "word": "sanction", "translation": "sankcja", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["international", "regulation"] },
-    { "word": "waiver", "translation": "zrzeczenie się", "partOfSpeech": "noun", "level": "B2", "frequency": 6, "tags": ["contracts", "general"] },
-    { "word": "indemnity", "translation": "odszkodowanie/gwarancja", "partOfSpeech": "noun", "level": "C1", "frequency": 5, "tags": ["contracts", "insurance"] },
-    { "word": "lien", "translation": "zastaw/prawo zastawu", "partOfSpeech": "noun", "level": "C1", "frequency": 5, "tags": ["property", "security"] },
-    { "word": "foreclosure", "translation": "egzekucja z nieruchomości", "partOfSpeech": "noun", "level": "C1", "frequency": 5, "tags": ["property", "banking"] },
-    { "word": "lease", "translation": "najem/dzierżawa", "partOfSpeech": "noun/verb", "level": "B1", "frequency": 8, "tags": ["property", "contracts"] },
-    { "word": "tenant", "translation": "najemca/dzierżawca", "partOfSpeech": "noun", "level": "B1", "frequency": 7, "tags": ["property", "general"] },
-    { "word": "landlord", "translation": "wynajmujący/właściciel", "partOfSpeech": "noun", "level": "B1", "frequency": 7, "tags": ["property", "general"] },
-    { "word": "deed", "translation": "akt/dokument prawny", "partOfSpeech": "noun", "level": "B2", "frequency": 6, "tags": ["property", "documents"] },
-    { "word": "easement", "translation": "służebność", "partOfSpeech": "noun", "level": "C1", "frequency": 4, "tags": ["property", "real_estate"] },
-    { "word": "will", "translation": "testament", "partOfSpeech": "noun", "level": "B1", "frequency": 7, "tags": ["inheritance", "general"] },
-    { "word": "heir", "translation": "spadkobierca", "partOfSpeech": "noun", "level": "B1", "frequency": 7, "tags": ["inheritance", "general"] },
-    { "word": "probate", "translation": "stwierdzenie nabycia spadku", "partOfSpeech": "noun", "level": "C1", "frequency": 4, "tags": ["inheritance", "courts"] },
-    { "word": "trust", "translation": "fundusz powierniczy/trust", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["wealth", "governance"] },
-    { "word": "beneficiary", "translation": "beneficjent", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["wealth", "contracts"] },
-    { "word": "guardian", "translation": "opiekun prawny", "partOfSpeech": "noun", "level": "B1", "frequency": 7, "tags": ["family", "general"] },
-    { "word": "custody", "translation": "opieka (prawna)", "partOfSpeech": "noun", "level": "B2", "frequency": 6, "tags": ["family", "courts"] },
-    { "word": "divorce", "translation": "rozwód", "partOfSpeech": "noun", "level": "B1", "frequency": 7, "tags": ["family", "general"] },
-    { "word": "prenuptial agreement", "translation": "intercyza", "partOfSpeech": "noun", "level": "C1", "frequency": 4, "tags": ["family", "contracts"] },
-    { "word": "alimony", "translation": "alimenty", "partOfSpeech": "noun", "level": "B2", "frequency": 5, "tags": ["family", "courts"] },
-    { "word": "disclosure", "translation": "ujawnienie/informacja", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["corporate", "regulatory"] },
-    { "word": "confidentiality", "translation": "poufność", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["contracts", "business"] },
-    { "word": "non-disclosure agreement", "translation": "umowa o zachowaniu poufności", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["contracts", "business"] },
-    { "word": "non-compete clause", "translation": "klauzula o zakazie konkurencji", "partOfSpeech": "noun", "level": "C1", "frequency": 5, "tags": ["employment", "contracts"] },
-    { "word": "termination", "translation": "rozwiązanie (umowy)", "partOfSpeech": "noun", "level": "B1", "frequency": 8, "tags": ["employment", "contracts"] },
-    { "word": "wrongful dismissal", "translation": "bezprawne zwolnienie", "partOfSpeech": "noun", "level": "C1", "frequency": 5, "tags": ["employment", "labor"] },
-    { "word": "employment law", "translation": "prawo pracy", "partOfSpeech": "noun", "level": "B1", "frequency": 7, "tags": ["employment", "labor"] },
-    { "word": "anti-trust", "translation": "antymonopolowy", "partOfSpeech": "adjective", "level": "C1", "frequency": 5, "tags": ["corporate", "regulation"] },
-    { "word": "merger control", "translation": "kontrola połączeń", "partOfSpeech": "noun", "level": "C1", "frequency": 4, "tags": ["corporate", "regulation"] },
-    { "word": "due process", "translation": "rzetelny proces", "partOfSpeech": "noun", "level": "B2", "frequency": 6, "tags": ["constitutional", "general"] },
-    { "word": "constitution", "translation": "konstytucja", "partOfSpeech": "noun", "level": "B1", "frequency": 8, "tags": ["constitutional", "government"] },
-    { "word": "human rights", "translation": "prawa człowieka", "partOfSpeech": "noun", "level": "B1", "frequency": 8, "tags": ["international", "constitutional"] },
-    { "word": "asylum", "translation": "azyl", "partOfSpeech": "noun", "level": "B2", "frequency": 6, "tags": ["immigration", "international"] },
-    { "word": "extradition", "translation": "ekstradycja", "partOfSpeech": "noun", "level": "C1", "frequency": 4, "tags": ["international", "criminal"] },
-    { "word": "treaty", "translation": "traktat", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["international", "government"] },
-    { "word": "ratify", "translation": "ratyfikować", "partOfSpeech": "verb", "level": "C1", "frequency": 5, "tags": ["international", "legislation"] },
-    { "word": "binding", "translation": "wiążący/obowiązujący", "partOfSpeech": "adjective", "level": "B1", "frequency": 8, "tags": ["contracts", "general"] },
-    { "word": "void", "translation": "nieważny/unieważniony", "partOfSpeech": "adjective", "level": "B2", "frequency": 6, "tags": ["contracts", "general"] },
-    { "word": "valid", "translation": "ważny/skuteczny prawnie", "partOfSpeech": "adjective", "level": "B1", "frequency": 8, "tags": ["general", "contracts"] },
-    { "word": "infringe", "translation": "naruszać (prawo)", "partOfSpeech": "verb", "level": "B2", "frequency": 6, "tags": ["ip", "general"] },
-    { "word": "violate", "translation": "łamać/naruszać", "partOfSpeech": "verb", "level": "B1", "frequency": 8, "tags": ["general", "criminal"] },
-    { "word": "prosecute", "translation": "ścigać (karnie)", "partOfSpeech": "verb", "level": "B2", "frequency": 7, "tags": ["criminal", "courts"] },
-    { "word": "convict", "translation": "skazać", "partOfSpeech": "verb", "level": "B2", "frequency": 7, "tags": ["criminal", "courts"] },
-    { "word": "acquit", "translation": "uniewinnić", "partOfSpeech": "verb", "level": "C1", "frequency": 5, "tags": ["criminal", "courts"] },
-    { "word": "bail", "translation": "kaucja", "partOfSpeech": "noun", "level": "B2", "frequency": 6, "tags": ["criminal", "courts"] },
-    { "word": "arraignment", "translation": "postawienie zarzutów", "partOfSpeech": "noun", "level": "C1", "frequency": 4, "tags": ["criminal", "courts"] },
-    { "word": "plea", "translation": "wina/odpowiedź na zarzuty", "partOfSpeech": "noun", "level": "B2", "frequency": 6, "tags": ["criminal", "courts"] },
-    { "word": "plea bargain", "translation": "ugoda karna", "partOfSpeech": "noun", "level": "C1", "frequency": 5, "tags": ["criminal", "negotiation"] },
-    { "word": "felony", "translation": "przestępstwo (ciężkie)", "partOfSpeech": "noun", "level": "C1", "frequency": 5, "tags": ["criminal", "classification"] },
-    { "word": "misdemeanor", "translation": "wykroczenie", "partOfSpeech": "noun", "level": "C1", "frequency": 5, "tags": ["criminal", "classification"] },
-    { "word": "statute of limitations", "translation": "przedawnienie", "partOfSpeech": "noun", "level": "C1", "frequency": 5, "tags": ["general", "criminal"] },
-    { "word": "burden of proof", "translation": "ciężar dowodu", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["litigation", "general"] },
-    { "word": "presumption of innocence", "translation": "domniemanie niewinności", "partOfSpeech": "noun", "level": "B2", "frequency": 6, "tags": ["criminal", "constitutional"] },
-    { "word": "habeas corpus", "translation": "nakaz habeas corpus", "partOfSpeech": "noun", "level": "C1", "frequency": 4, "tags": ["constitutional", "criminal"] },
-    { "word": "contempt of court", "translation": "znieważenie sądu", "partOfSpeech": "noun", "level": "C1", "frequency": 4, "tags": ["courts", "criminal"] },
-    { "word": "perjury", "translation": "krzywoprzysięstwo", "partOfSpeech": "noun", "level": "C1", "frequency": 5, "tags": ["criminal", "courts"] },
-    { "word": "attorney", "translation": "adwokat/pełnomocnik", "partOfSpeech": "noun", "level": "B1", "frequency": 8, "tags": ["general", "profession"] },
-    { "word": "counsel", "translation": "radca prawny/doradca", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["general", "profession"] },
-    { "word": "solicitor", "translation": "prawnik/radca (UK)", "partOfSpeech": "noun", "level": "B2", "frequency": 6, "tags": ["general", "profession"] },
-    { "word": "barrister", "translation": "adwokat procesowy (UK)", "partOfSpeech": "noun", "level": "C1", "frequency": 4, "tags": ["general", "profession"] },
-    { "word": "judiciary", "translation": "wymiar sprawiedliwości", "partOfSpeech": "noun", "level": "B2", "frequency": 6, "tags": ["government", "courts"] },
-    { "word": "magistrate", "translation": "sędzia pokoju", "partOfSpeech": "noun", "level": "C1", "frequency": 4, "tags": ["courts", "judges"] },
-    { "word": "jury", "translation": "ława przysięgłych", "partOfSpeech": "noun", "level": "B1", "frequency": 8, "tags": ["courts", "trial"] },
-    { "word": "exhibit", "translation": "dowód rzeczowy/załącznik", "partOfSpeech": "noun", "level": "B2", "frequency": 6, "tags": ["litigation", "evidence"] },
-    { "word": "cross-examine", "translation": "przesłuchiwać świadka", "partOfSpeech": "verb", "level": "C1", "frequency": 5, "tags": ["litigation", "trial"] },
-    { "word": "objection", "translation": "sprzeciw (procesowy)", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["litigation", "trial"] },
-    { "word": "ruling", "translation": "orzeczenie/decyzja sądu", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["courts", "general"] },
-    { "word": "uphold", "translation": "podtrzymać (wyrok)", "partOfSpeech": "verb", "level": "B2", "frequency": 6, "tags": ["courts", "appeals"] },
-    { "word": "overturn", "translation": "uchylić (wyrok)", "partOfSpeech": "verb", "level": "B2", "frequency": 6, "tags": ["courts", "appeals"] },
-    { "word": "statute book", "translation": "dziennik ustaw", "partOfSpeech": "noun", "level": "C1", "frequency": 4, "tags": ["legislation", "general"] },
-    { "word": "legal entity", "translation": "podmiot prawny", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["corporate", "general"] },
-    { "word": "limited liability", "translation": "ograniczona odpowiedzialność", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["corporate", "business"] },
-    { "word": "incorporation", "translation": "rejestracja spółki", "partOfSpeech": "noun", "level": "B2", "frequency": 6, "tags": ["corporate", "business"] },
-    { "word": "shareholder agreement", "translation": "umowa akcjonariuszy", "partOfSpeech": "noun", "level": "C1", "frequency": 5, "tags": ["corporate", "contracts"] },
-    { "word": "articles of association", "translation": "statut spółki", "partOfSpeech": "noun", "level": "C1", "frequency": 5, "tags": ["corporate", "governance"] },
-    { "word": "board of directors", "translation": "zarząd/rada dyrektorów", "partOfSpeech": "noun", "level": "B1", "frequency": 7, "tags": ["corporate", "governance"] },
-    { "word": "fiduciary duty", "translation": "obowiązek powierniczy", "partOfSpeech": "noun", "level": "C1", "frequency": 5, "tags": ["corporate", "governance"] },
-    { "word": "insider trading", "translation": "wykorzystanie informacji poufnych", "partOfSpeech": "noun", "level": "C1", "frequency": 5, "tags": ["criminal", "markets"] },
-    { "word": "whistleblower", "translation": "sygnalista", "partOfSpeech": "noun", "level": "B2", "frequency": 6, "tags": ["corporate", "compliance"] },
-    { "word": "data protection", "translation": "ochrona danych", "partOfSpeech": "noun", "level": "B1", "frequency": 8, "tags": ["privacy", "technology"] },
-    { "word": "GDPR", "translation": "RODO", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["privacy", "eu_law"] },
-    { "word": "consent", "translation": "zgoda/przyzwolenie", "partOfSpeech": "noun", "level": "B1", "frequency": 8, "tags": ["privacy", "general"] },
-    { "word": "liable", "translation": "odpowiedzialny (prawnie)", "partOfSpeech": "adjective", "level": "B1", "frequency": 8, "tags": ["general", "liability"] },
-    { "word": "unlawful", "translation": "bezprawny/niezgodny z prawem", "partOfSpeech": "adjective", "level": "B1", "frequency": 7, "tags": ["general", "criminal"] },
-    { "word": "legitimate", "translation": "legalny/uzasadniony", "partOfSpeech": "adjective", "level": "B1", "frequency": 8, "tags": ["general", "governance"] },
-    { "word": "statutory", "translation": "ustawowy/statutowy", "partOfSpeech": "adjective", "level": "B2", "frequency": 7, "tags": ["legislation", "general"] },
-    { "word": "alleged", "translation": "domniemany/rzekomy", "partOfSpeech": "adjective", "level": "B2", "frequency": 7, "tags": ["litigation", "general"] },
-    { "word": "dispute", "translation": "spór", "partOfSpeech": "noun", "level": "B1", "frequency": 8, "tags": ["general", "litigation"] },
-    { "word": "claim", "translation": "roszczenie/żądanie", "partOfSpeech": "noun/verb", "level": "B1", "frequency": 9, "tags": ["general", "litigation"] },
-    { "word": "proceedings", "translation": "postępowanie (sądowe)", "partOfSpeech": "noun", "level": "B2", "frequency": 7, "tags": ["litigation", "courts"] }
+    {
+      "word": "jurisdiction",
+      "translation": "jurysdykcja",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 8,
+      "tags": [
+        "courts",
+        "civil"
+      ]
+    },
+    {
+      "word": "liability",
+      "translation": "odpowiedzialność prawna",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 9,
+      "tags": [
+        "general",
+        "civil"
+      ]
+    },
+    {
+      "word": "statute",
+      "translation": "ustawa/statut",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 8,
+      "tags": [
+        "legislation",
+        "general"
+      ]
+    },
+    {
+      "word": "tort",
+      "translation": "czyn niedozwolony/delikt",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "civil",
+        "liability"
+      ]
+    },
+    {
+      "word": "plaintiff",
+      "translation": "powód (strona)",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "litigation",
+        "civil"
+      ]
+    },
+    {
+      "word": "defendant",
+      "translation": "pozwany/oskarżony",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "litigation",
+        "general"
+      ]
+    },
+    {
+      "word": "remedy",
+      "translation": "środek prawny",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "civil",
+        "general"
+      ]
+    },
+    {
+      "word": "breach",
+      "translation": "naruszenie/złamanie",
+      "partOfSpeech": "noun/verb",
+      "level": "B1",
+      "frequency": 9,
+      "tags": [
+        "contracts",
+        "general"
+      ]
+    },
+    {
+      "word": "injunction",
+      "translation": "nakaz sądowy/zakaz",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 6,
+      "tags": [
+        "courts",
+        "civil"
+      ]
+    },
+    {
+      "word": "compliance",
+      "translation": "zgodność z przepisami",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 9,
+      "tags": [
+        "regulatory",
+        "business"
+      ]
+    },
+    {
+      "word": "contract",
+      "translation": "umowa",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 10,
+      "tags": [
+        "contracts",
+        "general"
+      ]
+    },
+    {
+      "word": "clause",
+      "translation": "klauzula/postanowienie",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "contracts",
+        "general"
+      ]
+    },
+    {
+      "word": "provision",
+      "translation": "postanowienie/przepis",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 8,
+      "tags": [
+        "legislation",
+        "contracts"
+      ]
+    },
+    {
+      "word": "amendment",
+      "translation": "poprawka/zmiana",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "legislation",
+        "contracts"
+      ]
+    },
+    {
+      "word": "enforce",
+      "translation": "egzekwować/wymuszać",
+      "partOfSpeech": "verb",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "general",
+        "courts"
+      ]
+    },
+    {
+      "word": "repeal",
+      "translation": "uchylić (ustawę)",
+      "partOfSpeech": "verb",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "legislation",
+        "government"
+      ]
+    },
+    {
+      "word": "enact",
+      "translation": "uchwalić (prawo)",
+      "partOfSpeech": "verb",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "legislation",
+        "government"
+      ]
+    },
+    {
+      "word": "verdict",
+      "translation": "werdykt/wyrok",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "litigation",
+        "courts"
+      ]
+    },
+    {
+      "word": "sentence",
+      "translation": "wyrok/kara",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "criminal",
+        "courts"
+      ]
+    },
+    {
+      "word": "appeal",
+      "translation": "apelacja/odwołanie",
+      "partOfSpeech": "noun/verb",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "litigation",
+        "courts"
+      ]
+    },
+    {
+      "word": "prosecution",
+      "translation": "ściganie/oskarżenie",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "criminal",
+        "litigation"
+      ]
+    },
+    {
+      "word": "defense",
+      "translation": "obrona",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "litigation",
+        "criminal"
+      ]
+    },
+    {
+      "word": "witness",
+      "translation": "świadek",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 9,
+      "tags": [
+        "litigation",
+        "general"
+      ]
+    },
+    {
+      "word": "testimony",
+      "translation": "zeznanie",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "litigation",
+        "courts"
+      ]
+    },
+    {
+      "word": "evidence",
+      "translation": "dowód",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 9,
+      "tags": [
+        "litigation",
+        "general"
+      ]
+    },
+    {
+      "word": "allegation",
+      "translation": "zarzut/oskarżenie",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "litigation",
+        "general"
+      ]
+    },
+    {
+      "word": "indictment",
+      "translation": "akt oskarżenia",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "criminal",
+        "litigation"
+      ]
+    },
+    {
+      "word": "acquittal",
+      "translation": "uniewinnienie",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "criminal",
+        "courts"
+      ]
+    },
+    {
+      "word": "conviction",
+      "translation": "skazanie",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "criminal",
+        "courts"
+      ]
+    },
+    {
+      "word": "parole",
+      "translation": "warunkowe zwolnienie",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "criminal",
+        "sentencing"
+      ]
+    },
+    {
+      "word": "probation",
+      "translation": "okres próbny/zawiasy",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "criminal",
+        "sentencing"
+      ]
+    },
+    {
+      "word": "arbitration",
+      "translation": "arbitraż",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "dispute_resolution",
+        "business"
+      ]
+    },
+    {
+      "word": "mediation",
+      "translation": "mediacja",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "dispute_resolution",
+        "civil"
+      ]
+    },
+    {
+      "word": "settlement",
+      "translation": "ugoda/rozliczenie",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "litigation",
+        "dispute_resolution"
+      ]
+    },
+    {
+      "word": "damages",
+      "translation": "odszkodowanie",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "civil",
+        "liability"
+      ]
+    },
+    {
+      "word": "compensation",
+      "translation": "odszkodowanie/rekompensata",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "civil",
+        "employment"
+      ]
+    },
+    {
+      "word": "negligence",
+      "translation": "zaniedbanie/niedbalstwo",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "tort",
+        "liability"
+      ]
+    },
+    {
+      "word": "fraud",
+      "translation": "oszustwo",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "criminal",
+        "business"
+      ]
+    },
+    {
+      "word": "embezzlement",
+      "translation": "malwersacja/sprzeniewierzenie",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "criminal",
+        "financial"
+      ]
+    },
+    {
+      "word": "bribery",
+      "translation": "łapówkarstwo",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "criminal",
+        "corruption"
+      ]
+    },
+    {
+      "word": "money laundering",
+      "translation": "pranie pieniędzy",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "criminal",
+        "financial"
+      ]
+    },
+    {
+      "word": "intellectual property",
+      "translation": "własność intelektualna",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "ip",
+        "business"
+      ]
+    },
+    {
+      "word": "patent",
+      "translation": "patent",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "ip",
+        "technology"
+      ]
+    },
+    {
+      "word": "trademark",
+      "translation": "znak towarowy",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "ip",
+        "business"
+      ]
+    },
+    {
+      "word": "copyright",
+      "translation": "prawo autorskie",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "ip",
+        "creative"
+      ]
+    },
+    {
+      "word": "power of attorney",
+      "translation": "pełnomocnictwo",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "general",
+        "representation"
+      ]
+    },
+    {
+      "word": "notary",
+      "translation": "notariusz",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "general",
+        "documents"
+      ]
+    },
+    {
+      "word": "affidavit",
+      "translation": "oświadczenie pod przysięgą",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "litigation",
+        "documents"
+      ]
+    },
+    {
+      "word": "deposition",
+      "translation": "przesłuchanie/zeznanie",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "litigation",
+        "discovery"
+      ]
+    },
+    {
+      "word": "subpoena",
+      "translation": "wezwanie do sądu",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "litigation",
+        "courts"
+      ]
+    },
+    {
+      "word": "petition",
+      "translation": "petycja/wniosek",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "courts",
+        "general"
+      ]
+    },
+    {
+      "word": "motion",
+      "translation": "wniosek procesowy",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "litigation",
+        "courts"
+      ]
+    },
+    {
+      "word": "hearing",
+      "translation": "posiedzenie/rozprawa",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "courts",
+        "general"
+      ]
+    },
+    {
+      "word": "trial",
+      "translation": "proces sądowy",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 9,
+      "tags": [
+        "litigation",
+        "courts"
+      ]
+    },
+    {
+      "word": "litigation",
+      "translation": "postępowanie sądowe",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 8,
+      "tags": [
+        "general",
+        "dispute_resolution"
+      ]
+    },
+    {
+      "word": "sue",
+      "translation": "pozwać (kogoś)",
+      "partOfSpeech": "verb",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "litigation",
+        "general"
+      ]
+    },
+    {
+      "word": "file a lawsuit",
+      "translation": "złożyć pozew",
+      "partOfSpeech": "verb phrase",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "litigation",
+        "general"
+      ]
+    },
+    {
+      "word": "dismiss",
+      "translation": "oddalić (sprawę)",
+      "partOfSpeech": "verb",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "courts",
+        "litigation"
+      ]
+    },
+    {
+      "word": "overrule",
+      "translation": "uchylić/odrzucić",
+      "partOfSpeech": "verb",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "courts",
+        "general"
+      ]
+    },
+    {
+      "word": "sustain",
+      "translation": "utrzymać w mocy",
+      "partOfSpeech": "verb",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "courts",
+        "litigation"
+      ]
+    },
+    {
+      "word": "precedent",
+      "translation": "precedens",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "common_law",
+        "courts"
+      ]
+    },
+    {
+      "word": "case law",
+      "translation": "orzecznictwo",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "common_law",
+        "research"
+      ]
+    },
+    {
+      "word": "regulation",
+      "translation": "regulacja/rozporządzenie",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 9,
+      "tags": [
+        "regulatory",
+        "general"
+      ]
+    },
+    {
+      "word": "legislation",
+      "translation": "ustawodawstwo",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "legislative",
+        "government"
+      ]
+    },
+    {
+      "word": "decree",
+      "translation": "dekret/zarządzenie",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "government",
+        "general"
+      ]
+    },
+    {
+      "word": "ordinance",
+      "translation": "zarządzenie/rozporządzenie",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "government",
+        "local"
+      ]
+    },
+    {
+      "word": "sanction",
+      "translation": "sankcja",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "international",
+        "regulation"
+      ]
+    },
+    {
+      "word": "waiver",
+      "translation": "zrzeczenie się",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "contracts",
+        "general"
+      ]
+    },
+    {
+      "word": "indemnity",
+      "translation": "odszkodowanie/gwarancja",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "contracts",
+        "insurance"
+      ]
+    },
+    {
+      "word": "lien",
+      "translation": "zastaw/prawo zastawu",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "property",
+        "security"
+      ]
+    },
+    {
+      "word": "foreclosure",
+      "translation": "egzekucja z nieruchomości",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "property",
+        "banking"
+      ]
+    },
+    {
+      "word": "lease",
+      "translation": "najem/dzierżawa",
+      "partOfSpeech": "noun/verb",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "property",
+        "contracts"
+      ]
+    },
+    {
+      "word": "tenant",
+      "translation": "najemca/dzierżawca",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "property",
+        "general"
+      ]
+    },
+    {
+      "word": "landlord",
+      "translation": "wynajmujący/właściciel",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "property",
+        "general"
+      ]
+    },
+    {
+      "word": "deed",
+      "translation": "akt/dokument prawny",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "property",
+        "documents"
+      ]
+    },
+    {
+      "word": "easement",
+      "translation": "służebność",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 4,
+      "tags": [
+        "property",
+        "real_estate"
+      ]
+    },
+    {
+      "word": "will",
+      "translation": "testament",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "inheritance",
+        "general"
+      ]
+    },
+    {
+      "word": "heir",
+      "translation": "spadkobierca",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "inheritance",
+        "general"
+      ]
+    },
+    {
+      "word": "probate",
+      "translation": "stwierdzenie nabycia spadku",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 4,
+      "tags": [
+        "inheritance",
+        "courts"
+      ]
+    },
+    {
+      "word": "trust",
+      "translation": "fundusz powierniczy/trust",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "wealth",
+        "governance"
+      ]
+    },
+    {
+      "word": "beneficiary",
+      "translation": "beneficjent",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "wealth",
+        "contracts"
+      ]
+    },
+    {
+      "word": "guardian",
+      "translation": "opiekun prawny",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "family",
+        "general"
+      ]
+    },
+    {
+      "word": "custody",
+      "translation": "opieka (prawna)",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "family",
+        "courts"
+      ]
+    },
+    {
+      "word": "divorce",
+      "translation": "rozwód",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "family",
+        "general"
+      ]
+    },
+    {
+      "word": "prenuptial agreement",
+      "translation": "intercyza",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 4,
+      "tags": [
+        "family",
+        "contracts"
+      ]
+    },
+    {
+      "word": "alimony",
+      "translation": "alimenty",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 5,
+      "tags": [
+        "family",
+        "courts"
+      ]
+    },
+    {
+      "word": "disclosure",
+      "translation": "ujawnienie/informacja",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "corporate",
+        "regulatory"
+      ]
+    },
+    {
+      "word": "confidentiality",
+      "translation": "poufność",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "contracts",
+        "business"
+      ]
+    },
+    {
+      "word": "non-disclosure agreement",
+      "translation": "umowa o zachowaniu poufności",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "contracts",
+        "business"
+      ]
+    },
+    {
+      "word": "non-compete clause",
+      "translation": "klauzula o zakazie konkurencji",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "employment",
+        "contracts"
+      ]
+    },
+    {
+      "word": "termination",
+      "translation": "rozwiązanie (umowy)",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "employment",
+        "contracts"
+      ]
+    },
+    {
+      "word": "wrongful dismissal",
+      "translation": "bezprawne zwolnienie",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "employment",
+        "labor"
+      ]
+    },
+    {
+      "word": "employment law",
+      "translation": "prawo pracy",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "employment",
+        "labor"
+      ]
+    },
+    {
+      "word": "anti-trust",
+      "translation": "antymonopolowy",
+      "partOfSpeech": "adjective",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "corporate",
+        "regulation"
+      ]
+    },
+    {
+      "word": "merger control",
+      "translation": "kontrola połączeń",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 4,
+      "tags": [
+        "corporate",
+        "regulation"
+      ]
+    },
+    {
+      "word": "due process",
+      "translation": "rzetelny proces",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "constitutional",
+        "general"
+      ]
+    },
+    {
+      "word": "constitution",
+      "translation": "konstytucja",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "constitutional",
+        "government"
+      ]
+    },
+    {
+      "word": "human rights",
+      "translation": "prawa człowieka",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "international",
+        "constitutional"
+      ]
+    },
+    {
+      "word": "asylum",
+      "translation": "azyl",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "immigration",
+        "international"
+      ]
+    },
+    {
+      "word": "extradition",
+      "translation": "ekstradycja",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 4,
+      "tags": [
+        "international",
+        "criminal"
+      ]
+    },
+    {
+      "word": "treaty",
+      "translation": "traktat",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "international",
+        "government"
+      ]
+    },
+    {
+      "word": "ratify",
+      "translation": "ratyfikować",
+      "partOfSpeech": "verb",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "international",
+        "legislation"
+      ]
+    },
+    {
+      "word": "binding",
+      "translation": "wiążący/obowiązujący",
+      "partOfSpeech": "adjective",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "contracts",
+        "general"
+      ]
+    },
+    {
+      "word": "void",
+      "translation": "nieważny/unieważniony",
+      "partOfSpeech": "adjective",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "contracts",
+        "general"
+      ]
+    },
+    {
+      "word": "valid",
+      "translation": "ważny/skuteczny prawnie",
+      "partOfSpeech": "adjective",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "general",
+        "contracts"
+      ]
+    },
+    {
+      "word": "infringe",
+      "translation": "naruszać (prawo)",
+      "partOfSpeech": "verb",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "ip",
+        "general"
+      ]
+    },
+    {
+      "word": "violate",
+      "translation": "łamać/naruszać",
+      "partOfSpeech": "verb",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "general",
+        "criminal"
+      ]
+    },
+    {
+      "word": "prosecute",
+      "translation": "ścigać (karnie)",
+      "partOfSpeech": "verb",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "criminal",
+        "courts"
+      ]
+    },
+    {
+      "word": "convict",
+      "translation": "skazać",
+      "partOfSpeech": "verb",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "criminal",
+        "courts"
+      ]
+    },
+    {
+      "word": "acquit",
+      "translation": "uniewinnić",
+      "partOfSpeech": "verb",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "criminal",
+        "courts"
+      ]
+    },
+    {
+      "word": "bail",
+      "translation": "kaucja",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "criminal",
+        "courts"
+      ]
+    },
+    {
+      "word": "arraignment",
+      "translation": "postawienie zarzutów",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 4,
+      "tags": [
+        "criminal",
+        "courts"
+      ]
+    },
+    {
+      "word": "plea",
+      "translation": "wina/odpowiedź na zarzuty",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "criminal",
+        "courts"
+      ]
+    },
+    {
+      "word": "plea bargain",
+      "translation": "ugoda karna",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "criminal",
+        "negotiation"
+      ]
+    },
+    {
+      "word": "felony",
+      "translation": "przestępstwo (ciężkie)",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "criminal",
+        "classification"
+      ]
+    },
+    {
+      "word": "misdemeanor",
+      "translation": "wykroczenie",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "criminal",
+        "classification"
+      ]
+    },
+    {
+      "word": "statute of limitations",
+      "translation": "przedawnienie",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "general",
+        "criminal"
+      ]
+    },
+    {
+      "word": "burden of proof",
+      "translation": "ciężar dowodu",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "litigation",
+        "general"
+      ]
+    },
+    {
+      "word": "presumption of innocence",
+      "translation": "domniemanie niewinności",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "criminal",
+        "constitutional"
+      ]
+    },
+    {
+      "word": "habeas corpus",
+      "translation": "nakaz habeas corpus",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 4,
+      "tags": [
+        "constitutional",
+        "criminal"
+      ]
+    },
+    {
+      "word": "contempt of court",
+      "translation": "znieważenie sądu",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 4,
+      "tags": [
+        "courts",
+        "criminal"
+      ]
+    },
+    {
+      "word": "perjury",
+      "translation": "krzywoprzysięstwo",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "criminal",
+        "courts"
+      ]
+    },
+    {
+      "word": "attorney",
+      "translation": "adwokat/pełnomocnik",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "general",
+        "profession"
+      ]
+    },
+    {
+      "word": "counsel",
+      "translation": "radca prawny/doradca",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "general",
+        "profession"
+      ]
+    },
+    {
+      "word": "solicitor",
+      "translation": "prawnik/radca (UK)",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "general",
+        "profession"
+      ]
+    },
+    {
+      "word": "barrister",
+      "translation": "adwokat procesowy (UK)",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 4,
+      "tags": [
+        "general",
+        "profession"
+      ]
+    },
+    {
+      "word": "judiciary",
+      "translation": "wymiar sprawiedliwości",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "government",
+        "courts"
+      ]
+    },
+    {
+      "word": "magistrate",
+      "translation": "sędzia pokoju",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 4,
+      "tags": [
+        "courts",
+        "judges"
+      ]
+    },
+    {
+      "word": "jury",
+      "translation": "ława przysięgłych",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "courts",
+        "trial"
+      ]
+    },
+    {
+      "word": "exhibit",
+      "translation": "dowód rzeczowy/załącznik",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "litigation",
+        "evidence"
+      ]
+    },
+    {
+      "word": "cross-examine",
+      "translation": "przesłuchiwać świadka",
+      "partOfSpeech": "verb",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "litigation",
+        "trial"
+      ]
+    },
+    {
+      "word": "objection",
+      "translation": "sprzeciw (procesowy)",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "litigation",
+        "trial"
+      ]
+    },
+    {
+      "word": "ruling",
+      "translation": "orzeczenie/decyzja sądu",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "courts",
+        "general"
+      ]
+    },
+    {
+      "word": "uphold",
+      "translation": "podtrzymać (wyrok)",
+      "partOfSpeech": "verb",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "courts",
+        "appeals"
+      ]
+    },
+    {
+      "word": "overturn",
+      "translation": "uchylić (wyrok)",
+      "partOfSpeech": "verb",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "courts",
+        "appeals"
+      ]
+    },
+    {
+      "word": "statute book",
+      "translation": "dziennik ustaw",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 4,
+      "tags": [
+        "legislation",
+        "general"
+      ]
+    },
+    {
+      "word": "legal entity",
+      "translation": "podmiot prawny",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "corporate",
+        "general"
+      ]
+    },
+    {
+      "word": "limited liability",
+      "translation": "ograniczona odpowiedzialność",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "corporate",
+        "business"
+      ]
+    },
+    {
+      "word": "incorporation",
+      "translation": "rejestracja spółki",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "corporate",
+        "business"
+      ]
+    },
+    {
+      "word": "shareholder agreement",
+      "translation": "umowa akcjonariuszy",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "corporate",
+        "contracts"
+      ]
+    },
+    {
+      "word": "articles of association",
+      "translation": "statut spółki",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "corporate",
+        "governance"
+      ]
+    },
+    {
+      "word": "board of directors",
+      "translation": "zarząd/rada dyrektorów",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "corporate",
+        "governance"
+      ]
+    },
+    {
+      "word": "fiduciary duty",
+      "translation": "obowiązek powierniczy",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "corporate",
+        "governance"
+      ]
+    },
+    {
+      "word": "insider trading",
+      "translation": "wykorzystanie informacji poufnych",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "criminal",
+        "markets"
+      ]
+    },
+    {
+      "word": "whistleblower",
+      "translation": "sygnalista",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "corporate",
+        "compliance"
+      ]
+    },
+    {
+      "word": "data protection",
+      "translation": "ochrona danych",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "privacy",
+        "technology"
+      ]
+    },
+    {
+      "word": "GDPR",
+      "translation": "RODO",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "privacy",
+        "eu_law"
+      ]
+    },
+    {
+      "word": "consent",
+      "translation": "zgoda/przyzwolenie",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "privacy",
+        "general"
+      ]
+    },
+    {
+      "word": "liable",
+      "translation": "odpowiedzialny (prawnie)",
+      "partOfSpeech": "adjective",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "general",
+        "liability"
+      ]
+    },
+    {
+      "word": "unlawful",
+      "translation": "bezprawny/niezgodny z prawem",
+      "partOfSpeech": "adjective",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "general",
+        "criminal"
+      ]
+    },
+    {
+      "word": "legitimate",
+      "translation": "legalny/uzasadniony",
+      "partOfSpeech": "adjective",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "general",
+        "governance"
+      ]
+    },
+    {
+      "word": "statutory",
+      "translation": "ustawowy/statutowy",
+      "partOfSpeech": "adjective",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "legislation",
+        "general"
+      ]
+    },
+    {
+      "word": "alleged",
+      "translation": "domniemany/rzekomy",
+      "partOfSpeech": "adjective",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "litigation",
+        "general"
+      ]
+    },
+    {
+      "word": "dispute",
+      "translation": "spór",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "general",
+        "litigation"
+      ]
+    },
+    {
+      "word": "claim",
+      "translation": "roszczenie/żądanie",
+      "partOfSpeech": "noun/verb",
+      "level": "B1",
+      "frequency": 9,
+      "tags": [
+        "general",
+        "litigation"
+      ]
+    },
+    {
+      "word": "proceedings",
+      "translation": "postępowanie (sądowe)",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "litigation",
+        "courts"
+      ]
+    },
+    {
+      "word": "adjournment",
+      "translation": "odroczenie",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "procedure"
+      ]
+    },
+    {
+      "word": "annulment",
+      "translation": "unieważnienie",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "civil"
+      ]
+    },
+    {
+      "word": "bylaws",
+      "translation": "regulamin/statut",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "corporate"
+      ]
+    },
+    {
+      "word": "cease and desist",
+      "translation": "zaprzestanie działań",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "IP"
+      ]
+    },
+    {
+      "word": "claimant",
+      "translation": "powód/wnioskodawca",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "civil"
+      ]
+    },
+    {
+      "word": "counterclaim",
+      "translation": "powództwo wzajemne",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "civil"
+      ]
+    },
+    {
+      "word": "defamation",
+      "translation": "zniesławienie",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "civil"
+      ]
+    },
+    {
+      "word": "enforceable",
+      "translation": "wykonalny/egzekwowalny",
+      "partOfSpeech": "adjective",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "contract"
+      ]
+    },
+    {
+      "word": "forfeiture",
+      "translation": "przepadek/konfiskata",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "criminal"
+      ]
+    },
+    {
+      "word": "good faith",
+      "translation": "dobra wiara",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "contract"
+      ]
+    },
+    {
+      "word": "hearsay",
+      "translation": "dowód ze słyszenia",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "evidence"
+      ]
+    },
+    {
+      "word": "immunity",
+      "translation": "immunitet",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "constitutional"
+      ]
+    },
+    {
+      "word": "jurisprudence",
+      "translation": "orzecznictwo",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "theory"
+      ]
+    },
+    {
+      "word": "malfeasance",
+      "translation": "nadużycie władzy",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 4,
+      "tags": [
+        "criminal"
+      ]
+    },
+    {
+      "word": "misdemeanour",
+      "translation": "wykroczenie",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "criminal"
+      ]
+    },
+    {
+      "word": "notarise",
+      "translation": "poświadczyć notarialnie",
+      "partOfSpeech": "verb",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "procedure"
+      ]
+    },
+    {
+      "word": "oath",
+      "translation": "przysięga",
+      "partOfSpeech": "noun",
+      "level": "B1",
+      "frequency": 8,
+      "tags": [
+        "procedure"
+      ]
+    },
+    {
+      "word": "punitive damages",
+      "translation": "odszkodowanie karne",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "civil"
+      ]
+    },
+    {
+      "word": "restitution",
+      "translation": "restytucja/zwrot",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "civil"
+      ]
+    },
+    {
+      "word": "severability",
+      "translation": "rozdzielność klauzul",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 4,
+      "tags": [
+        "contract"
+      ]
+    },
+    {
+      "word": "accessory",
+      "translation": "współsprawca/pomocnik",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "criminal"
+      ]
+    },
+    {
+      "word": "circumstantial evidence",
+      "translation": "dowód poszlakowy",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "evidence"
+      ]
+    },
+    {
+      "word": "coercion",
+      "translation": "przymus/wymuszenie",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "criminal"
+      ]
+    },
+    {
+      "word": "corroborate",
+      "translation": "potwierdzić/uwiarygodnić",
+      "partOfSpeech": "verb",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "evidence"
+      ]
+    },
+    {
+      "word": "cross-examination",
+      "translation": "przesłuchanie krzyżowe",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 6,
+      "tags": [
+        "procedure"
+      ]
+    },
+    {
+      "word": "estoppel",
+      "translation": "estoppel/zakaz venire contra factum proprium",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 4,
+      "tags": [
+        "contract"
+      ]
+    },
+    {
+      "word": "ex parte",
+      "translation": "jednostronny/bez udziału strony",
+      "partOfSpeech": "adjective",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "procedure"
+      ]
+    },
+    {
+      "word": "garnishment",
+      "translation": "zajęcie wynagrodzenia",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 4,
+      "tags": [
+        "civil"
+      ]
+    },
+    {
+      "word": "in camera",
+      "translation": "za zamkniętymi drzwiami",
+      "partOfSpeech": "adverb",
+      "level": "C1",
+      "frequency": 4,
+      "tags": [
+        "procedure"
+      ]
+    },
+    {
+      "word": "interrogatory",
+      "translation": "zapytanie procesowe",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "procedure"
+      ]
+    },
+    {
+      "word": "judicial review",
+      "translation": "kontrola sądowa",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "administrative"
+      ]
+    },
+    {
+      "word": "mitigating circumstances",
+      "translation": "okoliczności łagodzące",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "criminal"
+      ]
+    },
+    {
+      "word": "pro bono",
+      "translation": "pro bono (bezpłatnie)",
+      "partOfSpeech": "adverb",
+      "level": "B1",
+      "frequency": 7,
+      "tags": [
+        "general"
+      ]
+    },
+    {
+      "word": "quash",
+      "translation": "uchylić/unieważnić",
+      "partOfSpeech": "verb",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "procedure"
+      ]
+    },
+    {
+      "word": "abrogate",
+      "translation": "uchylić/unieważnić",
+      "partOfSpeech": "verb",
+      "level": "C1",
+      "frequency": 4,
+      "tags": [
+        "legislation"
+      ]
+    },
+    {
+      "word": "certiorari",
+      "translation": "certiorari (wezwanie akt)",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 3,
+      "tags": [
+        "procedure"
+      ]
+    },
+    {
+      "word": "double jeopardy",
+      "translation": "zakaz podwójnego karania",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "criminal"
+      ]
+    },
+    {
+      "word": "eminent domain",
+      "translation": "wywłaszczenie",
+      "partOfSpeech": "noun",
+      "level": "C1",
+      "frequency": 4,
+      "tags": [
+        "property"
+      ]
+    },
+    {
+      "word": "force majeure",
+      "translation": "siła wyższa",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "contract"
+      ]
+    },
+    {
+      "word": "habitual offender",
+      "translation": "recydywista",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 5,
+      "tags": [
+        "criminal"
+      ]
+    },
+    {
+      "word": "ipso facto",
+      "translation": "ipso facto/tym samym",
+      "partOfSpeech": "adverb",
+      "level": "C1",
+      "frequency": 4,
+      "tags": [
+        "theory"
+      ]
+    },
+    {
+      "word": "mens rea",
+      "translation": "zamiar przestępczy",
+      "partOfSpeesh": "noun",
+      "level": "C1",
+      "frequency": 5,
+      "tags": [
+        "criminal"
+      ]
+    },
+    {
+      "word": "natural justice",
+      "translation": "zasady słuszności",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 6,
+      "tags": [
+        "theory"
+      ]
+    },
+    {
+      "word": "tort law",
+      "translation": "prawo deliktowe",
+      "partOfSpeech": "noun",
+      "level": "B2",
+      "frequency": 7,
+      "tags": [
+        "civil"
+      ]
+    }
   ]
 }

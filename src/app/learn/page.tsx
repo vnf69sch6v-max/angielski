@@ -5,13 +5,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/hooks/useAuth";
 import { useSession } from "@/hooks/useSession";
-import { getAllWordProgress, updateWordProgress, saveSession, updateUserProfile } from "@/lib/firebase";
+import { getAllWordProgress, updateWordProgress, saveSession, updateUserProfile, updateSession } from "@/lib/firebase";
 import { buildSession } from "@/lib/algorithm/session-engine";
 import { scoreAnswer } from "@/lib/algorithm/scoring";
 import { reviewWord } from "@/lib/algorithm/fsrs-engine";
 import { updateExerciseLevel } from "@/lib/algorithm/escalator";
 import { AnswerResult, QuizData, WordProgress, Session } from "@/lib/types";
-import { generateQuiz, resetCallCount, analyzeSession } from "@/lib/ai/gemini";
+import { generateQuiz, resetCallCount, analyzeSession, generateMnemonic } from "@/lib/ai/gemini";
 import FlashCard from "@/components/cards/FlashCard";
 import QuizCard from "@/components/cards/QuizCard";
 import MatchingCard from "@/components/cards/MatchingCard";
@@ -178,16 +178,42 @@ export default function LearnPage() {
           streakDays: (profile?.streakDays || 0) + 1,
         }).catch(console.error);
 
-        // AI session analysis
+        // AI session analysis — save results to Firestore + generate mnemonics
         analyzeSession({
           accuracyOverall: result.accuracyOverall,
           accuracyByDomain: result.accuracyByDomain,
           wrongWords: result.wrongWords,
           duration: result.durationMs,
           wordsReviewed: result.wordsReviewed,
-        }).then((analysis) => {
+        }).then(async (analysis) => {
           if (analysis) {
-            console.log("Session analysis:", analysis);
+            // Save analysis to session document
+            updateSession(user.uid, result.sessionId, {
+              aiAnalysis: {
+                weakDomains: analysis.weakDomains,
+                sessionQuality: analysis.sessionQuality,
+                suggestions: analysis.suggestionPL,
+              },
+            }).catch(console.error);
+
+            // Generate mnemonics for words flagged by AI
+            for (const wordStr of analysis.wordsNeedingMnemonics || []) {
+              const matchingItem = session.sessionItems.find(
+                (si) => si.wordProgress.word === wordStr && si.wordProgress.timesWrongTotal >= 3
+              );
+              if (matchingItem && !matchingItem.wordProgress.mnemonic) {
+                const mnemonic = await generateMnemonic(
+                  matchingItem.wordProgress.word,
+                  matchingItem.wordProgress.translation,
+                  matchingItem.wordProgress.timesWrongTotal
+                );
+                if (mnemonic) {
+                  updateWordProgress(user.uid, matchingItem.wordProgress.wordId, {
+                    mnemonic,
+                  }).catch(console.error);
+                }
+              }
+            }
           }
         }).catch(console.error);
       }

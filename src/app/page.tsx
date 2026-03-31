@@ -5,10 +5,12 @@ import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useAuth } from "@/hooks/useAuth";
-import { getUserStats, getDueWords, getRecentSessions } from "@/lib/firebase";
+import { getUserStats, getDueWords, getRecentSessions, getAllWordProgress } from "@/lib/firebase";
 import { UserStats, Session } from "@/lib/types";
+import { generateWeeklyReport } from "@/lib/ai/gemini";
 import Navbar from "@/components/layout/Navbar";
 import StatCard from "@/components/ui/StatCard";
+import Button from "@/components/ui/Button";
 import {
   Line,
   XAxis,
@@ -26,6 +28,8 @@ export default function DashboardPage() {
   const [dueWordsCount, setDueWordsCount] = useState(0);
   const [recentSessions, setRecentSessions] = useState<Session[]>([]);
   const [, setIsLoading] = useState(true);
+  const [weeklyReport, setWeeklyReport] = useState<string | null>(null);
+  const [isGeneratingReport, setIsGeneratingReport] = useState(false);
 
   useEffect(() => {
     if (!loading && !user) {
@@ -56,6 +60,64 @@ export default function DashboardPage() {
 
     loadData();
   }, [user]);
+
+  const handleGenerateReport = async () => {
+    if (!user || isGeneratingReport) return;
+    setIsGeneratingReport(true);
+    try {
+      const [allWords, sessions] = await Promise.all([
+        getAllWordProgress(user.uid),
+        getRecentSessions(user.uid, 7),
+      ]);
+
+      const totalReviewed = sessions.reduce((sum, s) => sum + s.wordsReviewed, 0);
+      const avgAccuracy = sessions.length > 0
+        ? sessions.reduce((sum, s) => sum + s.accuracyOverall, 0) / sessions.length
+        : 0;
+      const newWordsCount = sessions.reduce((sum, s) => sum + s.newWordsIntroduced, 0);
+      const masteredCount = allWords.filter(w => w.state === "mastered").length;
+
+      // Aggregate accuracy by domain
+      const domainAcc: Record<string, { total: number; count: number }> = {};
+      for (const s of sessions) {
+        for (const [d, acc] of Object.entries(s.accuracyByDomain)) {
+          if (!domainAcc[d]) domainAcc[d] = { total: 0, count: 0 };
+          if (acc > 0) {
+            domainAcc[d].total += acc;
+            domainAcc[d].count++;
+          }
+        }
+      }
+      const accuracyByDomain: Record<string, number> = {};
+      for (const [d, { total, count }] of Object.entries(domainAcc)) {
+        accuracyByDomain[d] = count > 0 ? total / count : 0;
+      }
+
+      // Find weakest domain
+      const weakestDomain = Object.entries(accuracyByDomain)
+        .sort((a, b) => a[1] - b[1])[0]?.[0] || "finance";
+
+      const report = await generateWeeklyReport({
+        totalSessions: sessions.length,
+        totalWordsReviewed: totalReviewed,
+        averageAccuracy: avgAccuracy,
+        accuracyByDomain,
+        newWordsLearned: newWordsCount,
+        masteredWords: masteredCount,
+        streakDays: profile?.streakDays || 0,
+        weakestDomain,
+        knownWords: allWords.map(w => w.word),
+      });
+
+      if (report) {
+        setWeeklyReport(report.summaryPL);
+      }
+    } catch (err) {
+      console.error("Failed to generate weekly report:", err);
+    } finally {
+      setIsGeneratingReport(false);
+    }
+  };
 
   if (loading || !user) {
     return (
@@ -261,6 +323,40 @@ export default function DashboardPage() {
                       />
                     </AreaChart>
                   </ResponsiveContainer>
+                </motion.div>
+              )}
+
+              {/* Weekly AI Report */}
+              {recentSessions.length >= 1 && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5 }}
+                  className="glass-card p-5 sm:p-6 mt-6"
+                >
+                  <div className="flex items-center justify-between mb-3">
+                    <h3 className="text-sm font-body text-text-secondary flex items-center gap-2">
+                      <span className="text-lg">🤖</span>
+                      Raport tygodniowy AI
+                    </h3>
+                    <Button
+                      size="sm"
+                      variant={weeklyReport ? "secondary" : "primary"}
+                      onClick={handleGenerateReport}
+                      disabled={isGeneratingReport}
+                    >
+                      {isGeneratingReport ? "Generuję..." : weeklyReport ? "Odśwież" : "Generuj"}
+                    </Button>
+                  </div>
+                  {weeklyReport ? (
+                    <p className="text-sm font-body text-text-primary leading-relaxed">
+                      {weeklyReport}
+                    </p>
+                  ) : (
+                    <p className="text-xs font-body text-text-secondary">
+                      Gemini AI przeanalizuje Twoje postępy z ostatnich 7 dni i poda rekomendacje.
+                    </p>
+                  )}
                 </motion.div>
               )}
             </>

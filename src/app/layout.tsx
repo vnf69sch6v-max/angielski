@@ -51,6 +51,7 @@ export const metadata: Metadata = {
     viewportFit: "cover",
   },
   themeColor: "#0A0A0C",
+  manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
@@ -65,10 +66,24 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pl" className="dark">
+      <head>
+        <link rel="apple-touch-icon" href="/icons/icon-192x192.svg" />
+      </head>
       <body
         className={`${dmSans.variable} ${jetbrainsMono.variable} ${instrumentSerif.variable} antialiased bg-bg text-text-primary font-body`}
       >
         <AuthProvider>{children}</AuthProvider>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if ('serviceWorker' in navigator) {
+                window.addEventListener('load', () => {
+                  navigator.serviceWorker.register('/sw.js').catch(() => {});
+                });
+              }
+            `,
+          }}
+        />
       </body>
     </html>
   );
