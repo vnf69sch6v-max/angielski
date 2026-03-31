@@ -4,6 +4,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import {
   onAuthStateChanged,
   signInWithPopup,
+  signInWithRedirect,
   signOut as firebaseSignOut,
   User,
 } from "firebase/auth";
@@ -64,9 +65,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const signInWithGoogle = async () => {
     try {
-      await signInWithPopup(auth, googleProvider);
+      if (typeof window !== "undefined" && /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+        await signInWithRedirect(auth, googleProvider);
+      } else {
+        await signInWithPopup(auth, googleProvider);
+      }
     } catch (error) {
       console.error("Google sign-in failed:", error);
+      alert("Wystąpił błąd podczas logowania. Spróbuj ponownie.");
     }
   };
 
