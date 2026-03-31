@@ -10,7 +10,8 @@
       "tags": [
         "devops",
         "general"
-      ]
+      ],
+      "synonymPair": "deploy_rollback"
     },
     {
       "word": "scalable",
@@ -21,7 +22,8 @@
       "tags": [
         "architecture",
         "business"
-      ]
+      ],
+      "synonymPair": "scalable_bottleneck"
     },
     {
       "word": "iterate",
@@ -65,7 +67,8 @@
       "tags": [
         "performance",
         "general"
-      ]
+      ],
+      "synonymPair": "scalable_bottleneck"
     },
     {
       "word": "deprecate",
@@ -197,7 +200,8 @@
       "tags": [
         "development",
         "testing"
-      ]
+      ],
+      "synonymPair": "bug_hotfix"
     },
     {
       "word": "feature",
@@ -219,7 +223,8 @@
       "tags": [
         "agile",
         "management"
-      ]
+      ],
+      "synonymPair": "agile_waterfall"
     },
     {
       "word": "backlog",
@@ -373,7 +378,8 @@
       "tags": [
         "security",
         "data"
-      ]
+      ],
+      "synonymPair": "encrypt_decrypt"
     },
     {
       "word": "hash",
@@ -505,7 +511,8 @@
       "tags": [
         "architecture",
         "backend"
-      ]
+      ],
+      "synonymPair": "monorepo_microservice"
     },
     {
       "word": "monolith",
@@ -659,7 +666,8 @@
       "tags": [
         "devops",
         "deployment"
-      ]
+      ],
+      "synonymPair": "deploy_rollback"
     },
     {
       "word": "downtime",
@@ -758,7 +766,8 @@
       "tags": [
         "development",
         "networking"
-      ]
+      ],
+      "synonymPair": "sync_async"
     },
     {
       "word": "callback",
@@ -923,7 +932,8 @@
       "tags": [
         "methodology",
         "management"
-      ]
+      ],
+      "synonymPair": "agile_waterfall"
     },
     {
       "word": "waterfall",
@@ -1477,7 +1487,8 @@
       "frequency": 8,
       "tags": [
         "deployment"
-      ]
+      ],
+      "synonymPair": "bug_hotfix"
     },
     {
       "word": "immutable",
@@ -1487,7 +1498,8 @@
       "frequency": 7,
       "tags": [
         "programming"
-      ]
+      ],
+      "synonymPair": "mutable_immutable"
     },
     {
       "word": "monorepo",
@@ -1497,7 +1509,8 @@
       "frequency": 7,
       "tags": [
         "workflow"
-      ]
+      ],
+      "synonymPair": "monorepo_microservice"
     },
     {
       "word": "on-call",
@@ -1597,7 +1610,8 @@
       "frequency": 7,
       "tags": [
         "programming"
-      ]
+      ],
+      "synonymPair": "mutable_immutable"
     },
     {
       "word": "just-in-time",

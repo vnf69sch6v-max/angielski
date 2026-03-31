@@ -40,6 +40,7 @@ export interface SeedWord {
   level: "B1" | "B2" | "C1";
   frequency: number; // 1-10
   tags: string[];
+  synonymPair?: string; // Group ID for synonym/antonym pairing (§4.3)
 }
 
 export interface WordList {
@@ -78,6 +79,11 @@ export interface WordProgress {
   exampleSentences: string[];
   mnemonic: string | null;
   quizCache: QuizData | null;
+  // Weekly repeat limiter (§9.3)
+  weeklyReviewCount: number;
+  lastWeeklyReset: Timestamp | null;
+  // Synonym/antonym pairing
+  synonymPair: string | null; // group ID e.g. "raise_lower"
   // Dates
   dateAdded: Timestamp;
   dateFirstCorrect: Timestamp | null;

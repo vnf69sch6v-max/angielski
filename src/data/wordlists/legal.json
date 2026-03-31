@@ -21,7 +21,8 @@
       "tags": [
         "general",
         "civil"
-      ]
+      ],
+      "synonymPair": "liability_immunity"
     },
     {
       "word": "statute",
@@ -54,7 +55,8 @@
       "tags": [
         "litigation",
         "civil"
-      ]
+      ],
+      "synonymPair": "plaintiff_defendant"
     },
     {
       "word": "defendant",
@@ -65,7 +67,8 @@
       "tags": [
         "litigation",
         "general"
-      ]
+      ],
+      "synonymPair": "plaintiff_defendant"
     },
     {
       "word": "remedy",
@@ -98,7 +101,8 @@
       "tags": [
         "courts",
         "civil"
-      ]
+      ],
+      "synonymPair": "injunction_waiver"
     },
     {
       "word": "compliance",
@@ -219,7 +223,8 @@
       "tags": [
         "litigation",
         "courts"
-      ]
+      ],
+      "synonymPair": "appeal_ruling"
     },
     {
       "word": "prosecution",
@@ -230,7 +235,8 @@
       "tags": [
         "criminal",
         "litigation"
-      ]
+      ],
+      "synonymPair": "prosecution_defence"
     },
     {
       "word": "defense",
@@ -307,7 +313,8 @@
       "tags": [
         "criminal",
         "courts"
-      ]
+      ],
+      "synonymPair": "guilty_innocent"
     },
     {
       "word": "conviction",
@@ -406,7 +413,8 @@
       "tags": [
         "tort",
         "liability"
-      ]
+      ],
+      "synonymPair": "fraud_negligence"
     },
     {
       "word": "fraud",
@@ -417,7 +425,8 @@
       "tags": [
         "criminal",
         "business"
-      ]
+      ],
+      "synonymPair": "fraud_negligence"
     },
     {
       "word": "embezzlement",
@@ -538,7 +547,8 @@
       "tags": [
         "litigation",
         "discovery"
-      ]
+      ],
+      "synonymPair": "subpoena_deposition"
     },
     {
       "word": "subpoena",
@@ -549,7 +559,8 @@
       "tags": [
         "litigation",
         "courts"
-      ]
+      ],
+      "synonymPair": "subpoena_deposition"
     },
     {
       "word": "petition",
@@ -670,7 +681,8 @@
       "tags": [
         "common_law",
         "courts"
-      ]
+      ],
+      "synonymPair": "precedent_statute"
     },
     {
       "word": "case law",
@@ -747,7 +759,8 @@
       "tags": [
         "contracts",
         "general"
-      ]
+      ],
+      "synonymPair": "injunction_waiver"
     },
     {
       "word": "indemnity",
@@ -912,7 +925,8 @@
       "tags": [
         "family",
         "courts"
-      ]
+      ],
+      "synonymPair": "custody_bail"
     },
     {
       "word": "divorce",
@@ -1132,7 +1146,8 @@
       "tags": [
         "contracts",
         "general"
-      ]
+      ],
+      "synonymPair": "binding_enforceable"
     },
     {
       "word": "void",
@@ -1220,7 +1235,8 @@
       "tags": [
         "criminal",
         "courts"
-      ]
+      ],
+      "synonymPair": "custody_bail"
     },
     {
       "word": "arraignment",
@@ -1264,7 +1280,8 @@
       "tags": [
         "criminal",
         "classification"
-      ]
+      ],
+      "synonymPair": "felony_misdemeanour"
     },
     {
       "word": "misdemeanor",
@@ -1462,7 +1479,8 @@
       "tags": [
         "courts",
         "general"
-      ]
+      ],
+      "synonymPair": "appeal_ruling"
     },
     {
       "word": "uphold",
@@ -1671,7 +1689,8 @@
       "tags": [
         "legislation",
         "general"
-      ]
+      ],
+      "synonymPair": "precedent_statute"
     },
     {
       "word": "alleged",
@@ -1765,7 +1784,8 @@
       "frequency": 7,
       "tags": [
         "civil"
-      ]
+      ],
+      "synonymPair": "claimant_respondent"
     },
     {
       "word": "counterclaim",
@@ -1775,7 +1795,8 @@
       "frequency": 6,
       "tags": [
         "civil"
-      ]
+      ],
+      "synonymPair": "claimant_respondent"
     },
     {
       "word": "defamation",
@@ -1795,7 +1816,8 @@
       "frequency": 7,
       "tags": [
         "contract"
-      ]
+      ],
+      "synonymPair": "binding_enforceable"
     },
     {
       "word": "forfeiture",
@@ -1835,7 +1857,8 @@
       "frequency": 8,
       "tags": [
         "constitutional"
-      ]
+      ],
+      "synonymPair": "liability_immunity"
     },
     {
       "word": "jurisprudence",
@@ -1865,7 +1888,8 @@
       "frequency": 6,
       "tags": [
         "criminal"
-      ]
+      ],
+      "synonymPair": "felony_misdemeanour"
     },
     {
       "word": "notarise",

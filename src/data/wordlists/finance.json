@@ -10,7 +10,8 @@
       "tags": [
         "bonds",
         "investing"
-      ]
+      ],
+      "synonymPair": "dividend_yield"
     },
     {
       "word": "equity",
@@ -21,7 +22,8 @@
       "tags": [
         "stocks",
         "accounting"
-      ]
+      ],
+      "synonymPair": "bond_equity"
     },
     {
       "word": "leverage",
@@ -120,7 +122,8 @@
       "tags": [
         "accounting",
         "general"
-      ]
+      ],
+      "synonymPair": "asset_liability"
     },
     {
       "word": "liability",
@@ -131,7 +134,8 @@
       "tags": [
         "accounting",
         "general"
-      ]
+      ],
+      "synonymPair": "asset_liability"
     },
     {
       "word": "revenue",
@@ -142,7 +146,8 @@
       "tags": [
         "accounting",
         "reporting"
-      ]
+      ],
+      "synonymPair": "revenue_expense"
     },
     {
       "word": "profit margin",
@@ -175,7 +180,8 @@
       "tags": [
         "stocks",
         "income"
-      ]
+      ],
+      "synonymPair": "dividend_yield"
     },
     {
       "word": "portfolio",
@@ -197,7 +203,8 @@
       "tags": [
         "fixed_income",
         "investing"
-      ]
+      ],
+      "synonymPair": "bond_equity"
     },
     {
       "word": "stock",
@@ -241,7 +248,8 @@
       "tags": [
         "macro",
         "monetary"
-      ]
+      ],
+      "synonymPair": "inflation_deflation"
     },
     {
       "word": "deflation",
@@ -252,7 +260,8 @@
       "tags": [
         "macro",
         "monetary"
-      ]
+      ],
+      "synonymPair": "inflation_deflation"
     },
     {
       "word": "depreciation",
@@ -263,7 +272,8 @@
       "tags": [
         "accounting",
         "macro"
-      ]
+      ],
+      "synonymPair": "appreciation_depreciation"
     },
     {
       "word": "appreciation",
@@ -274,7 +284,8 @@
       "tags": [
         "macro",
         "investing"
-      ]
+      ],
+      "synonymPair": "appreciation_depreciation"
     },
     {
       "word": "budget",
@@ -648,7 +659,8 @@
       "tags": [
         "macro",
         "budgeting"
-      ]
+      ],
+      "synonymPair": "surplus_deficit"
     },
     {
       "word": "deficit",
@@ -659,7 +671,8 @@
       "tags": [
         "macro",
         "budgeting"
-      ]
+      ],
+      "synonymPair": "surplus_deficit"
     },
     {
       "word": "subsidy",
@@ -1044,7 +1057,8 @@
       "tags": [
         "personal_finance",
         "accounting"
-      ]
+      ],
+      "synonymPair": "gross_net"
     },
     {
       "word": "break-even",
@@ -1319,7 +1333,8 @@
       "tags": [
         "investing",
         "funds"
-      ]
+      ],
+      "synonymPair": "hedge_speculate"
     },
     {
       "word": "venture capital",
@@ -1440,7 +1455,8 @@
       "tags": [
         "trading",
         "strategy"
-      ]
+      ],
+      "synonymPair": "hedge_speculate"
     },
     {
       "word": "spread",
@@ -1484,7 +1500,8 @@
       "tags": [
         "markets",
         "cycles"
-      ]
+      ],
+      "synonymPair": "bull_bear"
     },
     {
       "word": "bull market",
@@ -1495,7 +1512,8 @@
       "tags": [
         "markets",
         "cycles"
-      ]
+      ],
+      "synonymPair": "bull_bear"
     },
     {
       "word": "rally",
@@ -1913,7 +1931,8 @@
       "tags": [
         "economics",
         "general"
-      ]
+      ],
+      "synonymPair": "supply_demand"
     },
     {
       "word": "purchasing power",
@@ -2027,7 +2046,8 @@
       "frequency": 8,
       "tags": [
         "accounting"
-      ]
+      ],
+      "synonymPair": "gross_net"
     },
     {
       "word": "leverage ratio",

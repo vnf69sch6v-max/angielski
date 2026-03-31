@@ -90,11 +90,7 @@ function validateByTime(
   // Reguła 3: Suspiciously fast on quiz/translation → keep but flag
   // (we don't modify rating, just noted for analytics)
 
-  // Reguła 4: Never upgrade based on speed
-  // (Quiz fast correct → Easy is handled in getRawScore)
-  if (exerciseType === "quiz" && rating === 3 && responseTimeMs < 5000) {
-    rating = 4; // Quick correct on quiz = Easy
-  }
+  // Reguła 4: Never upgrade based on speed (§6.3 strict compliance)
 
   return rating;
 }

@@ -132,7 +132,8 @@ function calculateNewWordsCount(
   return Math.max(3, Math.min(10, count));
 }
 
-// ─── Sort new word pool (§3.2, §4.4) ────────────────
+// ─── Sort new word pool (§3.2, §4.3, §4.4) ──────────
+// Groups synonym/antonym pairs together, prioritizes weak domain, then sorts by level
 
 function sortNewWordPool(
   pool: WordProgress[],
@@ -140,17 +141,41 @@ function sortNewWordPool(
 ): WordProgress[] {
   const levelOrder: Record<string, number> = { B1: 0, B2: 1, C1: 2 };
 
-  return [...pool].sort((a, b) => {
-    // Prioritize weakest domain
+  // Step 1: Sort by domain priority + level
+  const sorted = [...pool].sort((a, b) => {
     const domA = a.domain === weakestDomain ? 0 : 1;
     const domB = b.domain === weakestDomain ? 0 : 1;
     if (domA !== domB) return domA - domB;
 
-    // Then sort by level: B1 → B2 → C1
     const levelA = levelOrder[a.level] ?? 1;
     const levelB = levelOrder[b.level] ?? 1;
     return levelA - levelB;
   });
+
+  // Step 2: Group synonym pairs together (§4.3)
+  const result: WordProgress[] = [];
+  const used = new Set<string>();
+
+  for (const word of sorted) {
+    if (used.has(word.wordId)) continue;
+    used.add(word.wordId);
+    result.push(word);
+
+    // If this word has a synonym pair, find and add its partner(s) right after
+    if (word.synonymPair) {
+      for (const partner of sorted) {
+        if (
+          !used.has(partner.wordId) &&
+          partner.synonymPair === word.synonymPair
+        ) {
+          used.add(partner.wordId);
+          result.push(partner);
+        }
+      }
+    }
+  }
+
+  return result;
 }
 
 // ─── Handle retry logic (§4.5) ──────────────────────
