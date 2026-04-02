@@ -41,10 +41,7 @@ const firebaseConfig = {
 const isFirebaseConfigured = Boolean(firebaseConfig.apiKey);
 const isBrowser = typeof window !== "undefined";
 
-// Use current hostname as authDomain so popup returns to the correct Vercel domain
-if (isBrowser && firebaseConfig.apiKey) {
-  firebaseConfig.authDomain = window.location.hostname;
-}
+
 
 const app = isFirebaseConfigured && isBrowser
   ? getApps().length === 0
