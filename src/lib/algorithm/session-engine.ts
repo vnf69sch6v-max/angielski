@@ -42,14 +42,16 @@ export function buildSession(
   }
 
   // ── Phase 0.5: Count states ────────────────────────
-  const dueReviewWords = getDueWords(
-    migrated.filter((w) => w.state === "review" || w.state === "relearning")
-  );
+  const dueReviewWords = getDueWords(migrated);
+  // learning words filtering uses isDue (already dual-track aware)
   const learningWords = migrated.filter(
-    (w) => w.state === "learning" && isDue(w)
+    (w) => {
+      if (w.tracks) return (w.tracks.recognition.state === "learning" && isTrackDue(w, "recognition")) || (w.tracks.production.state === "learning" && isTrackDue(w, "production"));
+      return w.state === "learning" && isDue(w);
+    }
   );
   const currentLearningCount = migrated.filter(
-    (w) => w.state === "learning"
+    (w) => w.tracks ? (w.tracks.recognition.state === "learning" || w.tracks.production.state === "learning") : (w.state === "learning")
   ).length;
 
   // ── Phase 1: New words (§4.2-4.3) ─────────────────
@@ -366,7 +368,19 @@ function getEasierExercise(current: string): SessionItem["exerciseType"] {
 
 // ─── Helpers ────────────────────────────────────────
 
+function isTrackDue(wp: WordProgress, track: "recognition" | "production"): boolean {
+  if (!wp.tracks) return false;
+  const t = wp.tracks[track];
+  if (t.state === "mastered" || t.state === "new") return false;
+  if (!t.nextReview) return true;
+  return t.nextReview.toMillis() <= Date.now();
+}
+
 function isDue(wp: WordProgress): boolean {
+  if (wp.tracks) {
+     return isTrackDue(wp, "recognition") || isTrackDue(wp, "production");
+  }
+  // Legacy
   if (!wp.nextReview) return true;
   return wp.nextReview.toMillis() <= Date.now();
 }
@@ -379,10 +393,7 @@ function getDueWords(words: WordProgress[]): WordProgress[] {
 
   return words
     .filter((w) => {
-      if (w.state === "mastered" || w.state === "new") return false;
-      if (!w.nextReview) return true;
-      if (w.nextReview.toMillis() > now) return false;
-
+      // Weekly limit
       if (
         w.weeklyReviewCount >= MAX_WEEKLY_REVIEWS &&
         w.lastWeeklyReset &&
@@ -391,16 +402,40 @@ function getDueWords(words: WordProgress[]): WordProgress[] {
         return false;
       }
 
+      if (w.tracks) {
+        const r = w.tracks.recognition;
+        const p = w.tracks.production;
+        const rDue = (r.state === "review" || r.state === "relearning") && isTrackDue(w, "recognition");
+        const pDue = (p.state === "review" || p.state === "relearning") && isTrackDue(w, "production");
+        return rDue || pDue;
+      }
+      
+      // Legacy
+      if (w.state === "mastered" || w.state === "new") return false;
+      if (!w.nextReview) return true;
+      if (w.nextReview.toMillis() > now) return false;
       return true;
     })
     .sort((a, b) => {
       // Sort by retrievability ascending (lowest first = most urgent)
-      const rA = a.lastReview && a.stability > 0
-        ? Math.pow(1 + (now - a.lastReview.toMillis()) / (9 * a.stability * 86400000), -1)
-        : 0;
-      const rB = b.lastReview && b.stability > 0
-        ? Math.pow(1 + (now - b.lastReview.toMillis()) / (9 * b.stability * 86400000), -1)
-        : 0;
+      let rA = 1;
+      if (a.tracks) {
+        const trA = a.tracks.recognition.lastReview && a.tracks.recognition.stability > 0 ? Math.pow(1 + (now - a.tracks.recognition.lastReview.toMillis()) / (9 * a.tracks.recognition.stability * 86400000), -1) : 0;
+        const tpA = a.tracks.production.lastReview && a.tracks.production.stability > 0 ? Math.pow(1 + (now - a.tracks.production.lastReview.toMillis()) / (9 * a.tracks.production.stability * 86400000), -1) : 0;
+        rA = Math.min(trA, tpA);
+      } else {
+        rA = a.lastReview && a.stability > 0 ? Math.pow(1 + (now - a.lastReview.toMillis()) / (9 * a.stability * 86400000), -1) : 0;
+      }
+      
+      let rB = 1;
+      if (b.tracks) {
+        const trB = b.tracks.recognition.lastReview && b.tracks.recognition.stability > 0 ? Math.pow(1 + (now - b.tracks.recognition.lastReview.toMillis()) / (9 * b.tracks.recognition.stability * 86400000), -1) : 0;
+        const tpB = b.tracks.production.lastReview && b.tracks.production.stability > 0 ? Math.pow(1 + (now - b.tracks.production.lastReview.toMillis()) / (9 * b.tracks.production.stability * 86400000), -1) : 0;
+        rB = Math.min(trB, tpB);
+      } else {
+        rB = b.lastReview && b.stability > 0 ? Math.pow(1 + (now - b.lastReview.toMillis()) / (9 * b.stability * 86400000), -1) : 0;
+      }
+
       return rA - rB;
     });
 }

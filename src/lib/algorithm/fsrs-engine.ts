@@ -194,33 +194,6 @@ export function reviewWord(
   return updated;
 }
 
-// ─── Get due words sorted by retrievability (§4.3) ───
-
-const MAX_WEEKLY_REVIEWS = 5; // §9.3: max 5 reviews per word per week
-
-export function getDueWords(allWords: WordProgress[]): WordProgress[] {
-  const now = Date.now();
-  const sevenDaysMs = 7 * 24 * 60 * 60 * 1000;
-
-  return allWords
-    .filter((w) => {
-      if (w.state === "mastered" || w.state === "new") return false;
-      if (!w.nextReview) return true;
-      if (w.nextReview.toMillis() > now) return false;
-
-      // §9.3: Skip words reviewed 5+ times this week (suspended for 3 days)
-      if (
-        w.weeklyReviewCount >= MAX_WEEKLY_REVIEWS &&
-        w.lastWeeklyReset &&
-        (now - w.lastWeeklyReset.toMillis()) <= sevenDaysMs
-      ) {
-        return false;
-      }
-
-      return true;
-    })
-    .sort((a, b) => calculateRetrievability(a) - calculateRetrievability(b));
-}
 
 // ─── Calculate current retrievability (§2.3) ─────────
 
