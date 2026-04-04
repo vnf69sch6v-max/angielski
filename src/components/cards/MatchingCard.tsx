@@ -50,7 +50,8 @@ export default function MatchingCard({ pairs, onAnswer }: MatchingCardProps) {
     (leftIdx: number, rightIdx: number) => {
       const realRightIdx = shuffledRight[rightIdx];
 
-      if (leftIdx === realRightIdx) {
+      // FIX 1 (V3): Compare by wordId, not positional index
+      if (pairs[leftIdx].wordId === pairs[realRightIdx].wordId) {
         // Correct match
         setMatched((prev) => new Set([...Array.from(prev), leftIdx]));
         setCorrectCount((prev) => prev + 1);
@@ -74,7 +75,7 @@ export default function MatchingCard({ pairs, onAnswer }: MatchingCardProps) {
         }, 800);
       }
     },
-    [shuffledRight, matched, pairs.length, correctCount, onAnswer]
+    [shuffledRight, matched, pairs, correctCount, onAnswer]
   );
 
   const handleLeftClick = (index: number) => {

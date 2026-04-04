@@ -210,6 +210,41 @@ export function reviewWord(
   updated.dateMastered = dateMastered;
   updated.consecutiveCorrect = nextConsecutiveCorrect;
 
+  // V3 FIX 2: Track consecutiveEasy
+  if (rating === 4) {
+    updated.consecutiveEasy = (wp.consecutiveEasy || 0) + 1;
+  } else {
+    updated.consecutiveEasy = 0;
+  }
+
+  // V3 FIX 2: 5× Easy override — minimum 14-day interval
+  const MIN_EASY_INTERVAL_MS = 14 * 24 * 60 * 60 * 1000; // 14 days
+  if (
+    (updated.consecutiveEasy || 0) >= 5 &&
+    updated.accuracy >= 0.95 &&
+    nextReviewDate
+  ) {
+    const intervalMs = nextReviewDate.toMillis() - Date.now();
+    if (intervalMs < MIN_EASY_INTERVAL_MS) {
+      nextReviewDate = Timestamp.fromMillis(Date.now() + MIN_EASY_INTERVAL_MS);
+      updated.nextReview = nextReviewDate;
+      if (trackDirection && updated.tracks) {
+        updated.tracks[trackDirection].nextReview = nextReviewDate;
+      }
+    }
+  }
+
+  // V3 FIX 2: FSRS interval logging
+  if (typeof window !== 'undefined') {
+    const newNext = nextReviewDate ? nextReviewDate.toMillis() : Date.now();
+    const intervalDays = Math.round((newNext - Date.now()) / (24 * 60 * 60 * 1000));
+    console.log(
+      `[FSRS] Word: "${wp.word}", rating: ${rating}, state: ${activeState}→${nextState}, ` +
+      `interval: ${intervalDays}d, consecutiveEasy: ${updated.consecutiveEasy || 0}, ` +
+      `track: ${trackDirection || 'global'}`
+    );
+  }
+
   // §9.3: Weekly repeat limiter — reset counter if >7 days since last reset
   const sevenDaysMs = 7 * 24 * 60 * 60 * 1000;
   if (!wp.lastWeeklyReset || (Date.now() - wp.lastWeeklyReset.toMillis()) > sevenDaysMs) {
@@ -254,6 +289,7 @@ function stateToFsrs(state: WordState): State {
 
 function buildFsrsCard(wp: WordProgress, trackDirection?: TrackDirection): Card {
   const card = createEmptyCard();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let source: any = wp;
   
   if (trackDirection && wp.tracks) {

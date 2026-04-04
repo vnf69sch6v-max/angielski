@@ -147,6 +147,9 @@ export interface WordProgress {
 
   // ─── V2: Context Production cache ──────────────────
   contextCache?: string | null;
+
+  // ─── V3: consecutiveEasy tracker ───────────────────
+  consecutiveEasy?: number;
 }
 
 // ─── Quiz Data ────────────────────────────────────────
@@ -221,6 +224,9 @@ export interface UserProfile {
   lastSessionDate: Timestamp | null;
   settings: UserSettings;
   createdAt: Timestamp;
+  // V3: Streak
+  streakLastActiveDate?: string;  // "2026-04-04" date string, timezone-aware
+  longestStreak?: number;
 }
 
 export interface UserSettings {
@@ -288,4 +294,67 @@ export interface AnswerResult {
   rawRating: number; // 1-4
   responseTimeMs: number;
   trackDirection?: TrackDirection;
+  reFlipUsed?: boolean; // V3: re-flip tracking
 }
+
+// ─── V3: Learner Profile ─────────────────────────────
+
+export interface DomainStrength {
+  accuracy: number;
+  wordsKnown: number;
+  weakestArea: string;
+}
+
+export interface TimeSlotStats {
+  avgAccuracy: number;
+  sessionsCount: number;
+  avgSessionLength?: number;
+  avgNewWordsRetained?: number;
+}
+
+export type LearningVelocity = "slow" | "moderate" | "fast" | "unknown";
+export type DifficultyStrategyName = "wave" | "ascending" | "descending" | "random";
+
+export interface StrategyScore {
+  retention1d: number;
+  retention7d: number;
+  trials: number;
+}
+
+export interface LearnerProfile {
+  domainStrength: Record<Domain, DomainStrength>;
+  sessionsByDayOfWeek: Record<number, TimeSlotStats>;
+  sessionsByHour: Record<number, TimeSlotStats>;
+  optimalTimeOfDay: number | null;
+  optimalSessionLength: number | null;
+  avgNewWordsPerDay: number;
+  avgRetentionRate1d: number;
+  avgRetentionRate7d: number;
+  learningVelocity: LearningVelocity;
+  commonMistakePatterns: string[];
+  difficultyStrategy: {
+    currentStrategy: DifficultyStrategyName;
+    strategyScores: Record<DifficultyStrategyName, StrategyScore>;
+  };
+  totalSessions: number;
+  totalWordsEverSeen: number;
+  profileLastUpdated: Timestamp;
+}
+
+// ─── V3: Word Graph ──────────────────────────────────
+
+export type RelationType = "synonym" | "antonym" | "colocation" | "same_topic" | "false_friend" | "derivative";
+
+export interface WordConnection {
+  wordId: string;
+  word: string;
+  relationType: RelationType;
+  strength: number; // 0-1
+}
+
+export interface WordGraphEntry {
+  wordId: string;
+  word: string;
+  connections: WordConnection[];
+}
+

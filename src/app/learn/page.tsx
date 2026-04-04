@@ -18,12 +18,15 @@ import { reviewWord } from "@/lib/algorithm/fsrs-engine";
 import { updateExerciseLevel } from "@/lib/algorithm/escalator";
 import { updateLeechStatus } from "@/lib/algorithm/leech";
 import { migrateWordToV2, needsMigration } from "@/lib/algorithm/migration";
+import { onSessionEnd as updateStreak } from "@/lib/algorithm/streak";
+import { updateLearnerProfile } from "@/lib/algorithm/learner-profile";
 import {
   AnswerResult,
   QuizData,
   WordProgress,
   Session,
   ContextProductionEval,
+  Domain,
 } from "@/lib/types";
 import {
   generateQuiz,
@@ -338,9 +341,16 @@ export default function LearnPage() {
     if (user) {
       saveSession(user.uid, result).catch(console.error);
 
+      // V3: Timezone-aware streak update
+      const streakUpdate = updateStreak({
+        streakDays: profile?.streakDays || 0,
+        streakLastActiveDate: profile?.streakLastActiveDate,
+        longestStreak: profile?.longestStreak || 0,
+      });
+
       updateUserProfile(user.uid, {
         lastSessionDate: Timestamp.now(),
-        streakDays: (profile?.streakDays || 0) + 1,
+        ...(streakUpdate || {}),
       }).catch(console.error);
 
       analyzeSession({
@@ -384,8 +394,21 @@ export default function LearnPage() {
           }
         })
         .catch(console.error);
+
+      // V3: Update learner profile
+      const wordResults = session.answers.map((a) => {
+        const item = session.sessionItems.find((si) => si.wordProgress.wordId === a.wordId);
+        return {
+          wordId: a.wordId,
+          word: item?.wordProgress.word || '',
+          domain: (item?.wordProgress.domain || 'finance') as Domain,
+          wasCorrect: a.wasCorrect,
+          rating: a.rawRating,
+        };
+      });
+      updateLearnerProfile(user.uid, result, wordResults, allWordsRef).catch(console.error);
     }
-  }, [session, user, profile]);
+  }, [session, user, profile, allWordsRef]);
 
   const handleNext = useCallback(() => {
     setShowFeedback(false);

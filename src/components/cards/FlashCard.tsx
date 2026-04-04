@@ -8,22 +8,39 @@ import { useTTS } from "@/hooks/useTTS";
 
 interface FlashCardProps {
   wordProgress: WordProgress;
-  onAnswer: (rating: 1 | 2 | 3 | 4, responseTimeMs: number) => void;
+  onAnswer: (rating: 1 | 2 | 3 | 4, responseTimeMs: number, reFlipUsed?: boolean) => void;
 }
 
 export default function FlashCard({ wordProgress, onAnswer }: FlashCardProps) {
   const [isFlipped, setIsFlipped] = useState(false);
+  const [isReFlipped, setIsReFlipped] = useState(false);
+  const [showReFlipAnswer, setShowReFlipAnswer] = useState(false);
   const startTime = useRef(Date.now());
   const { speak, isSpeaking } = useTTS();
 
   useEffect(() => {
     startTime.current = Date.now();
     setIsFlipped(false);
+    setIsReFlipped(false);
+    setShowReFlipAnswer(false);
   }, [wordProgress.wordId]);
 
   const handleRate = (rating: 1 | 2 | 3 | 4) => {
     const responseTime = Date.now() - startTime.current;
-    onAnswer(rating, responseTime);
+    // V3: Re-flip bonus — "Good" with re-flip becomes "Easy"
+    let finalRating = rating;
+    if (isReFlipped && showReFlipAnswer && rating === 3) {
+      finalRating = 4; // production verified bonus
+    }
+    onAnswer(finalRating, responseTime, isReFlipped);
+  };
+
+  const handleReFlip = () => {
+    setIsReFlipped(true);
+  };
+
+  const handleShowReFlipAnswer = () => {
+    setShowReFlipAnswer(true);
   };
 
   const ratingButtons = [
@@ -39,15 +56,15 @@ export default function FlashCard({ wordProgress, onAnswer }: FlashCardProps) {
       <div
         className="relative w-full cursor-pointer"
         style={{ perspective: 1000, minHeight: 280 }}
-        onClick={() => !isFlipped && setIsFlipped(true)}
+        onClick={() => !isFlipped && !isReFlipped && setIsFlipped(true)}
       >
         <motion.div
           className="relative w-full h-full"
           style={{ transformStyle: "preserve-3d" }}
-          animate={{ rotateY: isFlipped ? 180 : 0 }}
+          animate={{ rotateY: isReFlipped ? 360 : isFlipped ? 180 : 0 }}
           transition={{ type: "spring", stiffness: 260, damping: 25 }}
         >
-          {/* Front */}
+          {/* Front — EN word */}
           <div
             className="absolute inset-0 w-full glass-card p-8 flex flex-col items-center justify-center"
             style={{ backfaceVisibility: "hidden", minHeight: 280 }}
@@ -80,7 +97,7 @@ export default function FlashCard({ wordProgress, onAnswer }: FlashCardProps) {
             </p>
           </div>
 
-          {/* Back */}
+          {/* Back — PL translation (or re-flip challenge) */}
           <div
             className="absolute inset-0 w-full glass-card p-8 flex flex-col items-center justify-center"
             style={{
@@ -89,54 +106,105 @@ export default function FlashCard({ wordProgress, onAnswer }: FlashCardProps) {
               minHeight: 280,
             }}
           >
-            <p className="text-sm font-body text-text-secondary mb-2">
-              Tłumaczenie
-            </p>
-            <h3 className="text-3xl font-heading text-accent mb-2 text-center">
-              {wordProgress.translation}
-            </h3>
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                const textToSpeak = wordProgress.exampleSentences.length > 0
-                  ? `${wordProgress.word}. ${wordProgress.exampleSentences[0]}`
-                  : wordProgress.word;
-                speak(textToSpeak);
-              }}
-              className={`touch-target p-2 rounded-full transition-all duration-200 mb-2 ${
-                isSpeaking
-                  ? "bg-accent/20 text-accent scale-110"
-                  : "bg-bg-surface-hover text-text-secondary hover:text-accent hover:bg-accent/10"
-              }`}
-              title="Wymowa"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
-              </svg>
-            </button>
-            {wordProgress.mnemonic && (
-              <div className="w-full mt-2 p-3 rounded-xl bg-accent/10 border border-accent/20">
-                <p className="text-xs text-accent/70 mb-1">💡 Mnemotechnika:</p>
-                <p className="text-sm text-accent font-body">
-                  {wordProgress.mnemonic}
+            {!isReFlipped ? (
+              <>
+                {/* Normal back side */}
+                <p className="text-sm font-body text-text-secondary mb-2">
+                  Tłumaczenie
                 </p>
-              </div>
-            )}
-            {wordProgress.exampleSentences.length > 0 && (
-              <div className="w-full mt-2 p-3 rounded-xl bg-bg/50 border border-border/50">
-                <p className="text-xs text-text-secondary mb-1">Przykład:</p>
-                <p className="text-sm text-text-primary italic font-body">
-                  &ldquo;{wordProgress.exampleSentences[0]}&rdquo;
+                <h3 className="text-3xl font-heading text-accent mb-2 text-center">
+                  {wordProgress.translation}
+                </h3>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    const textToSpeak = wordProgress.exampleSentences.length > 0
+                      ? `${wordProgress.word}. ${wordProgress.exampleSentences[0]}`
+                      : wordProgress.word;
+                    speak(textToSpeak);
+                  }}
+                  className={`touch-target p-2 rounded-full transition-all duration-200 mb-2 ${
+                    isSpeaking
+                      ? "bg-accent/20 text-accent scale-110"
+                      : "bg-bg-surface-hover text-text-secondary hover:text-accent hover:bg-accent/10"
+                  }`}
+                  title="Wymowa"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                  </svg>
+                </button>
+                {wordProgress.mnemonic && (
+                  <div className="w-full mt-2 p-3 rounded-xl bg-accent/10 border border-accent/20">
+                    <p className="text-xs text-accent/70 mb-1">💡 Mnemotechnika:</p>
+                    <p className="text-sm text-accent font-body">
+                      {wordProgress.mnemonic}
+                    </p>
+                  </div>
+                )}
+                {wordProgress.exampleSentences.length > 0 && (
+                  <div className="w-full mt-2 p-3 rounded-xl bg-bg/50 border border-border/50">
+                    <p className="text-xs text-text-secondary mb-1">Przykład:</p>
+                    <p className="text-sm text-text-primary italic font-body">
+                      &ldquo;{wordProgress.exampleSentences[0]}&rdquo;
+                    </p>
+                  </div>
+                )}
+
+                {/* V3: Re-flip button */}
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleReFlip();
+                  }}
+                  className="mt-3 text-xs px-3 py-1.5 rounded-lg bg-bg-surface border border-border/50 text-text-secondary hover:text-accent hover:border-accent/30 transition-all"
+                >
+                  Sprawdź siebie ↩
+                </button>
+              </>
+            ) : (
+              <>
+                {/* Re-flip challenge: PL visible, EN hidden */}
+                <p className="text-sm font-body text-text-secondary mb-2">
+                  Przypomnij sobie angielskie słowo:
                 </p>
-              </div>
+                <h3 className="text-2xl font-heading text-accent mb-4 text-center">
+                  {wordProgress.translation}
+                </h3>
+                {!showReFlipAnswer ? (
+                  <motion.button
+                    whileTap={{ scale: 0.95 }}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleShowReFlipAnswer();
+                    }}
+                    className="px-6 py-3 rounded-xl bg-accent/20 border border-accent/30 text-accent font-body font-medium hover:bg-accent/30 transition-all"
+                  >
+                    Pokaż odpowiedź
+                  </motion.button>
+                ) : (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="text-center"
+                  >
+                    <h2 className="text-3xl font-heading text-text-primary mb-2">
+                      {wordProgress.word}
+                    </h2>
+                    <p className="text-xs text-success/70 font-body">
+                      ✨ Re-flip bonus aktywny (Dobrze → Łatwo)
+                    </p>
+                  </motion.div>
+                )}
+              </>
             )}
           </div>
         </motion.div>
       </div>
 
-      {/* Rating buttons (only visible when flipped) */}
+      {/* Rating buttons — visible when flipped (normal or re-flip revealed) */}
       <AnimatePresence>
-        {isFlipped && (
+        {(isFlipped && !isReFlipped) || (isReFlipped && showReFlipAnswer) ? (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -164,7 +232,7 @@ export default function FlashCard({ wordProgress, onAnswer }: FlashCardProps) {
               </motion.button>
             ))}
           </motion.div>
-        )}
+        ) : null}
       </AnimatePresence>
     </div>
   );

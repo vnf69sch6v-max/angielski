@@ -8,6 +8,7 @@ import { updateUserProfile, resetAllProgress, getAllWordProgress } from "@/lib/f
 import { Domain, DOMAIN_CONFIG, UserSettings, DEFAULT_SETTINGS } from "@/lib/types";
 import Navbar from "@/components/layout/Navbar";
 import Button from "@/components/ui/Button";
+import { runAlgorithmDiagnostics, TestResult } from "@/lib/algorithm/__tests__/algorithm-diagnostics";
 
 export default function SettingsPage() {
   const { user, profile, loading, signOut } = useAuth();
@@ -16,6 +17,8 @@ export default function SettingsPage() {
   const [isSaving, setIsSaving] = useState(false);
   const [showResetConfirm, setShowResetConfirm] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [diagnosticResults, setDiagnosticResults] = useState<TestResult[] | null>(null);
+  const [isRunningDiag, setIsRunningDiag] = useState(false);
 
   useEffect(() => {
     if (!loading && !user) router.push("/login");
@@ -79,6 +82,19 @@ export default function SettingsPage() {
       URL.revokeObjectURL(url);
     } catch (err) {
       console.error("Export failed:", err);
+    }
+  };
+
+  const handleRunDiagnostics = async () => {
+    if (!user) return;
+    setIsRunningDiag(true);
+    try {
+      const results = await runAlgorithmDiagnostics(user.uid);
+      setDiagnosticResults(results);
+    } catch (err) {
+      console.error("Diagnostics failed:", err);
+    } finally {
+      setIsRunningDiag(false);
     }
   };
 
@@ -435,6 +451,48 @@ export default function SettingsPage() {
                         Tak, resetuj
                       </Button>
                     </div>
+                  </div>
+                )}
+              </div>
+
+              {/* V3: Algorithm Diagnostics */}
+              <div className="mt-6 pt-6 border-t border-border/30">
+                <h4 className="text-sm font-heading text-text-primary mb-3">🔬 Diagnostyka algorytmu</h4>
+                <Button
+                  variant="secondary"
+                  onClick={handleRunDiagnostics}
+                  fullWidth
+                  className="mb-3"
+                >
+                  {isRunningDiag ? "Uruchamiam..." : "Uruchom diagnostykę algorytmu"}
+                </Button>
+
+                {diagnosticResults && (
+                  <div className="space-y-2 mt-3">
+                    {diagnosticResults.map((r, i) => (
+                      <div
+                        key={i}
+                        className={`p-3 rounded-xl border text-sm font-body ${
+                          r.severity === "PASS"
+                            ? "bg-success-muted border-success/30 text-success"
+                            : r.severity === "WARN"
+                            ? "bg-warning-muted border-warning/30 text-warning"
+                            : "bg-error-muted border-error/30 text-error"
+                        }`}
+                      >
+                        <span className="font-medium">
+                          {r.severity === "PASS" ? "✅" : r.severity === "WARN" ? "⚠️" : "❌"}{" "}
+                          {r.name}
+                        </span>
+                        <p className="text-xs mt-1 opacity-80">{r.message}</p>
+                      </div>
+                    ))}
+                    <button
+                      onClick={() => setDiagnosticResults(null)}
+                      className="text-xs text-text-secondary hover:text-text-primary transition-colors"
+                    >
+                      Zamknij wyniki
+                    </button>
                   </div>
                 )}
               </div>

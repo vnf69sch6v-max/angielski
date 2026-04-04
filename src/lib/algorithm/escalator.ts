@@ -165,6 +165,21 @@ export function updateExerciseLevel(
     }
   }
 
+  // V3 FIX 3: Escalation logging
+  if (typeof window !== 'undefined') {
+    const decision = updated.exerciseLevel !== wp.exerciseLevel
+      ? (updated.exerciseLevel > wp.exerciseLevel ? `PROMOTE to level ${updated.exerciseLevel}` : `DEMOTE to level ${updated.exerciseLevel}`)
+      : 'NO CHANGE';
+    console.log(
+      `[ESCALATOR] Word: "${wp.word}"\n` +
+      `  exerciseLevel: ${wp.exerciseLevel} → ${updated.exerciseLevel}\n` +
+      `  consecutiveCorrect: ${wp.consecutiveCorrect} (threshold: ${PROMOTION_RULES[wp.exerciseLevel].minReviews})\n` +
+      `  effectiveAccuracy: ${effectiveAccuracy.toFixed(2)} (threshold: ${PROMOTION_RULES[wp.exerciseLevel].accuracyThreshold})\n` +
+      `  wasCorrect: ${wasCorrect}\n` +
+      `  DECISION: ${decision}`
+    );
+  }
+
   return updated;
 }
 
