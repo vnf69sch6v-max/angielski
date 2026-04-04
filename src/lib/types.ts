@@ -212,6 +212,13 @@ export interface Session {
   productionAccuracy?: number;
   fatigueData?: SessionFatigueData;
   leechWordsReviewed?: number;
+  // V3.1 additions
+  enjoymentScore?: number;
+  localDate?: string;
+  localStartHour?: number;
+  dayOfWeek?: number;
+  timezone?: string;
+  difficultyStrategy?: string;
 }
 
 // ─── User Profile ─────────────────────────────────────
@@ -227,6 +234,8 @@ export interface UserProfile {
   // V3: Streak
   streakLastActiveDate?: string;  // "2026-04-04" date string, timezone-aware
   longestStreak?: number;
+  // V3.1: Streak history (last 90 active dates for heatmap)
+  streakHistory?: string[];
 }
 
 export interface UserSettings {

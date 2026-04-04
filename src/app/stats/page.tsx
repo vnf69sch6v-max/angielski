@@ -8,6 +8,10 @@ import { getUserStats, getAllSessions, getAllWordProgress } from "@/lib/firebase
 import { UserStats, Session, WordProgress, DOMAIN_CONFIG, Domain } from "@/lib/types";
 import Navbar from "@/components/layout/Navbar";
 import {
+  getIntelligenceMetrics,
+  AlgorithmIntelligenceMetrics,
+} from "@/lib/algorithm/intelligence";
+import {
   AreaChart,
   Area,
   LineChart,
@@ -28,6 +32,7 @@ export default function StatsPage() {
   const [sessions, setSessions] = useState<Session[]>([]);
   const [allWords, setAllWords] = useState<WordProgress[]>([]);
   const [, setIsLoading] = useState(true);
+  const [intelligence, setIntelligence] = useState<AlgorithmIntelligenceMetrics | null>(null);
 
   useEffect(() => {
     if (!loading && !user) router.push("/login");
@@ -50,6 +55,12 @@ export default function StatsPage() {
       } finally {
         setIsLoading(false);
       }
+
+      // V3.1: Load intelligence metrics
+      try {
+        const intel = await getIntelligenceMetrics(user.uid);
+        if (intel) setIntelligence(intel);
+      } catch { /* no metrics yet */ }
     };
     load();
   }, [user]);
@@ -335,6 +346,150 @@ export default function StatsPage() {
             </div>
           )}
         </div>
+
+          {/* V3.1: Algorithm Intelligence Section */}
+          {intelligence && (
+            <div className="mt-8">
+              <h2 className="text-lg font-heading text-text-primary mb-4">🧠 Jak działa algorytm</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {/* Retention */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="glass-card p-4"
+                >
+                  <h3 className="text-xs font-heading text-text-secondary mb-2">📊 Retention</h3>
+                  <div className="flex justify-between items-center mb-1">
+                    <span className="text-sm text-text-secondary">1 dzień</span>
+                    <span className="text-lg font-heading text-text-primary">
+                      {Math.round(intelligence.retention1d * 100)}%
+                      <span className={`text-xs ml-1 ${intelligence.retention1dTrend >= 0 ? 'text-success' : 'text-error'}`}>
+                        {intelligence.retention1dTrend >= 0 ? '↑' : '↓'}{Math.abs(Math.round(intelligence.retention1dTrend * 100))}%
+                      </span>
+                    </span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm text-text-secondary">7 dni</span>
+                    <span className="text-lg font-heading text-text-primary">
+                      {Math.round(intelligence.retention7d * 100)}%
+                      <span className={`text-xs ml-1 ${intelligence.retention7dTrend >= 0 ? 'text-success' : 'text-error'}`}>
+                        {intelligence.retention7dTrend >= 0 ? '↑' : '↓'}{Math.abs(Math.round(intelligence.retention7dTrend * 100))}%
+                      </span>
+                    </span>
+                  </div>
+                </motion.div>
+
+                {/* Enjoyment */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 }}
+                  className="glass-card p-4"
+                >
+                  <h3 className="text-xs font-heading text-text-secondary mb-2">😊 Przyjemność sesji</h3>
+                  <div className="text-3xl font-heading text-accent">
+                    {intelligence.enjoymentScore.toFixed(1)}
+                    <span className="text-base text-text-secondary">/10</span>
+                  </div>
+                  <span className={`text-xs ${intelligence.enjoymentTrend >= 0 ? 'text-success' : 'text-error'}`}>
+                    {intelligence.enjoymentTrend >= 0 ? '↑' : '↓'}{Math.abs(intelligence.enjoymentTrend).toFixed(1)} vs wcześniej
+                  </span>
+                </motion.div>
+
+                {/* Strategy */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 }}
+                  className="glass-card p-4"
+                >
+                  <h3 className="text-xs font-heading text-text-secondary mb-2">🎯 Strategia trudności</h3>
+                  <div className="text-lg font-heading text-accent capitalize">
+                    {intelligence.bestStrategy}
+                  </div>
+                  <div className="text-xs text-text-secondary mt-1">
+                    Retention: {Math.round(intelligence.bestStrategyRetention * 100)}%
+                    ({intelligence.strategyTrials} prób)
+                  </div>
+                </motion.div>
+
+                {/* Domains */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3 }}
+                  className="glass-card p-4"
+                >
+                  <h3 className="text-xs font-heading text-text-secondary mb-2">💪 Silne/słabe obszary</h3>
+                  <div className="text-sm">
+                    <div className="flex justify-between">
+                      <span className="text-success">✅ {intelligence.strongestDomain}</span>
+                    </div>
+                    <div className="flex justify-between mt-1">
+                      <span className="text-error">⚠️ {intelligence.weakestDomain}</span>
+                    </div>
+                    {intelligence.productionGap > 0.1 && (
+                      <div className="text-xs text-warning mt-2">
+                        Luka produkcji: {Math.round(intelligence.productionGap * 100)}%
+                      </div>
+                    )}
+                  </div>
+                </motion.div>
+
+                {/* Optimal time */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4 }}
+                  className="glass-card p-4"
+                >
+                  <h3 className="text-xs font-heading text-text-secondary mb-2">⏰ Optymalna pora</h3>
+                  {intelligence.optimalTimeOfDay !== null ? (
+                    <div className="text-2xl font-heading text-accent">
+                      {intelligence.optimalTimeOfDay}:00
+                    </div>
+                  ) : (
+                    <div className="text-sm text-text-secondary">Za mało danych (min 7 sesji)</div>
+                  )}
+                  {intelligence.optimalSessionLength && (
+                    <div className="text-xs text-text-secondary mt-1">
+                      Optymalnie ~{Math.round(intelligence.optimalSessionLength)} słów/sesję
+                    </div>
+                  )}
+                </motion.div>
+
+                {/* Efficiency */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5 }}
+                  className="glass-card p-4"
+                >
+                  <h3 className="text-xs font-heading text-text-secondary mb-2">⚡ Efektywność</h3>
+                  <div className="text-sm space-y-1">
+                    <div className="flex justify-between">
+                      <span className="text-text-secondary">Do mastery:</span>
+                      <span className="text-text-primary font-medium">
+                        ~{Math.round(intelligence.wordsToMastery)} powtórek
+                      </span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-text-secondary">Eskalacja:</span>
+                      <span className="text-text-primary font-medium">
+                        lvl {intelligence.escalationSpeed.toFixed(1)} avg
+                      </span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-text-secondary">Dane:</span>
+                      <span className="text-text-primary font-medium">
+                        {intelligence.dataPoints} odpowiedzi, {intelligence.weeksOfData} tyg.
+                      </span>
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+            </div>
+          )}
       </main>
     </div>
   );

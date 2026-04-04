@@ -21,6 +21,22 @@ import { migrateWordToV2, needsMigration } from "@/lib/algorithm/migration";
 import { onSessionEnd as updateStreak } from "@/lib/algorithm/streak";
 import { updateLearnerProfile } from "@/lib/algorithm/learner-profile";
 import {
+  PendingBuffer,
+  buildFsrsSnapshot,
+  getTodayString,
+  getHourOfDay,
+  getDayOfWeek,
+  WordEvent,
+  WordUpdateBatch,
+} from "@/lib/algorithm/data-pipeline";
+import {
+  generateWordReasoning,
+  WordReasoning,
+} from "@/lib/algorithm/reasoning";
+import { createSessionContext, SessionContext } from "@/lib/algorithm/recommendation";
+import { calculateEnjoymentScore } from "@/lib/algorithm/enjoyment";
+import { calculateIntelligenceMetrics } from "@/lib/algorithm/intelligence";
+import {
   AnswerResult,
   QuizData,
   WordProgress,
@@ -103,6 +119,15 @@ export default function LearnPage() {
 
   // V2: Fatigue 5-minute timer
   const [fiveMinTimer, setFiveMinTimer] = useState<number | null>(null);
+
+  // V3.1: Data pipeline buffer
+  const pipelineBuffer = useRef<PendingBuffer | null>(null);
+  const answerCountRef = useRef(0);
+
+  // V3.1: Reasoning modal
+  const [showReasoning, setShowReasoning] = useState(false);
+  const [currentReasoning, setCurrentReasoning] = useState<WordReasoning | null>(null);
+  const sessionContextRef = useRef<SessionContext>(createSessionContext());
 
   // Load words and start session
   useEffect(() => {
@@ -289,12 +314,27 @@ export default function LearnPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fiveMinTimer]);
 
+  // V3.1: beforeunload — flush pending pipeline data
+  useEffect(() => {
+    const handler = () => {
+      pipelineBuffer.current?.flush();
+    };
+    window.addEventListener('beforeunload', handler);
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'hidden') handler();
+    });
+    return () => window.removeEventListener('beforeunload', handler);
+  }, []);
+
   const handleAnswer = useCallback(
     async (wasCorrect: boolean, rating: number, responseTimeMs: number) => {
       if (!user || !session.currentItem) return;
 
+      const wp = session.currentItem.wordProgress;
+      const track = session.currentItem.trackDirection || 'recognition';
+
       const answer: AnswerResult = {
-        wordId: session.currentItem.wordProgress.wordId,
+        wordId: wp.wordId,
         exerciseType: session.currentItem.exerciseType,
         wasCorrect,
         rawRating: rating,
@@ -306,26 +346,86 @@ export default function LearnPage() {
       setLastWasCorrect(wasCorrect);
       setShowFeedback(true);
 
+      // Capture FSRS state BEFORE
+      const fsrsBefore = buildFsrsSnapshot(
+        wp.stability, wp.difficulty, wp.retrievability, wp.nextReview
+      );
+
       // FSRS scheduling
       const fsrsRating = scoreAnswer(
         session.currentItem.exerciseType,
         rating,
         responseTimeMs
       );
-      let updatedWord = reviewWord(
-        session.currentItem.wordProgress,
-        fsrsRating,
-        session.currentItem.trackDirection
-      );
+      let updatedWord = reviewWord(wp, fsrsRating, session.currentItem.trackDirection);
       updatedWord = updateExerciseLevel(updatedWord, wasCorrect);
       updatedWord = updateLeechStatus(updatedWord);
 
+      // Capture FSRS state AFTER
+      const fsrsAfter = buildFsrsSnapshot(
+        updatedWord.stability, updatedWord.difficulty,
+        updatedWord.retrievability, updatedWord.nextReview
+      );
+
+      // V3.1: Build WordEvent for pipeline
+      answerCountRef.current += 1;
+      const sessionStartMs = session.sessionStartTime || Date.now();
+
+      if (pipelineBuffer.current) {
+        const consecutiveCorrectInSession = session.answers.filter(a => a.wasCorrect).length;
+        const lastWrongIdx = [...session.answers].reverse().findIndex(a => !a.wasCorrect);
+        const consecutiveWrongInSession = lastWrongIdx === -1 ? 0 :
+          session.answers.length - (session.answers.length - 1 - lastWrongIdx);
+
+        const event: WordEvent = {
+          wordId: wp.wordId,
+          word: wp.word,
+          sessionId: pipelineBuffer.current ? 'active' : '',
+          positionInSession: answerCountRef.current,
+          timestamp: Timestamp.now(),
+          localDate: getTodayString(),
+          localHour: getHourOfDay(),
+          dayOfWeek: getDayOfWeek(),
+          responseTimeMs,
+          exerciseType: session.currentItem.exerciseType,
+          exerciseLevel: wp.exerciseLevel,
+          direction: track,
+          wasCorrect,
+          finalRating: fsrsRating,
+          reFlipUsed: answer.reFlipUsed || false,
+          fatigueScore: session.fatigueScore,
+          sessionAccuracySoFar: session.accuracy,
+          sessionDurationSoFar: Date.now() - sessionStartMs,
+          consecutiveCorrectInSession,
+          consecutiveWrongInSession,
+          fsrsBefore,
+          fsrsAfter,
+        };
+
+        const batchUpdate: WordUpdateBatch = {
+          wordId: wp.wordId,
+          track,
+          wasCorrect,
+          newStability: updatedWord.stability,
+          newDifficulty: updatedWord.difficulty,
+          newRetrievability: updatedWord.retrievability,
+          newNextReview: updatedWord.nextReview,
+          timestamp: Timestamp.now(),
+          newExerciseLevel: updatedWord.exerciseLevel,
+          newConsecutiveCorrect: updatedWord.consecutiveCorrect,
+          newConsecutiveEasy: updatedWord.consecutiveEasy || 0,
+          isLeech: updatedWord.isLeech || false,
+        };
+
+        pipelineBuffer.current.add(batchUpdate, event);
+        if (pipelineBuffer.current.shouldFlush()) {
+          pipelineBuffer.current.flush().catch(console.error);
+        }
+      }
+
+      // Per-word save (existing fallback — keeps backward compat)
       try {
-        await updateWordProgress(
-          user.uid,
-          session.currentItem.wordProgress.wordId,
-          updatedWord
-        );
+        await updateWordProgress(user.uid, wp.wordId, updatedWord);
       } catch (err) {
         console.error("Failed to update word progress:", err);
       }
@@ -339,6 +439,9 @@ export default function LearnPage() {
     setShowSummary(true);
 
     if (user) {
+      // V3.1: Flush remaining pipeline events
+      pipelineBuffer.current?.flush().catch(console.error);
+
       saveSession(user.uid, result).catch(console.error);
 
       // V3: Timezone-aware streak update
@@ -407,6 +510,19 @@ export default function LearnPage() {
         };
       });
       updateLearnerProfile(user.uid, result, wordResults, allWordsRef).catch(console.error);
+
+      // V3.1: Calculate enjoyment score
+      const enjoyment = calculateEnjoymentScore(
+        session.answers,
+        result.durationMs,
+        result.wordsReviewed,
+        true, // completed voluntarily (clicked "Zakończ")
+        null // optimalLength — will be populated from learner profile later
+      );
+
+      // V3.1: Calculate intelligence metrics
+      calculateIntelligenceMetrics(user.uid, allWordsRef, enjoyment.enjoymentScore)
+        .catch(console.error);
     }
   }, [session, user, profile, allWordsRef]);
 
@@ -668,8 +784,23 @@ export default function LearnPage() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -50 }}
               transition={{ duration: 0.3 }}
-              className="w-full"
+              className="w-full relative"
             >
+              {/* V3.1: ℹ️ Reasoning button */}
+              <button
+                onClick={() => {
+                  const reasoning = generateWordReasoning(
+                    currentItem.wordProgress,
+                    sessionContextRef.current
+                  );
+                  setCurrentReasoning(reasoning);
+                  setShowReasoning(true);
+                }}
+                className="absolute top-2 right-2 z-10 w-7 h-7 rounded-full bg-bg-surface/80 backdrop-blur-sm border border-border/30 flex items-center justify-center text-text-secondary hover:text-accent hover:border-accent/30 transition-all text-xs"
+                title="Dlaczego to słowo?"
+              >
+                ℹ️
+              </button>
               {currentItem.exerciseType === "flashcard" && (
                 <FlashCard
                   wordProgress={currentItem.wordProgress}
@@ -820,6 +951,69 @@ export default function LearnPage() {
           }}
         />
       )}
+
+      {/* V3.1: Reasoning Modal */}
+      <AnimatePresence>
+        {showReasoning && currentReasoning && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center px-4"
+            onClick={() => setShowReasoning(false)}
+          >
+            <div className="absolute inset-0 bg-bg/80 backdrop-blur-sm" />
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="relative glass-card p-6 max-w-md w-full max-h-[80vh] overflow-y-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <h3 className="text-lg font-heading text-text-primary mb-1">
+                Dlaczego &ldquo;{currentReasoning.word}&rdquo;?
+              </h3>
+              <p className="text-xs text-text-secondary mb-4 font-body">
+                Score: {currentReasoning.totalScore} pkt
+              </p>
+
+              <div className="space-y-2">
+                {currentReasoning.reasons.map((r, i) => (
+                  <div
+                    key={i}
+                    className={`p-3 rounded-xl border text-sm font-body ${
+                      r.score > 0
+                        ? "bg-accent/5 border-accent/20"
+                        : "bg-error/5 border-error/20"
+                    }`}
+                  >
+                    <div className="flex justify-between items-center mb-1">
+                      <span className="font-medium text-text-primary">
+                        {r.factor}
+                      </span>
+                      <span
+                        className={`text-xs font-mono ${
+                          r.score > 0 ? "text-success" : "text-error"
+                        }`}
+                      >
+                        {r.score > 0 ? "+" : ""}{r.score}
+                      </span>
+                    </div>
+                    <p className="text-xs text-text-secondary">{r.explanation}</p>
+                  </div>
+                ))}
+              </div>
+
+              <button
+                onClick={() => setShowReasoning(false)}
+                className="mt-4 w-full py-2 rounded-xl bg-bg-surface border border-border/30 text-text-secondary text-sm font-body hover:text-text-primary transition-colors"
+              >
+                Zamknij
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
