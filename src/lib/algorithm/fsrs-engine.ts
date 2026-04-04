@@ -47,39 +47,59 @@ export function reviewWord(
   const now = new Date();
   const updated = { ...wp };
 
-  switch (wp.state) {
+  let activeState = wp.state;
+  let activeLearningStep = wp.learningStep;
+  let activeConsecutiveCorrect = wp.consecutiveCorrect;
+
+  if (trackDirection && wp.tracks) {
+    const t = wp.tracks[trackDirection];
+    activeState = t.state || "new";
+    activeLearningStep = t.learningStep || 0;
+    activeConsecutiveCorrect = t.correctAttempts || wp.consecutiveCorrect; // Fallback to global 
+  }
+
+  // Update these explicitly so we can re-assign them to track later
+  let nextState = activeState;
+  let nextLearningStep = activeLearningStep;
+  let nextConsecutiveCorrect = activeConsecutiveCorrect;
+  let nextStability = wp.stability;
+  let nextDifficulty = wp.difficulty;
+  let nextReviewDate = wp.nextReview;
+  let dateMastered = wp.dateMastered;
+
+  switch (activeState) {
     case "new":
     case "learning": {
       updated.lastReview = Timestamp.now();
       if (rating >= 3) {
         // §3.3 Fast Graduation: rating 4 skips learning entirely
         if (rating === 4) {
-          updated.learningStep = LEARNING_STEPS.length;
+          nextLearningStep = LEARNING_STEPS.length;
         } else {
-          updated.learningStep = Math.min(wp.learningStep + 1, LEARNING_STEPS.length);
+          nextLearningStep = Math.min(activeLearningStep + 1, LEARNING_STEPS.length);
         }
         
-        updated.consecutiveCorrect = wp.consecutiveCorrect + 1;
+        nextConsecutiveCorrect = activeConsecutiveCorrect + 1;
 
-        if (updated.learningStep >= LEARNING_STEPS.length) {
+        if (nextLearningStep >= LEARNING_STEPS.length) {
           // §3.3 Graduacja → REVIEW
-          updated.state = "review";
-          const card = buildFsrsCard(wp);
+          nextState = "review";
+          const card = buildFsrsCard(wp, trackDirection);
           const result = scheduler.repeat(card, now);
           const scheduled = result[ratingToFsrs(rating)].card;
-          updated.stability = scheduled.stability;
-          updated.difficulty = scheduled.difficulty;
-          updated.nextReview = Timestamp.fromDate(scheduled.due);
+          nextStability = scheduled.stability;
+          nextDifficulty = scheduled.difficulty;
+          nextReviewDate = Timestamp.fromDate(scheduled.due);
         } else {
-          const stepMinutes = LEARNING_STEPS[updated.learningStep];
-          updated.nextReview = Timestamp.fromMillis(Date.now() + stepMinutes * 60 * 1000);
+          const stepMinutes = LEARNING_STEPS[nextLearningStep];
+          nextReviewDate = Timestamp.fromMillis(Date.now() + stepMinutes * 60 * 1000);
         }
       } else {
         // §3.3: Błąd — cofnij o 1 krok (nie reset!)
-        updated.learningStep = Math.max(0, wp.learningStep - 1);
-        updated.consecutiveCorrect = 0;
-        const stepMinutes = LEARNING_STEPS[updated.learningStep];
-        updated.nextReview = Timestamp.fromMillis(Date.now() + stepMinutes * 60 * 1000);
+        nextLearningStep = Math.max(0, activeLearningStep - 1);
+        nextConsecutiveCorrect = 0;
+        const stepMinutes = LEARNING_STEPS[nextLearningStep];
+        nextReviewDate = Timestamp.fromMillis(Date.now() + stepMinutes * 60 * 1000);
       }
       break;
     }
@@ -88,28 +108,28 @@ export function reviewWord(
       updated.lastReview = Timestamp.now();
       if (rating === 1) {
         // §3.5: Again → relearning
-        updated.state = "relearning";
-        updated.consecutiveCorrect = 0;
-        updated.learningStep = 0;
-        updated.nextReview = Timestamp.fromMillis(Date.now() + RELEARNING_STEPS[0] * 60 * 1000);
+        nextState = "relearning";
+        nextConsecutiveCorrect = 0;
+        nextLearningStep = 0;
+        nextReviewDate = Timestamp.fromMillis(Date.now() + RELEARNING_STEPS[0] * 60 * 1000);
       } else {
-        const card = buildFsrsCard(wp);
+        const card = buildFsrsCard(wp, trackDirection);
         const result = scheduler.repeat(card, now);
         const scheduled = result[ratingToFsrs(rating)].card;
-        updated.stability = scheduled.stability;
-        updated.difficulty = scheduled.difficulty;
-        updated.nextReview = Timestamp.fromDate(scheduled.due);
-        updated.consecutiveCorrect = wp.consecutiveCorrect + 1;
+        nextStability = scheduled.stability;
+        nextDifficulty = scheduled.difficulty;
+        nextReviewDate = Timestamp.fromDate(scheduled.due);
+        nextConsecutiveCorrect = activeConsecutiveCorrect + 1;
 
         // §3.6: Mastered — 90 days without error
         if (
           wp.dateFirstCorrect &&
           (Date.now() - wp.dateFirstCorrect.toMillis()) / (24 * 60 * 60 * 1000) >= 90 &&
-          updated.consecutiveCorrect >= 10 &&
+          nextConsecutiveCorrect >= 10 &&
           wp.accuracy >= 0.90
         ) {
-          updated.state = "mastered";
-          updated.dateMastered = Timestamp.now();
+          nextState = "mastered";
+          dateMastered = Timestamp.now();
         }
       }
       break;
@@ -118,17 +138,17 @@ export function reviewWord(
     case "relearning": {
       updated.lastReview = Timestamp.now();
       if (rating >= 3) {
-        updated.state = "review";
-        updated.consecutiveCorrect = 1;
-        const card = buildFsrsCard(wp);
+        nextState = "review";
+        nextConsecutiveCorrect = 1;
+        const card = buildFsrsCard(wp, trackDirection);
         const result = scheduler.repeat(card, now);
         const scheduled = result[ratingToFsrs(rating)].card;
-        updated.stability = scheduled.stability;
-        updated.difficulty = scheduled.difficulty;
-        updated.nextReview = Timestamp.fromDate(scheduled.due);
+        nextStability = scheduled.stability;
+        nextDifficulty = scheduled.difficulty;
+        nextReviewDate = Timestamp.fromDate(scheduled.due);
       } else {
-        updated.consecutiveCorrect = 0;
-        updated.nextReview = Timestamp.fromMillis(Date.now() + RELEARNING_STEPS[0] * 60 * 1000);
+        nextConsecutiveCorrect = 0;
+        nextReviewDate = Timestamp.fromMillis(Date.now() + RELEARNING_STEPS[0] * 60 * 1000);
       }
       break;
     }
@@ -137,16 +157,16 @@ export function reviewWord(
       updated.lastReview = Timestamp.now();
       if (rating <= 2) {
         // §3.6: Failed spot-check → back to review with S=30
-        updated.state = "review";
-        updated.consecutiveCorrect = 0;
-        updated.dateMastered = null;
-        updated.stability = 30;
-        updated.nextReview = Timestamp.fromMillis(Date.now() + 24 * 60 * 60 * 1000);
+        nextState = "review";
+        nextConsecutiveCorrect = 0;
+        dateMastered = null;
+        nextStability = 30;
+        nextReviewDate = Timestamp.fromMillis(Date.now() + 24 * 60 * 60 * 1000);
       } else {
-        const card = buildFsrsCard(wp);
+        const card = buildFsrsCard(wp, trackDirection);
         const result = scheduler.repeat(card, now);
         const scheduled = result[ratingToFsrs(rating)].card;
-        updated.nextReview = Timestamp.fromDate(scheduled.due);
+        nextReviewDate = Timestamp.fromDate(scheduled.due);
       }
       break;
     }
@@ -171,16 +191,24 @@ export function reviewWord(
     }
     track.accuracy = track.totalAttempts > 0 ? track.correctAttempts / track.totalAttempts : 0;
     
-    // Syce states if it graduated
-    if (updated.state !== wp.state) {
-        track.state = updated.state;
-    }
-    track.nextReview = updated.nextReview;
-    track.stability = updated.stability;
-    track.difficulty = updated.difficulty;
-    track.learningStep = updated.learningStep;
+    // Sync states from what we calculated
+    track.state = nextState;
+    track.nextReview = nextReviewDate;
+    track.stability = nextStability;
+    track.difficulty = nextDifficulty;
+    track.learningStep = nextLearningStep;
     track.lastReview = updated.lastReview;
   }
+
+  // Also update the global properties so legacy doesn't completely break, 
+  // though they'll just represent the state of the *last* done track.
+  updated.state = nextState;
+  updated.learningStep = nextLearningStep;
+  updated.stability = nextStability;
+  updated.difficulty = nextDifficulty;
+  updated.nextReview = nextReviewDate;
+  updated.dateMastered = dateMastered;
+  updated.consecutiveCorrect = nextConsecutiveCorrect;
 
   // §9.3: Weekly repeat limiter — reset counter if >7 days since last reset
   const sevenDaysMs = 7 * 24 * 60 * 60 * 1000;
@@ -224,16 +252,22 @@ function stateToFsrs(state: WordState): State {
   return map[state];
 }
 
-function buildFsrsCard(wp: WordProgress): Card {
+function buildFsrsCard(wp: WordProgress, trackDirection?: TrackDirection): Card {
   const card = createEmptyCard();
+  let source: any = wp;
+  
+  if (trackDirection && wp.tracks) {
+    source = wp.tracks[trackDirection];
+  }
+
   return {
     ...card,
-    stability: wp.stability || card.stability,
-    difficulty: wp.difficulty || card.difficulty,
-    state: stateToFsrs(wp.state),
-    due: wp.nextReview ? wp.nextReview.toDate() : new Date(),
-    last_review: wp.lastReview ? wp.lastReview.toDate() : undefined,
-    reps: wp.totalAttempts,
-    lapses: wp.timesWrongTotal,
+    stability: source.stability || card.stability,
+    difficulty: source.difficulty || card.difficulty,
+    state: stateToFsrs(source.state || wp.state),
+    due: source.nextReview ? source.nextReview.toDate() : new Date(),
+    last_review: source.lastReview ? source.lastReview.toDate() : undefined,
+    reps: source.totalAttempts || wp.totalAttempts,
+    lapses: source.timesWrongTotal || wp.timesWrongTotal,
   } as Card;
 }
