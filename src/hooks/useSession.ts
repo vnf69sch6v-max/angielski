@@ -1,9 +1,17 @@
 "use client";
 
 import { useState, useCallback, useRef } from "react";
-import { SessionItem, AnswerResult, ExerciseType, Domain, Session } from "@/lib/types";
+import {
+  SessionItem,
+  AnswerResult,
+  ExerciseType,
+  Domain,
+  Session,
+  SessionFatigueData,
+} from "@/lib/types";
 import { generateId } from "@/lib/firebase";
 import { Timestamp } from "firebase/firestore";
+import { FatigueTracker, FatigueLevel } from "@/lib/algorithm/fatigue";
 
 interface UseSessionReturn {
   // State
@@ -14,11 +22,13 @@ interface UseSessionReturn {
   isComplete: boolean;
   answers: AnswerResult[];
   sessionStartTime: number | null;
+  isContinuationPhase: boolean;
 
   // Actions
   startSession: (items: SessionItem[]) => void;
   submitAnswer: (result: AnswerResult) => void;
   nextItem: () => void;
+  addItems: (items: SessionItem[]) => void;
   endSession: () => Session;
   resetSession: () => void;
 
@@ -27,33 +37,64 @@ interface UseSessionReturn {
   totalItems: number;
   correctCount: number;
   accuracy: number;
+  elapsedMs: number;
+
+  // V2: Fatigue
+  fatigueTracker: FatigueTracker;
+  fatigueLevel: FatigueLevel;
+  fatigueScore: number;
+  fatigueData: SessionFatigueData | null;
+
+  // V2: Track stats
+  recognitionAccuracy: number;
+  productionAccuracy: number;
 }
 
-export function useSession(): UseSessionReturn {
+export function useSession(fatigueSensitivity: "low" | "medium" | "high" = "medium"): UseSessionReturn {
   const [sessionItems, setSessionItems] = useState<SessionItem[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isActive, setIsActive] = useState(false);
   const [isComplete, setIsComplete] = useState(false);
   const [answers, setAnswers] = useState<AnswerResult[]>([]);
+  const [isContinuationPhase, setIsContinuationPhase] = useState(false);
+  const [fatigueLevel, setFatigueLevel] = useState<FatigueLevel>("green");
+  const [fatigueScore, setFatigueScore] = useState(0);
   const sessionStartTime = useRef<number | null>(null);
+  const fatigueTrackerRef = useRef(new FatigueTracker(fatigueSensitivity));
 
   const currentItem =
     isActive && currentIndex < sessionItems.length
       ? sessionItems[currentIndex]
       : null;
 
-  const startSession = useCallback((items: SessionItem[]) => {
-    setSessionItems(items);
-    setCurrentIndex(0);
-    setIsActive(true);
-    setIsComplete(false);
-    setAnswers([]);
-    sessionStartTime.current = Date.now();
-  }, []);
+  const startSession = useCallback(
+    (items: SessionItem[]) => {
+      setSessionItems(items);
+      setCurrentIndex(0);
+      setIsActive(true);
+      setIsComplete(false);
+      setAnswers([]);
+      setIsContinuationPhase(false);
+      setFatigueLevel("green");
+      setFatigueScore(0);
+      sessionStartTime.current = Date.now();
+      fatigueTrackerRef.current = new FatigueTracker(fatigueSensitivity);
+    },
+    [fatigueSensitivity]
+  );
 
   const submitAnswer = useCallback(
     (result: AnswerResult) => {
       setAnswers((prev) => [...prev, result]);
+
+      // Update fatigue tracker
+      fatigueTrackerRef.current.addAnswer(
+        result.wasCorrect,
+        result.responseTimeMs
+      );
+      const newScore = fatigueTrackerRef.current.getFatigueScore();
+      setFatigueScore(newScore);
+      setFatigueLevel(fatigueTrackerRef.current.getFatigueLevel());
 
       // Retry logic (Spec §4.5)
       if (!result.wasCorrect) {
@@ -61,19 +102,31 @@ export function useSession(): UseSessionReturn {
           const item = prev[currentIndex];
           if (!item) return prev;
 
-          // Count how many times this word is already in the session queue
           const appearances = prev.filter(
             (i) => i.wordProgress.wordId === result.wordId
           ).length;
 
-          // Max 2 retries = 3 total appearances
           if (appearances < 3) {
             let nextExercise: ExerciseType = "flashcard";
-            if (item.exerciseType === "translation") nextExercise = "quiz";
+            if (item.exerciseType === "context_production")
+              nextExercise = "translation";
+            else if (item.exerciseType === "translation")
+              nextExercise = "quiz";
             else if (item.exerciseType === "quiz") nextExercise = "matching";
-            else if (item.exerciseType === "matching") nextExercise = "flashcard";
+            else if (item.exerciseType === "listening")
+              nextExercise = "matching";
+            else if (item.exerciseType === "matching")
+              nextExercise = "reverse_typing";
+            else if (item.exerciseType === "reverse_typing")
+              nextExercise = "flashcard";
 
-            return [...prev, { ...item, exerciseType: nextExercise }];
+            return [
+              ...prev,
+              {
+                ...item,
+                exerciseType: nextExercise,
+              },
+            ];
           }
           return prev;
         });
@@ -86,12 +139,22 @@ export function useSession(): UseSessionReturn {
     setCurrentIndex((prev) => {
       const next = prev + 1;
       if (next >= sessionItems.length) {
-        setIsComplete(true);
+        // Don't auto-complete — enter continuation phase
+        setIsContinuationPhase(true);
         return prev;
       }
       return next;
     });
   }, [sessionItems.length]);
+
+  // V2: Add more items (continuation phase)
+  const addItems = useCallback((items: SessionItem[]) => {
+    if (items.length === 0) return;
+    setSessionItems((prev) => [...prev, ...items]);
+    setIsContinuationPhase(false);
+    // Move to next item (which is the first new one)
+    setCurrentIndex((prev) => prev + 1);
+  }, []);
 
   const endSession = useCallback((): Session => {
     setIsActive(false);
@@ -113,11 +176,27 @@ export function useSession(): UseSessionReturn {
       tech: { correct: 0, total: 0 },
     };
 
+    // V2: Track accuracy by direction
+    let recCorrect = 0,
+      recTotal = 0,
+      prodCorrect = 0,
+      prodTotal = 0;
+
     answers.forEach((answer, idx) => {
       if (idx < sessionItems.length) {
         const domain = sessionItems[idx].wordProgress.domain;
         domainAccuracy[domain].total++;
         if (answer.wasCorrect) domainAccuracy[domain].correct++;
+
+        // Track direction accuracy
+        const direction = answer.trackDirection || sessionItems[idx].trackDirection;
+        if (direction === "recognition") {
+          recTotal++;
+          if (answer.wasCorrect) recCorrect++;
+        } else if (direction === "production") {
+          prodTotal++;
+          if (answer.wasCorrect) prodCorrect++;
+        }
       }
     });
 
@@ -141,15 +220,10 @@ export function useSession(): UseSessionReturn {
     };
 
     // Exercise breakdown
-    const exerciseBreakdown: Record<ExerciseType, number> = {
-      flashcard: 0,
-      matching: 0,
-      quiz: 0,
-      translation: 0,
-    };
-
+    const exerciseBreakdown: Record<string, number> = {};
     sessionItems.forEach((item) => {
-      exerciseBreakdown[item.exerciseType]++;
+      exerciseBreakdown[item.exerciseType] =
+        (exerciseBreakdown[item.exerciseType] || 0) + 1;
     });
 
     // Wrong words
@@ -171,6 +245,11 @@ export function useSession(): UseSessionReturn {
       (item) => item.wordProgress.state === "new"
     ).length;
 
+    // Leech words reviewed
+    const leechWordsReviewed = sessionItems.filter(
+      (item) => item.wordProgress.isLeech
+    ).length;
+
     return {
       sessionId: generateId(),
       date: Timestamp.now(),
@@ -182,6 +261,11 @@ export function useSession(): UseSessionReturn {
       wrongWords,
       exerciseBreakdown,
       aiAnalysis: null,
+      // V2 additions
+      recognitionAccuracy: recTotal > 0 ? recCorrect / recTotal : 0,
+      productionAccuracy: prodTotal > 0 ? prodCorrect / prodTotal : 0,
+      fatigueData: fatigueTrackerRef.current.getSessionFatigueData(),
+      leechWordsReviewed,
     };
   }, [answers, sessionItems]);
 
@@ -191,10 +275,32 @@ export function useSession(): UseSessionReturn {
     setIsActive(false);
     setIsComplete(false);
     setAnswers([]);
+    setIsContinuationPhase(false);
+    setFatigueLevel("green");
+    setFatigueScore(0);
     sessionStartTime.current = null;
   }, []);
 
   const correctCount = answers.filter((a) => a.wasCorrect).length;
+
+  // V2: Track accuracy by direction
+  const recAnswers = answers.filter((a, i) => {
+    const dir = a.trackDirection || sessionItems[i]?.trackDirection;
+    return dir === "recognition";
+  });
+  const prodAnswers = answers.filter((a, i) => {
+    const dir = a.trackDirection || sessionItems[i]?.trackDirection;
+    return dir === "production";
+  });
+
+  const recognitionAccuracy =
+    recAnswers.length > 0
+      ? recAnswers.filter((a) => a.wasCorrect).length / recAnswers.length
+      : 0;
+  const productionAccuracy =
+    prodAnswers.length > 0
+      ? prodAnswers.filter((a) => a.wasCorrect).length / prodAnswers.length
+      : 0;
 
   return {
     sessionItems,
@@ -204,9 +310,11 @@ export function useSession(): UseSessionReturn {
     isComplete,
     answers,
     sessionStartTime: sessionStartTime.current,
+    isContinuationPhase,
     startSession,
     submitAnswer,
     nextItem,
+    addItems,
     endSession,
     resetSession,
     progress:
@@ -214,5 +322,14 @@ export function useSession(): UseSessionReturn {
     totalItems: sessionItems.length,
     correctCount,
     accuracy: answers.length > 0 ? correctCount / answers.length : 0,
+    elapsedMs: sessionStartTime.current ? Date.now() - sessionStartTime.current : 0,
+    // Fatigue
+    fatigueTracker: fatigueTrackerRef.current,
+    fatigueLevel,
+    fatigueScore,
+    fatigueData: fatigueTrackerRef.current.getSessionFatigueData(),
+    // Track stats
+    recognitionAccuracy,
+    productionAccuracy,
   };
 }

@@ -19,6 +19,12 @@ export default function SessionSummary({
 }: SessionSummaryProps) {
   const accuracyPercent = Math.round(session.accuracyOverall * 100);
   const durationMinutes = Math.round(session.durationMs / 60000);
+  const recAccuracy = session.recognitionAccuracy
+    ? Math.round(session.recognitionAccuracy * 100)
+    : null;
+  const prodAccuracy = session.productionAccuracy
+    ? Math.round(session.productionAccuracy * 100)
+    : null;
 
   const getAccuracyColor = () => {
     if (accuracyPercent >= 80) return "#22C55E";
@@ -40,14 +46,14 @@ export default function SessionSummary({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-bg/80 backdrop-blur-md"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-bg/80 backdrop-blur-md overflow-y-auto"
         >
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
             transition={{ type: "spring", stiffness: 200, damping: 20 }}
-            className="w-full max-w-md glass-card p-6 sm:p-8"
+            className="w-full max-w-md glass-card p-6 sm:p-8 my-8"
           >
             <h2 className="text-2xl font-heading text-text-primary text-center mb-6">
               Podsumowanie sesji
@@ -79,13 +85,33 @@ export default function SessionSummary({
               {getAccuracyLabel()}
             </p>
 
+            {/* V2: Dual-track accuracy */}
+            {(recAccuracy !== null || prodAccuracy !== null) && (
+              <div className="grid grid-cols-2 gap-3 mb-4">
+                <div className="p-3 rounded-xl bg-blue-500/10 border border-blue-500/20 text-center">
+                  <p className="text-xl font-body font-bold text-blue-400">
+                    {recAccuracy ?? "—"}%
+                  </p>
+                  <p className="text-xs text-text-secondary">EN → PL</p>
+                </div>
+                <div className="p-3 rounded-xl bg-purple-500/10 border border-purple-500/20 text-center">
+                  <p className="text-xl font-body font-bold text-purple-400">
+                    {prodAccuracy ?? "—"}%
+                  </p>
+                  <p className="text-xs text-text-secondary">PL → EN</p>
+                </div>
+              </div>
+            )}
+
             {/* Stats grid */}
-            <div className="grid grid-cols-2 gap-3 mb-6">
+            <div className="grid grid-cols-2 gap-3 mb-4">
               <div className="p-3 rounded-xl bg-bg/50 border border-border/50 text-center">
                 <p className="text-2xl font-body font-bold text-text-primary">
                   {session.wordsReviewed}
                 </p>
-                <p className="text-xs text-text-secondary">Słów powtórzonych</p>
+                <p className="text-xs text-text-secondary">
+                  Słów powtórzonych
+                </p>
               </div>
               <div className="p-3 rounded-xl bg-bg/50 border border-border/50 text-center">
                 <p className="text-2xl font-body font-bold text-accent">
@@ -106,6 +132,45 @@ export default function SessionSummary({
                 <p className="text-xs text-text-secondary">Błędów</p>
               </div>
             </div>
+
+            {/* V2: Fatigue data */}
+            {session.fatigueData &&
+              session.fatigueData.fatigueOnsetMinute !== null && (
+                <div className="p-3 rounded-xl bg-warning/10 border border-warning/20 mb-4">
+                  <p className="text-xs font-body text-warning/70 mb-1">
+                    🧠 Zmęczenie
+                  </p>
+                  <p className="text-sm font-body text-text-primary">
+                    Spadek efektywności od minuty{" "}
+                    <span className="font-bold text-warning">
+                      {session.fatigueData.fatigueOnsetMinute}
+                    </span>
+                  </p>
+                  <p className="text-xs font-body text-text-secondary mt-1">
+                    Celność:{" "}
+                    {Math.round(session.fatigueData.accuracyBeforeFatigue * 100)}
+                    % → {Math.round(session.fatigueData.accuracyAfterFatigue * 100)}
+                    %
+                  </p>
+                </div>
+              )}
+
+            {/* V2: Leech words reviewed */}
+            {session.leechWordsReviewed !== undefined &&
+              session.leechWordsReviewed > 0 && (
+                <div className="p-3 rounded-xl bg-error/10 border border-error/20 mb-4">
+                  <p className="text-xs font-body text-error/70 mb-1">
+                    🔴 Trudne słowa (pijawki)
+                  </p>
+                  <p className="text-sm font-body text-text-primary">
+                    Powtórzono{" "}
+                    <span className="font-bold text-error">
+                      {session.leechWordsReviewed}
+                    </span>{" "}
+                    trudnych słów
+                  </p>
+                </div>
+              )}
 
             {/* Wrong words list */}
             {session.wrongWords.length > 0 && (

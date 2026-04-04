@@ -2,6 +2,11 @@
 
 import { useCallback, useRef, useState } from "react";
 
+interface TTSOptions {
+  rate?: number;
+  lang?: string;
+}
+
 /**
  * Text-to-Speech hook using Web Speech API
  * Speaks English words/sentences with native browser TTS.
@@ -10,39 +15,50 @@ export function useTTS() {
   const [isSpeaking, setIsSpeaking] = useState(false);
   const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
 
-  const speak = useCallback((text: string, lang: string = "en-US") => {
-    if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
+  const isAvailable =
+    typeof window !== "undefined" && "speechSynthesis" in window;
 
-    // Cancel any ongoing speech
-    window.speechSynthesis.cancel();
+  const speak = useCallback(
+    (text: string, options?: TTSOptions) => {
+      if (typeof window === "undefined" || !("speechSynthesis" in window))
+        return;
 
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = lang;
-    utterance.rate = 0.85; // Slightly slower for language learners
-    utterance.pitch = 1;
-    utterance.volume = 1;
+      const lang = options?.lang || "en-US";
+      const rate = options?.rate || 0.85;
 
-    // Try to find a good English voice
-    const voices = window.speechSynthesis.getVoices();
-    const englishVoice = voices.find(
-      (v) => v.lang.startsWith("en") && v.name.includes("Google")
-    ) || voices.find(
-      (v) => v.lang.startsWith("en") && v.name.includes("Samantha")
-    ) || voices.find(
-      (v) => v.lang.startsWith("en")
-    );
+      // Cancel any ongoing speech
+      window.speechSynthesis.cancel();
 
-    if (englishVoice) {
-      utterance.voice = englishVoice;
-    }
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = lang;
+      utterance.rate = rate;
+      utterance.pitch = 1;
+      utterance.volume = 1;
 
-    utterance.onstart = () => setIsSpeaking(true);
-    utterance.onend = () => setIsSpeaking(false);
-    utterance.onerror = () => setIsSpeaking(false);
+      // Try to find a good English voice
+      const voices = window.speechSynthesis.getVoices();
+      const englishVoice =
+        voices.find(
+          (v) => v.lang.startsWith("en") && v.name.includes("Google")
+        ) ||
+        voices.find(
+          (v) => v.lang.startsWith("en") && v.name.includes("Samantha")
+        ) ||
+        voices.find((v) => v.lang.startsWith("en"));
 
-    utteranceRef.current = utterance;
-    window.speechSynthesis.speak(utterance);
-  }, []);
+      if (englishVoice) {
+        utterance.voice = englishVoice;
+      }
+
+      utterance.onstart = () => setIsSpeaking(true);
+      utterance.onend = () => setIsSpeaking(false);
+      utterance.onerror = () => setIsSpeaking(false);
+
+      utteranceRef.current = utterance;
+      window.speechSynthesis.speak(utterance);
+    },
+    []
+  );
 
   const stop = useCallback(() => {
     if (typeof window === "undefined") return;
@@ -50,7 +66,5 @@ export function useTTS() {
     setIsSpeaking(false);
   }, []);
 
-  const isSupported = typeof window !== "undefined" && "speechSynthesis" in window;
-
-  return { speak, stop, isSpeaking, isSupported };
+  return { speak, stop, isSpeaking, isAvailable, isSupported: isAvailable };
 }

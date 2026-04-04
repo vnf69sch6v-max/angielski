@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useAuth } from "@/hooks/useAuth";
 import { getUserStats, getDueWords, getRecentSessions, getAllWordProgress } from "@/lib/firebase";
 import { UserStats, Session } from "@/lib/types";
+import { getLeechWords } from "@/lib/algorithm/leech";
 import { generateWeeklyReport } from "@/lib/ai/gemini";
 import Navbar from "@/components/layout/Navbar";
 import StatCard from "@/components/ui/StatCard";
@@ -29,6 +30,9 @@ export default function DashboardPage() {
   const [recentSessions, setRecentSessions] = useState<Session[]>([]);
   const [, setIsLoading] = useState(true);
   const [weeklyReport, setWeeklyReport] = useState<string | null>(null);
+  const [leechCount, setLeechCount] = useState(0);
+  const [recognizedCount, setRecognizedCount] = useState(0);
+  const [activelyUsedCount, setActivelyUsedCount] = useState(0);
   const [isGeneratingReport, setIsGeneratingReport] = useState(false);
 
   useEffect(() => {
@@ -42,15 +46,29 @@ export default function DashboardPage() {
 
     const loadData = async () => {
       try {
-        const [userStats, dueWords, sessions] = await Promise.all([
+        const [userStats, dueWords, sessions, allWords] = await Promise.all([
           getUserStats(user.uid),
           getDueWords(user.uid),
           getRecentSessions(user.uid, 7),
+          getAllWordProgress(user.uid),
         ]);
 
         setStats(userStats);
         setDueWordsCount(dueWords.length);
         setRecentSessions(sessions);
+
+        // V2: Calculate dual-track stats
+        const leeches = getLeechWords(allWords);
+        setLeechCount(leeches.length);
+
+        const recognized = allWords.filter(
+          (w) => (w.tracks?.recognition?.accuracy ?? 0) >= 0.80 && w.tracks?.recognition?.state !== "new"
+        ).length;
+        const activelyUsed = allWords.filter(
+          (w) => (w.tracks?.production?.accuracy ?? 0) >= 0.80 && w.tracks?.production?.state !== "new"
+        ).length;
+        setRecognizedCount(recognized);
+        setActivelyUsedCount(activelyUsed);
       } catch (err) {
         console.error("Failed to load dashboard data:", err);
       } finally {
@@ -271,6 +289,55 @@ export default function DashboardPage() {
                   }
                 />
               </motion.div>
+
+              {/* V2: Dual-track knowledge counters */}
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.35 }}
+                className="grid grid-cols-2 gap-3 mb-4"
+              >
+                <div className="glass-card p-4">
+                  <div className="flex items-center gap-2 mb-2">
+                    <div className="w-2.5 h-2.5 rounded-full bg-blue-400" />
+                    <span className="text-xs font-body text-text-secondary">Rozpoznajesz</span>
+                  </div>
+                  <p className="text-2xl font-body font-bold text-blue-400">{recognizedCount}</p>
+                  <p className="text-xs text-text-secondary mt-0.5">EN → PL ≥80%</p>
+                </div>
+                <div className="glass-card p-4">
+                  <div className="flex items-center gap-2 mb-2">
+                    <div className="w-2.5 h-2.5 rounded-full bg-purple-400" />
+                    <span className="text-xs font-body text-text-secondary">Aktywnie używasz</span>
+                  </div>
+                  <p className="text-2xl font-body font-bold text-purple-400">{activelyUsedCount}</p>
+                  <p className="text-xs text-text-secondary mt-0.5">PL → EN ≥80%</p>
+                </div>
+              </motion.div>
+
+              {/* V2: Leech counter */}
+              {leechCount > 0 && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.38 }}
+                  className="glass-card p-4 mb-4 border-error/20"
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <span className="text-lg">🔴</span>
+                      <div>
+                        <p className="text-sm font-body text-text-primary font-medium">
+                          {leechCount} {leechCount === 1 ? 'słowo wymaga' : 'słów wymaga'} uwagi
+                        </p>
+                        <p className="text-xs font-body text-text-secondary">
+                          Te słowa są powtarzane wielokrotnie z niską celnością
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
 
               {/* Mini chart */}
               {chartData.length > 0 && (

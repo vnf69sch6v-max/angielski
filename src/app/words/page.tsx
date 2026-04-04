@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/hooks/useAuth";
 import { getAllWordProgress, setWordProgress, createWordProgressFromSeed } from "@/lib/firebase";
-import { WordProgress, Domain, WordState, DOMAIN_CONFIG, MASTERY_LABELS, SeedWord } from "@/lib/types";
+import { WordProgress, Domain, WordState, DOMAIN_CONFIG, MASTERY_LABELS, OVERALL_MASTERY_LABELS, SeedWord } from "@/lib/types";
 import Navbar from "@/components/layout/Navbar";
 import DomainTag from "@/components/ui/DomainTag";
 import Button from "@/components/ui/Button";
@@ -21,6 +21,7 @@ export default function WordsPage() {
   const [levelFilter, setLevelFilter] = useState<string | null>(null);
   const [expandedWord, setExpandedWord] = useState<string | null>(null);
   const [showAddModal, setShowAddModal] = useState(false);
+  const [leechFilter, setLeechFilter] = useState(false);
 
   // Add word form
   const [newWord, setNewWord] = useState("");
@@ -60,9 +61,10 @@ export default function WordsPage() {
       if (domainFilter && word.domain !== domainFilter) return false;
       if (stateFilter && word.state !== stateFilter) return false;
       if (levelFilter && word.level !== levelFilter) return false;
+      if (leechFilter && !word.isLeech) return false;
       return true;
     });
-  }, [words, searchQuery, domainFilter, stateFilter, levelFilter]);
+  }, [words, searchQuery, domainFilter, stateFilter, levelFilter, leechFilter]);
 
   const handleAddWord = async () => {
     if (!user || !newWord.trim() || !newTranslation.trim()) return;
@@ -204,6 +206,20 @@ export default function WordsPage() {
                 {level}
               </button>
             ))}
+
+            <span className="w-px h-6 bg-border self-center mx-1 flex-shrink-0" />
+
+            {/* Leech filter */}
+            <button
+              onClick={() => setLeechFilter(!leechFilter)}
+              className={`px-3 py-1.5 rounded-full text-xs font-body font-medium transition-all border ${
+                leechFilter
+                  ? "bg-error/20 text-error border-error/40"
+                  : "bg-bg-surface text-text-secondary border-border hover:text-text-primary opacity-50 hover:opacity-75"
+              }`}
+            >
+              🔴 Pijawki
+            </button>
           </div>
 
           {/* Word list */}
@@ -276,6 +292,18 @@ export default function WordsPage() {
                             {Math.round(word.accuracy * 100)}%
                           </span>
                         )}
+                        {/* V2: Leech badge */}
+                        {word.isLeech && (
+                          <span className="text-xs" title="Pijawka">
+                            🔴
+                          </span>
+                        )}
+                        {/* V2: Exercise level */}
+                        {word.exerciseLevel > 1 && (
+                          <span className="text-xs px-1.5 py-0.5 rounded bg-accent/10 text-accent font-mono">
+                            L{word.exerciseLevel}
+                          </span>
+                        )}
                       </div>
                     </div>
                   </button>
@@ -311,6 +339,56 @@ export default function WordsPage() {
                               </p>
                             </div>
                           </div>
+
+                          {/* V2: Dual-track progress bars */}
+                          {word.tracks && (
+                            <div className="space-y-2 mt-2">
+                              <div>
+                                <div className="flex items-center justify-between mb-1">
+                                  <span className="text-xs text-text-secondary">EN → PL (rozpoznawanie)</span>
+                                  <span className="text-xs text-blue-400 font-mono">
+                                    {Math.round(word.tracks.recognition.accuracy * 100)}%
+                                  </span>
+                                </div>
+                                <div className="w-full h-1.5 rounded-full bg-border overflow-hidden">
+                                  <div
+                                    className="h-full rounded-full bg-blue-400 transition-all"
+                                    style={{ width: `${word.tracks.recognition.accuracy * 100}%` }}
+                                  />
+                                </div>
+                              </div>
+                              <div>
+                                <div className="flex items-center justify-between mb-1">
+                                  <span className="text-xs text-text-secondary">PL → EN (produkcja)</span>
+                                  <span className="text-xs text-purple-400 font-mono">
+                                    {Math.round(word.tracks.production.accuracy * 100)}%
+                                  </span>
+                                </div>
+                                <div className="w-full h-1.5 rounded-full bg-border overflow-hidden">
+                                  <div
+                                    className="h-full rounded-full bg-purple-400 transition-all"
+                                    style={{ width: `${word.tracks.production.accuracy * 100}%` }}
+                                  />
+                                </div>
+                              </div>
+                              {/* Overall mastery badge */}
+                              {word.overallMastery && (
+                                <div className="flex items-center gap-2 mt-1">
+                                  <span className="text-xs text-text-secondary">Opanowanie:</span>
+                                  <span
+                                    className="text-xs px-2 py-0.5 rounded-full font-body"
+                                    style={{
+                                      backgroundColor: `${OVERALL_MASTERY_LABELS[word.overallMastery].color}20`,
+                                      color: OVERALL_MASTERY_LABELS[word.overallMastery].color,
+                                    }}
+                                  >
+                                    {OVERALL_MASTERY_LABELS[word.overallMastery].label}
+                                  </span>
+                                </div>
+                              )}
+                            </div>
+                          )}
+
                           {word.exampleSentences.length > 0 && (
                             <div>
                               <p className="text-xs text-text-secondary mb-1">Przykłady:</p>

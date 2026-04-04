@@ -1,17 +1,88 @@
 /**
  * Scoring Pipeline — converts raw exercise answers to FSRS ratings
- * Based on FluentFlow Algorithm Spec §6
+ * Based on FluentFlow Algorithm Spec §6 + V2 Extension
  */
 import { ExerciseType } from "@/lib/types";
 
-// ─── Exercise weights (§5.1) ─────────────────────────
+// ─── Exercise weights (§5.1 + V2 §3.1) ──────────────
 
 const EXERCISE_WEIGHTS: Record<ExerciseType, number> = {
   flashcard: 0.8,
+  reverse_typing: 1.1,
   matching: 0.9,
+  listening: 1.0,
   quiz: 1.0,
   translation: 1.2,
+  context_production: 1.3,
 };
+
+// ─── Levenshtein distance ────────────────────────────
+
+export function levenshteinDistance(a: string, b: string): number {
+  const aLower = a.toLowerCase().trim();
+  const bLower = b.toLowerCase().trim();
+
+  if (aLower === bLower) return 0;
+  if (aLower.length === 0) return bLower.length;
+  if (bLower.length === 0) return aLower.length;
+
+  const matrix: number[][] = [];
+
+  for (let i = 0; i <= bLower.length; i++) {
+    matrix[i] = [i];
+  }
+  for (let j = 0; j <= aLower.length; j++) {
+    matrix[0][j] = j;
+  }
+
+  for (let i = 1; i <= bLower.length; i++) {
+    for (let j = 1; j <= aLower.length; j++) {
+      const cost = bLower.charAt(i - 1) === aLower.charAt(j - 1) ? 0 : 1;
+      matrix[i][j] = Math.min(
+        matrix[i - 1][j] + 1,
+        matrix[i][j - 1] + 1,
+        matrix[i - 1][j - 1] + cost
+      );
+    }
+  }
+
+  return matrix[bLower.length][aLower.length];
+}
+
+// ─── Score reverse typing by Levenshtein ─────────────
+
+export function scoreReverseTyping(
+  userAnswer: string,
+  correctAnswer: string,
+  acceptedVariants: string[] = []
+): { rating: 1 | 2 | 3 | 4; distance: number } {
+  const allCorrect = [correctAnswer, ...acceptedVariants];
+
+  // Find minimum distance across all accepted variants
+  let minDist = Infinity;
+  for (const correct of allCorrect) {
+    const dist = levenshteinDistance(userAnswer.trim(), correct.trim());
+    if (dist < minDist) minDist = dist;
+  }
+
+  let rating: 1 | 2 | 3 | 4;
+  if (minDist === 0) rating = 4;
+  else if (minDist <= 2) rating = 3;
+  else if (minDist <= 4) rating = 2;
+  else rating = 1;
+
+  return { rating, distance: minDist };
+}
+
+// ─── Score listening answer ──────────────────────────
+
+export function scoreListening(
+  userAnswer: string,
+  correctAnswer: string
+): { rating: 1 | 2 | 3 | 4; distance: number } {
+  // Same logic as reverse typing
+  return scoreReverseTyping(userAnswer, correctAnswer);
+}
 
 // ─── Main scoring function (§6.1-6.4) ────────────────
 
@@ -41,6 +112,11 @@ function getRawScore(exerciseType: ExerciseType, rawResult: number): number {
       // rawResult is user's button click (1-4)
       return Math.max(1, Math.min(4, rawResult));
 
+    case "reverse_typing":
+    case "listening":
+      // rawResult is already a rating 1-4 from Levenshtein scoring
+      return Math.max(1, Math.min(4, rawResult));
+
     case "matching":
       // rawResult is correctPairs (0-5)
       if (rawResult <= 1) return 1;
@@ -50,11 +126,17 @@ function getRawScore(exerciseType: ExerciseType, rawResult: number): number {
 
     case "quiz":
       // rawResult: 0 = wrong, 1 = correct
-      // Fast correct = Easy, normal correct = Good, wrong = Again
       return rawResult >= 1 ? 3 : 1;
 
     case "translation":
       // rawResult is AI score (0-100)
+      if (rawResult < 40) return 1;
+      if (rawResult < 65) return 2;
+      if (rawResult < 90) return 3;
+      return 4;
+
+    case "context_production":
+      // rawResult is AI score (0-100), same scale as translation
       if (rawResult < 40) return 1;
       if (rawResult < 65) return 2;
       if (rawResult < 90) return 3;
@@ -72,8 +154,11 @@ function validateByTime(
   rating: number,
   responseTimeMs: number
 ): number {
-  // §6.3: Quiz/translation get double thresholds
-  const isLongExercise = exerciseType === "quiz" || exerciseType === "translation";
+  // §6.3: Quiz/translation/context get double thresholds
+  const isLongExercise =
+    exerciseType === "quiz" ||
+    exerciseType === "translation" ||
+    exerciseType === "context_production";
   const easyThreshold = isLongExercise ? 30000 : 15000;
   const goodThreshold = isLongExercise ? 60000 : 30000;
 
@@ -88,8 +173,6 @@ function validateByTime(
   }
 
   // Reguła 3: Suspiciously fast on quiz/translation → keep but flag
-  // (we don't modify rating, just noted for analytics)
-
   // Reguła 4: Never upgrade based on speed (§6.3 strict compliance)
 
   return rating;
@@ -104,11 +187,15 @@ export function wasAnswerCorrect(
   switch (exerciseType) {
     case "flashcard":
       return rawResult >= 3;
+    case "reverse_typing":
+    case "listening":
+      return rawResult >= 3; // rating 3+ = correct
     case "matching":
       return rawResult >= 4;
     case "quiz":
       return rawResult >= 1;
     case "translation":
+    case "context_production":
       return rawResult >= 65;
     default:
       return false;

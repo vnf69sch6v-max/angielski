@@ -203,6 +203,111 @@ export default function SettingsPage() {
               </div>
             </motion.div>
 
+            {/* V2: TTS Voice */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.15 }}
+              className="glass-card p-6"
+            >
+              <h3 className="text-lg font-heading text-text-primary mb-1">
+                Głos TTS
+              </h3>
+              <p className="text-sm text-text-secondary font-body mb-4">
+                Wybierz akcent dla wymowy słów
+              </p>
+              <div className="flex gap-3">
+                {(["en-US", "en-GB"] as const).map((voice) => (
+                  <button
+                    key={voice}
+                    onClick={() =>
+                      setSettings((prev) => ({ ...prev, ttsVoice: voice }))
+                    }
+                    className={`flex-1 py-3 rounded-xl font-body text-sm font-medium transition-all border ${
+                      (settings.ttsVoice || "en-US") === voice
+                        ? "bg-accent/15 text-accent border-accent/40"
+                        : "bg-bg-surface text-text-secondary border-border hover:text-text-primary"
+                    }`}
+                  >
+                    {voice === "en-US" ? "🇺🇸 Amerykański" : "🇬🇧 Brytyjski"}
+                  </button>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* V2: Fatigue Sensitivity */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.18 }}
+              className="glass-card p-6"
+            >
+              <h3 className="text-lg font-heading text-text-primary mb-1">
+                Wykrywanie zmęczenia
+              </h3>
+              <p className="text-sm text-text-secondary font-body mb-4">
+                Jak szybko system powinien wykrywać spadek efektywności
+              </p>
+              <div className="flex gap-3">
+                {(["low", "medium", "high"] as const).map((level) => (
+                  <button
+                    key={level}
+                    onClick={() =>
+                      setSettings((prev) => ({ ...prev, fatigueSensitivity: level }))
+                    }
+                    className={`flex-1 py-3 rounded-xl font-body text-sm font-medium transition-all border ${
+                      (settings.fatigueSensitivity || "medium") === level
+                        ? "bg-accent/15 text-accent border-accent/40"
+                        : "bg-bg-surface text-text-secondary border-border hover:text-text-primary"
+                    }`}
+                  >
+                    {level === "low" ? "Niska" : level === "medium" ? "Średnia" : "Wysoka"}
+                  </button>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* V2: Daily New Word Cap */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="glass-card p-6"
+            >
+              <h3 className="text-lg font-heading text-text-primary mb-1">
+                Dzienny limit nowych słów
+              </h3>
+              <p className="text-sm text-text-secondary font-body mb-5">
+                Maksymalna liczba nowych słów w jednym dniu
+              </p>
+              <div className="flex items-center gap-4">
+                <input
+                  type="range"
+                  min={10}
+                  max={50}
+                  step={5}
+                  value={settings.dailyNewWordCap || 50}
+                  onChange={(e) =>
+                    setSettings((prev) => ({
+                      ...prev,
+                      dailyNewWordCap: parseInt(e.target.value),
+                    }))
+                  }
+                  className="flex-1 h-2 rounded-full appearance-none cursor-pointer"
+                  style={{
+                    background: `linear-gradient(to right, #6366F1 0%, #6366F1 ${
+                      ((( settings.dailyNewWordCap || 50) - 10) / 40) * 100
+                    }%, #27272A ${
+                      (((settings.dailyNewWordCap || 50) - 10) / 40) * 100
+                    }%, #27272A 100%)`,
+                  }}
+                />
+                <span className="text-2xl font-body font-bold text-accent w-10 text-center">
+                  {settings.dailyNewWordCap || 50}
+                </span>
+              </div>
+            </motion.div>
+
             {/* Target retention */}
             <motion.div
               initial={{ opacity: 0, y: 10 }}

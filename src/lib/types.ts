@@ -4,8 +4,18 @@ import { Timestamp } from "firebase/firestore";
 
 export type Domain = "finance" | "legal" | "smalltalk" | "tech";
 export type WordState = "new" | "learning" | "review" | "relearning" | "mastered";
-export type ExerciseLevel = 1 | 2 | 3 | 4; // flashcard / matching / quiz / translation
-export type ExerciseType = "flashcard" | "matching" | "quiz" | "translation";
+export type ExerciseLevel = 1 | 2 | 3 | 4 | 5 | 6 | 7;
+export type ExerciseType =
+  | "flashcard"
+  | "reverse_typing"
+  | "matching"
+  | "listening"
+  | "quiz"
+  | "translation"
+  | "context_production";
+export type TrackDirection = "recognition" | "production";
+export type OverallMastery = "passive" | "partial" | "active" | "mastered";
+export type FatigueSensitivity = "low" | "medium" | "high";
 
 // ─── Domain Metadata ──────────────────────────────────
 
@@ -18,9 +28,22 @@ export const DOMAIN_CONFIG: Record<Domain, { label: string; labelPL: string; col
 
 export const EXERCISE_TYPE_MAP: Record<ExerciseLevel, ExerciseType> = {
   1: "flashcard",
-  2: "matching",
-  3: "quiz",
-  4: "translation",
+  2: "reverse_typing",
+  3: "matching",
+  4: "listening",
+  5: "quiz",
+  6: "translation",
+  7: "context_production",
+};
+
+export const EXERCISE_LEVEL_LABELS: Record<ExerciseLevel, string> = {
+  1: "Fiszka",
+  2: "Pisanie",
+  3: "Dopasowanie",
+  4: "Słuchanie",
+  5: "Quiz",
+  6: "Tłumaczenie",
+  7: "Kontekst",
 };
 
 export const MASTERY_LABELS: Record<WordState, { label: string; color: string }> = {
@@ -30,6 +53,28 @@ export const MASTERY_LABELS: Record<WordState, { label: string; color: string }>
   relearning: { label: "Ponowna nauka", color: "#EF4444" },
   mastered: { label: "Opanowane", color: "#22C55E" },
 };
+
+export const OVERALL_MASTERY_LABELS: Record<OverallMastery, { label: string; color: string }> = {
+  passive: { label: "Pasywne", color: "#F59E0B" },
+  partial: { label: "Częściowe", color: "#3B82F6" },
+  active: { label: "Aktywne", color: "#8B5CF6" },
+  mastered: { label: "Opanowane", color: "#22C55E" },
+};
+
+// ─── Dual-Track Data (V2) ─────────────────────────────
+
+export interface TrackData {
+  stability: number;
+  difficulty: number;
+  retrievability: number;
+  nextReview: Timestamp;
+  lastReview: Timestamp | null;
+  state: WordState;
+  learningStep: number;
+  totalAttempts: number;
+  correctAttempts: number;
+  accuracy: number;
+}
 
 // ─── Word Data (from seed JSON) ───────────────────────
 
@@ -59,7 +104,7 @@ export interface WordProgress {
   partOfSpeech: string;
   source: "seed" | "ai" | "manual";
   state: WordState;
-  // FSRS fields (Phase 2 will populate these properly)
+  // Legacy FSRS fields (kept for backward compat)
   stability: number;
   difficulty: number;
   retrievability: number;
@@ -83,11 +128,25 @@ export interface WordProgress {
   weeklyReviewCount: number;
   lastWeeklyReset: Timestamp | null;
   // Synonym/antonym pairing
-  synonymPair: string | null; // group ID e.g. "raise_lower"
+  synonymPair: string | null;
   // Dates
   dateAdded: Timestamp;
   dateFirstCorrect: Timestamp | null;
   dateMastered: Timestamp | null;
+
+  // ─── V2: DUAL-TRACK — new fields ───────────────────
+  tracks?: {
+    recognition: TrackData;
+    production: TrackData;
+  };
+  overallMastery?: OverallMastery;
+
+  // ─── V2: LEECH — new fields ────────────────────────
+  isLeech?: boolean;
+  leechTrack?: TrackDirection | null;
+
+  // ─── V2: Context Production cache ──────────────────
+  contextCache?: string | null;
 }
 
 // ─── Quiz Data ────────────────────────────────────────
@@ -107,6 +166,27 @@ export interface TranslationEval {
   alternatives: string[];
 }
 
+// ─── Context Production Evaluation (V2) ──────────────
+
+export interface ContextProductionEval {
+  wordUsed: number;       // 0-30
+  grammar: number;        // 0-40
+  naturalness: number;    // 0-30
+  totalScore: number;     // 0-100
+  feedbackPL: string;
+}
+
+// ─── Fatigue Data (V2) ───────────────────────────────
+
+export interface SessionFatigueData {
+  fatigueOnsetMinute: number | null;
+  wordsBeforeFatigue: number;
+  accuracyBeforeFatigue: number;
+  accuracyAfterFatigue: number;
+  timeOfDay: number; // hour of session start
+  peakFatigueScore: number;
+}
+
 // ─── Session ──────────────────────────────────────────
 
 export interface Session {
@@ -118,12 +198,17 @@ export interface Session {
   accuracyOverall: number;
   accuracyByDomain: Record<Domain, number>;
   wrongWords: { wordId: string; word: string; exercise: ExerciseType }[];
-  exerciseBreakdown: Record<ExerciseType, number>;
+  exerciseBreakdown: Record<string, number>;
   aiAnalysis: {
     weakDomains: string[];
     sessionQuality: string;
     suggestions: string;
   } | null;
+  // V2 additions
+  recognitionAccuracy?: number;
+  productionAccuracy?: number;
+  fatigueData?: SessionFatigueData;
+  leechWordsReviewed?: number;
 }
 
 // ─── User Profile ─────────────────────────────────────
@@ -140,8 +225,12 @@ export interface UserProfile {
 
 export interface UserSettings {
   domainWeights: Record<Domain, number>;
-  dailyGoal: number; // new words per day (3-10)
+  dailyGoal: number; // new words per day (3-10) — legacy, still used as minimum
   targetRetention: number; // 0.95 default
+  // V2 additions
+  ttsVoice?: "en-US" | "en-GB";
+  fatigueSensitivity?: FatigueSensitivity;
+  dailyNewWordCap?: number; // 10-50, default 50
 }
 
 export const DEFAULT_SETTINGS: UserSettings = {
@@ -153,6 +242,9 @@ export const DEFAULT_SETTINGS: UserSettings = {
   },
   dailyGoal: 7,
   targetRetention: 0.95,
+  ttsVoice: "en-US",
+  fatigueSensitivity: "medium",
+  dailyNewWordCap: 50,
 };
 
 // ─── User Stats ───────────────────────────────────────
@@ -167,6 +259,10 @@ export interface UserStats {
   weeklyProgress: WeeklyDataPoint[];
   totalSessions: number;
   totalStudyTimeMs: number;
+  // V2 additions
+  recognizedWords?: number;
+  activelyUsedWords?: number;
+  leechCount?: number;
 }
 
 export interface WeeklyDataPoint {
@@ -180,6 +276,7 @@ export interface WeeklyDataPoint {
 export interface SessionItem {
   wordProgress: WordProgress;
   exerciseType: ExerciseType;
+  trackDirection?: TrackDirection;
 }
 
 // ─── Answer Result ───────────────────────────────────
@@ -190,4 +287,5 @@ export interface AnswerResult {
   wasCorrect: boolean;
   rawRating: number; // 1-4
   responseTimeMs: number;
+  trackDirection?: TrackDirection;
 }

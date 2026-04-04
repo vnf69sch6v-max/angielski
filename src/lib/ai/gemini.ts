@@ -2,7 +2,7 @@
 
 import { getAI, getGenerativeModel, GoogleAIBackend } from "firebase/ai";
 import { getApps } from "firebase/app";
-import { QuizData, TranslationEval, Domain } from "@/lib/types";
+import { QuizData, TranslationEval, ContextProductionEval, Domain } from "@/lib/types";
 
 // ─── Firebase AI (Gemini) Setup ──────────────────────
 
@@ -326,3 +326,85 @@ Respond ONLY with valid JSON:
     return null;
   }
 }
+
+// ─── V2: Context Scenario Generation ─────────────────
+
+export async function generateContextScenario(
+  word: string,
+  translation: string,
+  domain: Domain
+): Promise<string | null> {
+  if (!canCallAI()) return null;
+
+  try {
+    callCount++;
+    const model = getGeminiModel();
+
+    const prompt = `Wygeneruj krótki scenariusz (1-2 zdania po polsku) w domenie "${domain}" 
+gdzie użytkownik musi użyć angielskiego słowa "${word}" (po polsku: "${translation}").
+Scenariusz powinien dać naturalny kontekst do użycia tego słowa w zdaniu.
+
+Odpowiedz TYLKO samym scenariuszem po polsku, bez dodatkowego tekstu.
+Przykład: "Opisujesz klientowi wyniki portfela obligacji za ostatni kwartał."`;
+
+    const result = await model.generateContent(prompt);
+    const text = result.response.text().trim();
+    return text || null;
+  } catch (error) {
+    console.error("Failed to generate context scenario:", error);
+    return null;
+  }
+}
+
+// ─── V2: Context Production Evaluation ───────────────
+
+export async function evaluateContextProduction(
+  word: string,
+  scenario: string,
+  userSentence: string
+): Promise<ContextProductionEval | null> {
+  if (!canCallAI()) return null;
+
+  try {
+    callCount++;
+    const model = getGeminiModel();
+
+    const prompt = `You evaluate English sentences written by a Polish B1 student.
+
+Target word: "${word}"
+Scenario (in Polish): "${scenario}"
+Student wrote: "${userSentence}"
+
+Evaluate on three criteria:
+1. wordUsed (0-30): Is the target word used? Is it used correctly in context?
+2. grammar (0-40): Is the sentence grammatically correct?
+3. naturalness (0-30): Does the sentence sound natural/native?
+
+Be tolerant of minor typos. If the target word is completely missing, wordUsed = 0.
+Give brief feedback in Polish (2-3 sentences).
+
+Respond ONLY with valid JSON:
+{ "wordUsed": number, "grammar": number, "naturalness": number, "totalScore": number, "feedbackPL": "string in Polish" }
+
+totalScore must equal wordUsed + grammar + naturalness.`;
+
+    const result = await model.generateContent(prompt);
+    const text = result.response.text();
+    const evaluation = parseJsonResponse<ContextProductionEval>(text);
+
+    if (
+      typeof evaluation.totalScore === "number" &&
+      evaluation.totalScore >= 0 &&
+      evaluation.totalScore <= 100 &&
+      evaluation.feedbackPL
+    ) {
+      return evaluation;
+    }
+
+    return null;
+  } catch (error) {
+    console.error("Failed to evaluate context production:", error);
+    return null;
+  }
+}
+

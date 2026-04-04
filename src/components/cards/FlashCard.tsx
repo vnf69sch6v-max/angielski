@@ -62,7 +62,7 @@ export default function FlashCard({ wordProgress, onAnswer }: FlashCardProps) {
             <button
               onClick={(e) => {
                 e.stopPropagation();
-                speak(wordProgress.word);
+                speak(wordProgress.word, { lang: "en-US" });
               }}
               className={`touch-target p-2 rounded-full transition-all duration-200 ${
                 isSpeaking
@@ -98,10 +98,10 @@ export default function FlashCard({ wordProgress, onAnswer }: FlashCardProps) {
             <button
               onClick={(e) => {
                 e.stopPropagation();
-                const text = wordProgress.exampleSentences.length > 0
+                const textToSpeak = wordProgress.exampleSentences.length > 0
                   ? `${wordProgress.word}. ${wordProgress.exampleSentences[0]}`
                   : wordProgress.word;
-                speak(text);
+                speak(textToSpeak);
               }}
               className={`touch-target p-2 rounded-full transition-all duration-200 mb-2 ${
                 isSpeaking
