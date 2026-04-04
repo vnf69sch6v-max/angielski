@@ -13,13 +13,16 @@ import {
   updateSession,
 } from "@/lib/firebase";
 import { buildSession, getNextContinuationBatch, getNextPriority } from "@/lib/algorithm/session-engine";
+import { FatigueTracker } from "@/lib/algorithm/fatigue";
 import { scoreAnswer } from "@/lib/algorithm/scoring";
 import { reviewWord } from "@/lib/algorithm/fsrs-engine";
 import { updateExerciseLevel } from "@/lib/algorithm/escalator";
 import { updateLeechStatus } from "@/lib/algorithm/leech";
 import { migrateWordToV2, needsMigration } from "@/lib/algorithm/migration";
 import { onSessionEnd as updateStreak } from "@/lib/algorithm/streak";
-import { updateLearnerProfile } from "@/lib/algorithm/learner-profile";
+import { updateLearnerProfile, getLearnerProfile } from "@/lib/algorithm/learner-profile";
+import { pickStrategy, orderSessionWords } from "@/lib/algorithm/difficulty-bandit";
+import { getWordGraph, buildConnectionsMap } from "@/lib/algorithm/word-graph";
 import {
   PendingBuffer,
   buildFsrsSnapshot,
@@ -128,6 +131,7 @@ export default function LearnPage() {
   const [showReasoning, setShowReasoning] = useState(false);
   const [currentReasoning, setCurrentReasoning] = useState<WordReasoning | null>(null);
   const sessionContextRef = useRef<SessionContext>(createSessionContext());
+  const wordConnectionsRef = useRef<Map<string, Set<string>>>(new Map());
 
   // Load words and start session
   useEffect(() => {
@@ -165,19 +169,36 @@ export default function LearnPage() {
 
         const newPool = allWords.filter((w) => w.state === "new");
         const activeWords = allWords.filter((w) => w.state !== "new");
-        const sessionItems = buildSession(activeWords, newPool, null);
+        let sessionItems = buildSession(activeWords, newPool, null);
 
         if (sessionItems.length === 0) {
-          const { getSessionWords } = await import(
-            "@/lib/algorithm/placeholder"
-          );
-          const fallbackItems = getSessionWords(allWords);
-          resetCallCount();
-          session.startSession(fallbackItems);
-        } else {
-          resetCallCount();
-          session.startSession(sessionItems);
+          // If no items naturally due, force a new_words or drill_weak batch
+          const dummyFatigue = new FatigueTracker("medium");
+          sessionItems = getNextContinuationBatch(allWords, dummyFatigue, "new_words", 0, newPool, 50, new Set(), sessionContextRef.current);
+          if (sessionItems.length === 0) {
+            sessionItems = getNextContinuationBatch(allWords, dummyFatigue, "drill_weak", 0, newPool, 50, new Set(), sessionContextRef.current);
+          }
         }
+        
+        // V3: Apply Difficulty Bandit Strategy
+        const learnerProfile = await getLearnerProfile(user.uid);
+        const strategy = pickStrategy(learnerProfile);
+        sessionItems = orderSessionWords(sessionItems, strategy);
+
+        // V3: Pre-fetch Word Graph for future continuation batches
+        Promise.all((["finance", "legal", "tech", "smalltalk"] as Domain[]).map(d => getWordGraph(user.uid, d)))
+          .then(graphs => {
+            const fullMap = new Map<string, Set<string>>();
+            graphs.forEach(graph => {
+              const map = buildConnectionsMap(graph);
+              for (const [k, v] of Array.from(map.entries())) fullMap.set(k, v);
+            });
+            wordConnectionsRef.current = fullMap;
+          })
+          .catch(console.error);
+
+        resetCallCount();
+        session.startSession(sessionItems);
         setIsReady(true);
       } catch (err) {
         console.error("Failed to init session:", err);
@@ -275,7 +296,10 @@ export default function LearnPage() {
       newWordsToday,
       newPool,
       profile?.settings?.dailyNewWordCap || 50,
-      session.seenWordIds
+      session.seenWordIds,
+      sessionContextRef.current,
+      undefined,
+      wordConnectionsRef.current
     );
 
     if (batch.length > 0) {
@@ -284,19 +308,25 @@ export default function LearnPage() {
       }
       session.addItems(batch);
     } else {
-      // Try next priority
-      const next = getNextPriority(continuationIndexRef.current);
-      continuationIndexRef.current = next.nextIndex;
+      // If the priority yielded nothing, auto-cycle to the next one
+      const { priority: p2, nextIndex: n2 } = getNextPriority(continuationIndexRef.current);
+      continuationIndexRef.current = n2;
       const batch2 = getNextContinuationBatch(
         allWordsRef,
         session.fatigueTracker,
-        next.priority,
+        p2,
         newWordsToday,
         newPool,
         profile?.settings?.dailyNewWordCap || 50,
-        session.seenWordIds
+        session.seenWordIds,
+        sessionContextRef.current,
+        undefined,
+        wordConnectionsRef.current
       );
       if (batch2.length > 0) {
+        if (p2 === "new_words") {
+          setNewWordsToday((prev) => prev + batch2.length);
+        }
         session.addItems(batch2);
       }
       // If still nothing, session will show "End session" prompt

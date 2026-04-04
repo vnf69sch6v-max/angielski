@@ -10,6 +10,7 @@ import { getDomainWeights, pickWordsForDomain, getWeakestDomain } from "./domain
 import { getLeechWordsForSession } from "./leech";
 import { migrateWordToV2, needsMigration } from "./migration";
 import { FatigueTracker } from "./fatigue";
+import { SessionContext, rankDueWords } from "./recommendation";
 
 const MAX_REVIEWS_PER_SESSION = 30;
 const MAX_LEARNING_TOTAL = 20;
@@ -140,7 +141,10 @@ export function getNextContinuationBatch(
   newWordsToday: number,
   newWordPool: WordProgress[],
   dailyCap: number = DAILY_NEW_WORD_CAP,
-  seenWordIds: Set<string> = new Set()
+  seenWordIds: Set<string> = new Set(),
+  context?: SessionContext,
+  domainStrengths?: Record<Domain, { accuracy: number }>,
+  wordConnectionsMap?: Map<string, Set<string>>
 ): SessionItem[] {
   const batch: SessionItem[] = [];
 
@@ -159,15 +163,19 @@ export function getNextContinuationBatch(
             w.state !== "new" &&
             !seenWordIds.has(w.wordId) &&
             w.tracks.recognition.accuracy - w.tracks.production.accuracy > 0.10
-        )
-        .sort((a, b) => {
-          const gapA = a.tracks!.recognition.accuracy - a.tracks!.production.accuracy;
-          const gapB = b.tracks!.recognition.accuracy - b.tracks!.production.accuracy;
-          return gapB - gapA;
-        })
-        .slice(0, CONTINUATION_BATCH_SIZE);
+        );
 
-      for (const word of wordsWithGap) {
+      const sorted = context
+        ? rankDueWords(wordsWithGap, context, domainStrengths, wordConnectionsMap)
+        : wordsWithGap.sort((a, b) => {
+            const gapA = a.tracks!.recognition.accuracy - a.tracks!.production.accuracy;
+            const gapB = b.tracks!.recognition.accuracy - b.tracks!.production.accuracy;
+            return gapB - gapA;
+          });
+
+      const sliced = sorted.slice(0, CONTINUATION_BATCH_SIZE);
+
+      for (const word of sliced) {
         const exerciseType = getExerciseTypeWithFatigue(word, fatigueDown, forceLight);
         batch.push({
           wordProgress: word,
@@ -184,9 +192,10 @@ export function getNextContinuationBatch(
       if (gate === 0 || newWordsToday >= dailyCap) break;
 
       const filteredPool = newWordPool.filter(w => !seenWordIds.has(w.wordId));
-      const count = Math.min(gate, dailyCap - newWordsToday, filteredPool.length);
+      const sorted = context ? rankDueWords(filteredPool, context, domainStrengths, wordConnectionsMap) : filteredPool;
+      const count = Math.min(gate, dailyCap - newWordsToday, sorted.length);
       for (let i = 0; i < count; i++) {
-        const word = filteredPool[i];
+        const word = sorted[i];
         if (!word) break;
         const initialized = initializeWord(
           needsMigration(word) ? migrateWordToV2(word) : word
@@ -203,11 +212,15 @@ export function getNextContinuationBatch(
     case "drill_weak": {
       // P3: Weakest words by accuracy
       const weakest = migrated
-        .filter((w) => w.state !== "new" && w.totalAttempts > 0 && !seenWordIds.has(w.wordId))
-        .sort((a, b) => a.accuracy - b.accuracy)
-        .slice(0, CONTINUATION_BATCH_SIZE);
+        .filter((w) => w.state !== "new" && w.totalAttempts > 0 && !seenWordIds.has(w.wordId));
+        
+      const sorted = context 
+        ? rankDueWords(weakest, context, domainStrengths, wordConnectionsMap)
+        : weakest.sort((a, b) => a.accuracy - b.accuracy);
+        
+      const sliced = sorted.slice(0, CONTINUATION_BATCH_SIZE);
 
-      for (const word of weakest) {
+      for (const word of sliced) {
         const direction = getTrackDirection(word);
         const exerciseType = getExerciseTypeWithFatigue(word, fatigueDown, forceLight);
         batch.push({
@@ -230,11 +243,15 @@ export function getNextContinuationBatch(
             !seenWordIds.has(w.wordId) &&
             w.nextReview.toMillis() > Date.now() &&
             w.nextReview.toMillis() <= twoDaysFromNow
-        )
-        .sort((a, b) => a.nextReview.toMillis() - b.nextReview.toMillis())
-        .slice(0, CONTINUATION_BATCH_SIZE);
+        );
+        
+      const sorted = context 
+        ? rankDueWords(previewWords, context, domainStrengths, wordConnectionsMap)
+        : previewWords.sort((a, b) => a.nextReview.toMillis() - b.nextReview.toMillis());
+        
+      const sliced = sorted.slice(0, CONTINUATION_BATCH_SIZE);
 
-      for (const word of previewWords) {
+      for (const word of sliced) {
         const direction = getTrackDirection(word);
         const exerciseType = getExerciseTypeWithFatigue(word, fatigueDown, forceLight);
         batch.push({
