@@ -3,7 +3,7 @@
  * Based on FluentFlow Algorithm Spec §2
  */
 import { createEmptyCard, fsrs, generatorParameters, Rating, Card, State, Grade } from "ts-fsrs";
-import { WordProgress, WordState } from "@/lib/types";
+import { WordProgress, WordState, TrackDirection } from "@/lib/types";
 import { Timestamp } from "firebase/firestore";
 
 // ─── FSRS Configuration (§2.5) ───────────────────────
@@ -41,7 +41,8 @@ export function initializeWord(wordProgress: WordProgress): WordProgress {
 
 export function reviewWord(
   wp: WordProgress,
-  rating: 1 | 2 | 3 | 4
+  rating: 1 | 2 | 3 | 4,
+  trackDirection?: TrackDirection
 ): WordProgress {
   const now = new Date();
   const updated = { ...wp };
@@ -51,7 +52,13 @@ export function reviewWord(
     case "learning": {
       updated.lastReview = Timestamp.now();
       if (rating >= 3) {
-        updated.learningStep = Math.min(wp.learningStep + 1, LEARNING_STEPS.length);
+        // §3.3 Fast Graduation: rating 4 skips learning entirely
+        if (rating === 4) {
+          updated.learningStep = LEARNING_STEPS.length;
+        } else {
+          updated.learningStep = Math.min(wp.learningStep + 1, LEARNING_STEPS.length);
+        }
+        
         updated.consecutiveCorrect = wp.consecutiveCorrect + 1;
 
         if (updated.learningStep >= LEARNING_STEPS.length) {
@@ -154,6 +161,26 @@ export function reviewWord(
     updated.timesWrongTotal = wp.timesWrongTotal + 1;
   }
   updated.accuracy = updated.totalAttempts > 0 ? updated.correctAttempts / updated.totalAttempts : 0;
+
+  // Track specific updates! This is required for Escalator bug fix
+  if (trackDirection && updated.tracks) {
+    const track = updated.tracks[trackDirection];
+    track.totalAttempts += 1;
+    if (rating >= 3) {
+      track.correctAttempts += 1;
+    }
+    track.accuracy = track.totalAttempts > 0 ? track.correctAttempts / track.totalAttempts : 0;
+    
+    // Syce states if it graduated
+    if (updated.state !== wp.state) {
+        track.state = updated.state;
+    }
+    track.nextReview = updated.nextReview;
+    track.stability = updated.stability;
+    track.difficulty = updated.difficulty;
+    track.learningStep = updated.learningStep;
+    track.lastReview = updated.lastReview;
+  }
 
   // §9.3: Weekly repeat limiter — reset counter if >7 days since last reset
   const sevenDaysMs = 7 * 24 * 60 * 60 * 1000;

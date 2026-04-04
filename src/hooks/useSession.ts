@@ -48,6 +48,8 @@ interface UseSessionReturn {
   // V2: Track stats
   recognitionAccuracy: number;
   productionAccuracy: number;
+  // V2: Record of seen items to avoid repetition
+  seenWordIds: Set<string>;
 }
 
 export function useSession(fatigueSensitivity: "low" | "medium" | "high" = "medium"): UseSessionReturn {
@@ -61,6 +63,8 @@ export function useSession(fatigueSensitivity: "low" | "medium" | "high" = "medi
   const [fatigueScore, setFatigueScore] = useState(0);
   const sessionStartTime = useRef<number | null>(null);
   const fatigueTrackerRef = useRef(new FatigueTracker(fatigueSensitivity));
+  const seenWordIds = useRef<Set<string>>(new Set());
+  const sessionRetryMap = useRef<Map<string, number>>(new Map());
 
   const currentItem =
     isActive && currentIndex < sessionItems.length
@@ -79,6 +83,8 @@ export function useSession(fatigueSensitivity: "low" | "medium" | "high" = "medi
       setFatigueScore(0);
       sessionStartTime.current = Date.now();
       fatigueTrackerRef.current = new FatigueTracker(fatigueSensitivity);
+      seenWordIds.current = new Set(items.map(i => i.wordProgress.wordId));
+      sessionRetryMap.current = new Map();
     },
     [fatigueSensitivity]
   );
@@ -96,17 +102,17 @@ export function useSession(fatigueSensitivity: "low" | "medium" | "high" = "medi
       setFatigueScore(newScore);
       setFatigueLevel(fatigueTrackerRef.current.getFatigueLevel());
 
-      // Retry logic (Spec §4.5)
+      // Retry logic (Spec §4.5) - now properly limited to max 1 retry per session per word
       if (!result.wasCorrect) {
-        setSessionItems((prev) => {
-          const item = prev[currentIndex];
-          if (!item) return prev;
+        const currentRetryCount = sessionRetryMap.current.get(result.wordId) || 0;
+        
+        if (currentRetryCount < 1) { // MAX 1 RETRY!
+          sessionRetryMap.current.set(result.wordId, currentRetryCount + 1);
+          
+          setSessionItems((prev) => {
+            const item = prev[currentIndex];
+            if (!item) return prev;
 
-          const appearances = prev.filter(
-            (i) => i.wordProgress.wordId === result.wordId
-          ).length;
-
-          if (appearances < 3) {
             let nextExercise: ExerciseType = "flashcard";
             if (item.exerciseType === "context_production")
               nextExercise = "translation";
@@ -127,9 +133,8 @@ export function useSession(fatigueSensitivity: "low" | "medium" | "high" = "medi
                 exerciseType: nextExercise,
               },
             ];
-          }
-          return prev;
-        });
+          });
+        }
       }
     },
     [currentIndex]
@@ -150,6 +155,10 @@ export function useSession(fatigueSensitivity: "low" | "medium" | "high" = "medi
   // V2: Add more items (continuation phase)
   const addItems = useCallback((items: SessionItem[]) => {
     if (items.length === 0) return;
+    
+    // Add new items to seen set to prevent them from being pulled again
+    items.forEach(i => seenWordIds.current.add(i.wordProgress.wordId));
+    
     setSessionItems((prev) => [...prev, ...items]);
     setIsContinuationPhase(false);
     // Move to next item (which is the first new one)
@@ -328,8 +337,9 @@ export function useSession(fatigueSensitivity: "low" | "medium" | "high" = "medi
     fatigueLevel,
     fatigueScore,
     fatigueData: fatigueTrackerRef.current.getSessionFatigueData(),
-    // Track stats
+
     recognitionAccuracy,
     productionAccuracy,
+    seenWordIds: seenWordIds.current,
   };
 }

@@ -246,7 +246,8 @@ export default function LearnPage() {
       priority,
       newWordsToday,
       newPool,
-      profile?.settings?.dailyNewWordCap || 50
+      profile?.settings?.dailyNewWordCap || 50,
+      session.seenWordIds
     );
 
     if (batch.length > 0) {
@@ -264,7 +265,8 @@ export default function LearnPage() {
         next.priority,
         newWordsToday,
         newPool,
-        profile?.settings?.dailyNewWordCap || 50
+        profile?.settings?.dailyNewWordCap || 50,
+        session.seenWordIds
       );
       if (batch2.length > 0) {
         session.addItems(batch2);
@@ -309,7 +311,8 @@ export default function LearnPage() {
       );
       let updatedWord = reviewWord(
         session.currentItem.wordProgress,
-        fsrsRating
+        fsrsRating,
+        session.currentItem.trackDirection
       );
       updatedWord = updateExerciseLevel(updatedWord, wasCorrect);
       updatedWord = updateLeechStatus(updatedWord);

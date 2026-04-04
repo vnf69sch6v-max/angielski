@@ -137,7 +137,8 @@ export function getNextContinuationBatch(
   priority: ContinuationPriority,
   newWordsToday: number,
   newWordPool: WordProgress[],
-  dailyCap: number = DAILY_NEW_WORD_CAP
+  dailyCap: number = DAILY_NEW_WORD_CAP,
+  seenWordIds: Set<string> = new Set()
 ): SessionItem[] {
   const batch: SessionItem[] = [];
 
@@ -154,6 +155,7 @@ export function getNextContinuationBatch(
           (w) =>
             w.tracks &&
             w.state !== "new" &&
+            !seenWordIds.has(w.wordId) &&
             w.tracks.recognition.accuracy - w.tracks.production.accuracy > 0.10
         )
         .sort((a, b) => {
@@ -179,9 +181,10 @@ export function getNextContinuationBatch(
       const gate = fatigueTracker.getNewWordGate(fatigueTracker.lastFiveCorrect);
       if (gate === 0 || newWordsToday >= dailyCap) break;
 
-      const count = Math.min(gate, dailyCap - newWordsToday, newWordPool.length);
+      const filteredPool = newWordPool.filter(w => !seenWordIds.has(w.wordId));
+      const count = Math.min(gate, dailyCap - newWordsToday, filteredPool.length);
       for (let i = 0; i < count; i++) {
-        const word = newWordPool[i];
+        const word = filteredPool[i];
         if (!word) break;
         const initialized = initializeWord(
           needsMigration(word) ? migrateWordToV2(word) : word
@@ -198,7 +201,7 @@ export function getNextContinuationBatch(
     case "drill_weak": {
       // P3: Weakest words by accuracy
       const weakest = migrated
-        .filter((w) => w.state !== "new" && w.totalAttempts > 0)
+        .filter((w) => w.state !== "new" && w.totalAttempts > 0 && !seenWordIds.has(w.wordId))
         .sort((a, b) => a.accuracy - b.accuracy)
         .slice(0, CONTINUATION_BATCH_SIZE);
 
@@ -222,6 +225,7 @@ export function getNextContinuationBatch(
           (w) =>
             w.state === "review" &&
             w.nextReview &&
+            !seenWordIds.has(w.wordId) &&
             w.nextReview.toMillis() > Date.now() &&
             w.nextReview.toMillis() <= twoDaysFromNow
         )
