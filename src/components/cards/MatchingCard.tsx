@@ -25,6 +25,8 @@ export default function MatchingCard({ pairs, onAnswer }: MatchingCardProps) {
   const [correctCount, setCorrectCount] = useState(0);
   const startTime = useRef(Date.now());
 
+  const pairsStr = JSON.stringify(pairs);
+
   useEffect(() => {
     startTime.current = Date.now();
     setMatched(new Set());
@@ -41,7 +43,8 @@ export default function MatchingCard({ pairs, onAnswer }: MatchingCardProps) {
       [indices[i], indices[j]] = [indices[j], indices[i]];
     }
     setShuffledRight(indices);
-  }, [pairs]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pairsStr]);
 
   const tryMatch = useCallback(
     (leftIdx: number, rightIdx: number) => {
