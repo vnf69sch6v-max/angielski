@@ -296,14 +296,18 @@ function buildFsrsCard(wp: WordProgress, trackDirection?: TrackDirection): Card 
     source = wp.tracks[trackDirection];
   }
 
+  // FIX: Use ?? instead of || to preserve legitimate 0 values
+  // FIX: Ensure last_review falls back to global wp.lastReview if track doesn't have it
+  const lastReviewTs = source.lastReview ?? wp.lastReview;
+
   return {
     ...card,
-    stability: source.stability || card.stability,
-    difficulty: source.difficulty || card.difficulty,
-    state: stateToFsrs(source.state || wp.state),
+    stability: source.stability ?? card.stability,
+    difficulty: source.difficulty ?? card.difficulty,
+    state: stateToFsrs(source.state ?? wp.state),
     due: source.nextReview ? source.nextReview.toDate() : new Date(),
-    last_review: source.lastReview ? source.lastReview.toDate() : undefined,
-    reps: source.totalAttempts || wp.totalAttempts,
-    lapses: source.timesWrongTotal || wp.timesWrongTotal,
+    last_review: lastReviewTs ? lastReviewTs.toDate() : undefined,
+    reps: source.totalAttempts ?? wp.totalAttempts ?? 0,
+    lapses: source.timesWrongTotal ?? wp.timesWrongTotal ?? 0,
   } as Card;
 }

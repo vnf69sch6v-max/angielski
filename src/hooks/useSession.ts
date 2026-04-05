@@ -12,6 +12,7 @@ import {
 import { generateId } from "@/lib/firebase";
 import { Timestamp } from "firebase/firestore";
 import { FatigueTracker, FatigueLevel } from "@/lib/algorithm/fatigue";
+import { getTodayString, getHourOfDay, getDayOfWeek } from "@/lib/algorithm/data-pipeline";
 
 interface UseSessionReturn {
   // State
@@ -275,6 +276,11 @@ export function useSession(fatigueSensitivity: "low" | "medium" | "high" = "medi
       productionAccuracy: prodTotal > 0 ? prodCorrect / prodTotal : 0,
       fatigueData: fatigueTrackerRef.current.getSessionFatigueData(),
       leechWordsReviewed,
+      // V3.1 additions — pipeline metadata
+      localDate: getTodayString(),
+      localStartHour: getHourOfDay(),
+      dayOfWeek: getDayOfWeek(),
+      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
     };
   }, [answers, sessionItems]);
 

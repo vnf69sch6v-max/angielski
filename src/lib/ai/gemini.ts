@@ -408,3 +408,39 @@ totalScore must equal wordUsed + grammar + naturalness.`;
   }
 }
 
+// ─── Word Graph Generation ───────────────────────────
+
+export async function generateWordGraphForDomain(
+  words: { wordId: string; word: string }[],
+  domain: string
+): Promise<{ word: string; connections: { targetWord: string; relationType: string; strength: number }[] }[] | null> {
+  if (!canCallAI() || words.length < 3) return null;
+
+  try {
+    callCount++;
+    const model = getGeminiModel();
+    const wordList = words.map((w) => w.word).join(", ");
+
+    const result = await model.generateContent(
+      `I have a list of English words from the domain "${domain}": [${wordList}].
+
+For EACH word, identify connections with OTHER words on this list:
+- synonym (e.g. 'remedy' ↔ 'relief')
+- antonym (e.g. 'plaintiff' ↔ 'defendant')
+- colocation (e.g. 'breach' + 'of contract')
+- same_topic (e.g. 'jurisdiction', 'venue', 'court' = topic: courts)
+- false_friend PL-EN (e.g. 'actual' ≠ 'aktualny')
+- derivative (e.g. 'liable' → 'liability')
+
+Respond ONLY with valid JSON array. Max 5 connections per word. Skip words with no connections.
+Format: [{"word": "...", "connections": [{"targetWord": "...", "relationType": "synonym", "strength": 0.8}]}]`
+    );
+
+    const text = result.response.text();
+    const parsed = parseJsonResponse<{ word: string; connections: { targetWord: string; relationType: string; strength: number }[] }[]>(text);
+    return parsed;
+  } catch (error) {
+    console.error("Failed to generate word graph:", error);
+    return null;
+  }
+}

@@ -144,9 +144,16 @@ export function updateExerciseLevel(
 
     // Normal promotion check
     const rule = PROMOTION_RULES[wp.exerciseLevel];
+
+    // FIX: Use the actual consecutiveCorrect value (already updated by reviewWord)
+    // For level 1, use a relaxed threshold — words that just graduated from
+    // learning already proved they know the word during learning steps
+    const effectiveMinReviews = wp.exerciseLevel === 1 ? Math.min(rule.minReviews, 2) : rule.minReviews;
+    const effectiveAccThreshold = wp.exerciseLevel === 1 ? 0.70 : rule.accuracyThreshold;
+
     if (
-      effectiveAccuracy >= rule.accuracyThreshold &&
-      wp.consecutiveCorrect >= rule.minReviews &&
+      effectiveAccuracy >= effectiveAccThreshold &&
+      wp.consecutiveCorrect >= effectiveMinReviews &&
       wp.exerciseLevel < 7
     ) {
       updated.exerciseLevel = (wp.exerciseLevel + 1) as ExerciseLevel;

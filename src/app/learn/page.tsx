@@ -22,7 +22,7 @@ import { migrateWordToV2, needsMigration } from "@/lib/algorithm/migration";
 import { onSessionEnd as updateStreak } from "@/lib/algorithm/streak";
 import { updateLearnerProfile, getLearnerProfile } from "@/lib/algorithm/learner-profile";
 import { pickStrategy, orderSessionWords } from "@/lib/algorithm/difficulty-bandit";
-import { getWordGraph, buildConnectionsMap } from "@/lib/algorithm/word-graph";
+import { getWordGraph, buildConnectionsMap, saveWordGraph, parseWordGraphResponse } from "@/lib/algorithm/word-graph";
 import {
   PendingBuffer,
   buildFsrsSnapshot,
@@ -54,6 +54,7 @@ import {
   generateMnemonic,
   generateContextScenario,
   evaluateContextProduction,
+  generateWordGraphForDomain,
 } from "@/lib/ai/gemini";
 import FlashCard from "@/components/cards/FlashCard";
 import QuizCard from "@/components/cards/QuizCard";
@@ -185,15 +186,41 @@ export default function LearnPage() {
         const strategy = pickStrategy(learnerProfile);
         sessionItems = orderSessionWords(sessionItems, strategy);
 
-        // V3: Pre-fetch Word Graph for future continuation batches
-        Promise.all((["finance", "legal", "tech", "smalltalk"] as Domain[]).map(d => getWordGraph(user.uid, d)))
-          .then(graphs => {
+        // V3: Pre-fetch Word Graph, auto-generate if empty
+        const domains: Domain[] = ["finance", "legal", "tech", "smalltalk"];
+        Promise.all(domains.map(d => getWordGraph(user.uid, d)))
+          .then(async (graphs) => {
             const fullMap = new Map<string, Set<string>>();
+            let totalEntries = 0;
+            
             graphs.forEach(graph => {
+              totalEntries += graph.size;
               const map = buildConnectionsMap(graph);
               for (const [k, v] of Array.from(map.entries())) fullMap.set(k, v);
             });
             wordConnectionsRef.current = fullMap;
+
+            // Auto-generate graph if coverage is <10%
+            if (totalEntries < allWords.length * 0.1) {
+              for (const domain of domains) {
+                const domainWords = allWords.filter(w => w.domain === domain && w.state !== "new");
+                if (domainWords.length < 3) continue;
+                
+                const wordList = domainWords.map(w => ({ wordId: w.wordId, word: w.word }));
+                const rawGraph = await generateWordGraphForDomain(wordList, domain);
+                if (rawGraph) {
+                  const wordIdMap = new Map<string, string>();
+                  for (const w of domainWords) wordIdMap.set(w.word.toLowerCase(), w.wordId);
+                  const entries = parseWordGraphResponse(JSON.stringify(rawGraph), wordIdMap);
+                  if (entries.length > 0) {
+                    await saveWordGraph(user.uid, domain, entries);
+                    const map = buildConnectionsMap(new Map(entries.map(e => [e.wordId, e])));
+                    for (const [k, v] of Array.from(map.entries())) fullMap.set(k, v);
+                  }
+                }
+              }
+              wordConnectionsRef.current = fullMap;
+            }
           })
           .catch(console.error);
 
