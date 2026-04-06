@@ -7,7 +7,7 @@ import { ExerciseType } from "@/lib/types";
 // ─── Exercise weights (§5.1 + V2 §3.1) ──────────────
 
 const EXERCISE_WEIGHTS: Record<ExerciseType, number> = {
-  flashcard: 0.8,
+  flashcard: 1.0,
   reverse_typing: 1.1,
   matching: 0.9,
   listening: 1.0,
