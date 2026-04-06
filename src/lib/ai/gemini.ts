@@ -11,7 +11,7 @@ function getGeminiModel() {
   if (!app) throw new Error("Firebase not initialized");
 
   const ai = getAI(app, { backend: new GoogleAIBackend() });
-  return getGenerativeModel(ai, { model: "gemini-2.0-flash" });
+  return getGenerativeModel(ai, { model: "gemini-2.5-flash" });
 }
 
 // ─── Helper: Parse JSON from Gemini response ─────────
