@@ -39,10 +39,10 @@ const instrumentSerif = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "FluentFlow — Nauka angielskiego",
+  title: "Analiza Wyroków AI — Inteligentna analiza orzecznictwa",
   description:
-    "Inteligentna aplikacja do nauki angielskiego. Spaced repetition, ćwiczenia kontekstowe i adaptacyjny system nauki.",
-  keywords: ["angielski", "nauka", "spaced repetition", "B1", "B2", "FluentFlow"],
+    "Narzędzie do analizy wyroków sądowych z bazy SAOS w kontekście pisma procesowego. Sztuczna inteligencja wyszukuje i analizuje orzecznictwo.",
+  keywords: ["analiza wyroków", "orzecznictwo", "SAOS", "pismo procesowe", "AI", "prawo"],
   viewport: {
     width: "device-width",
     initialScale: 1,
@@ -51,11 +51,10 @@ export const metadata: Metadata = {
     viewportFit: "cover",
   },
   themeColor: "#0A0A0C",
-  manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
-    title: "FluentFlow",
+    title: "Analiza Wyroków AI",
   },
 };
 

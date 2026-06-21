@@ -1,143 +1,290 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import { useAuth } from "@/hooks/useAuth";
-import { getUserStats, getDueWords, getRecentSessions, getAllWordProgress } from "@/lib/firebase";
-import { UserStats, Session } from "@/lib/types";
-import { getLeechWords } from "@/lib/algorithm/leech";
-import { generateWeeklyReport } from "@/lib/ai/gemini";
-import Navbar from "@/components/layout/Navbar";
-import StatCard from "@/components/ui/StatCard";
-import Button from "@/components/ui/Button";
+import { motion, AnimatePresence } from "framer-motion";
+import BriefInput from "@/components/legal/BriefInput";
+import JudgmentCard from "@/components/legal/JudgmentCard";
+import AnalysisReport from "@/components/legal/AnalysisReport";
+import { extractKeywords, analyzeJudgments } from "@/lib/ai/legal-analyzer";
 import {
-  Line,
-  XAxis,
-  YAxis,
-  Tooltip,
-  ResponsiveContainer,
-  Area,
-  AreaChart,
-} from "recharts";
+  SAOSJudgmentSummary,
+  SAOSJudgmentDetail,
+  BriefAnalysis,
+  AnalysisReport as AnalysisReportType,
+  AnalysisStep,
+} from "@/lib/types";
 
-export default function DashboardPage() {
-  const { user, profile, loading } = useAuth();
+interface LogLine {
+  timestamp: string;
+  message: string;
+  type: "info" | "success" | "warning" | "error";
+}
+
+export default function HomePage() {
+  const { user, profile, loading, signOut } = useAuth();
   const router = useRouter();
-  const [stats, setStats] = useState<UserStats | null>(null);
-  const [dueWordsCount, setDueWordsCount] = useState(0);
-  const [recentSessions, setRecentSessions] = useState<Session[]>([]);
-  const [, setIsLoading] = useState(true);
-  const [weeklyReport, setWeeklyReport] = useState<string | null>(null);
-  const [leechCount, setLeechCount] = useState(0);
-  const [recognizedCount, setRecognizedCount] = useState(0);
-  const [activelyUsedCount, setActivelyUsedCount] = useState(0);
-  const [isGeneratingReport, setIsGeneratingReport] = useState(false);
 
+  // Redirect to login if not authenticated
   useEffect(() => {
     if (!loading && !user) {
       router.push("/login");
     }
   }, [user, loading, router]);
 
+  // App State
+  const [briefText, setBriefText] = useState("");
+  const [step, setStep] = useState<AnalysisStep>("idle");
+  const [briefAnalysis, setBriefAnalysis] = useState<BriefAnalysis | null>(null);
+  const [searchResults, setSearchResults] = useState<SAOSJudgmentSummary[]>([]);
+  const [totalResults, setTotalResults] = useState(0);
+  const [judgments, setJudgments] = useState<SAOSJudgmentDetail[]>([]);
+  const [report, setReport] = useState<AnalysisReportType | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  
+  // UI States
+  const [expandedJudgmentId, setExpandedJudgmentId] = useState<number | null>(null);
+  const [logs, setLogs] = useState<LogLine[]>([]);
+  
+  // Console ref for auto-scrolling
+  const consoleEndRef = useRef<HTMLDivElement>(null);
+
+  // Helper to add logs
+  const addLog = useCallback(
+    (message: string, type: "info" | "success" | "warning" | "error" = "info") => {
+      const now = new Date();
+      const timestamp = now.toTimeString().split(" ")[0];
+      setLogs((prev) => [...prev, { timestamp, message, type }]);
+    },
+    []
+  );
+
+  // Auto-scroll logs
   useEffect(() => {
-    if (!user) return;
+    consoleEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [logs]);
 
-    const loadData = async () => {
-      try {
-        const [userStats, dueWords, sessions, allWords] = await Promise.all([
-          getUserStats(user.uid),
-          getDueWords(user.uid),
-          getRecentSessions(user.uid, 7),
-          getAllWordProgress(user.uid),
-        ]);
-
-        setStats(userStats);
-        setDueWordsCount(dueWords.length);
-        setRecentSessions(sessions);
-
-        // V2: Calculate dual-track stats
-        const leeches = getLeechWords(allWords);
-        setLeechCount(leeches.length);
-
-        const recognized = allWords.filter(
-          (w) => (w.tracks?.recognition?.accuracy ?? 0) >= 0.80 && w.tracks?.recognition?.state !== "new"
-        ).length;
-        const activelyUsed = allWords.filter(
-          (w) => (w.tracks?.production?.accuracy ?? 0) >= 0.80 && w.tracks?.production?.state !== "new"
-        ).length;
-        setRecognizedCount(recognized);
-        setActivelyUsedCount(activelyUsed);
-      } catch (err) {
-        console.error("Failed to load dashboard data:", err);
-      } finally {
-        setIsLoading(false);
+  // Expand and lazy load judgment details if needed
+  const handleExpandJudgment = useCallback(
+    async (id: number) => {
+      if (expandedJudgmentId === id) {
+        setExpandedJudgmentId(null);
+        return;
       }
-    };
 
-    loadData();
-  }, [user]);
+      setExpandedJudgmentId(id);
 
-  const handleGenerateReport = async () => {
-    if (!user || isGeneratingReport) return;
-    setIsGeneratingReport(true);
+      // Check if we already have the full text content
+      const hasFullText = judgments.some((j) => j.id === id && j.textContent);
+      if (!hasFullText) {
+        try {
+          const res = await fetch(`/api/saos/judgment/${id}`);
+          if (res.ok) {
+            const detail = await res.json();
+            setJudgments((prev) => {
+              const index = prev.findIndex((j) => j.id === id);
+              if (index > -1) {
+                const updated = [...prev];
+                updated[index] = detail;
+                return updated;
+              } else {
+                return [...prev, detail];
+              }
+            });
+          } else {
+            console.error("Failed to fetch judgment details");
+          }
+        } catch (err) {
+          console.error("Error fetching single judgment:", err);
+        }
+      }
+    },
+    [expandedJudgmentId, judgments]
+  );
+
+  // Main Analysis Execution
+  const handleStartAnalysis = useCallback(async () => {
+    if (!briefText.trim()) return;
+
+    // Reset everything
+    setStep("extracting_keywords");
+    setBriefAnalysis(null);
+    setSearchResults([]);
+    setTotalResults(0);
+    setJudgments([]);
+    setReport(null);
+    setError(null);
+    setExpandedJudgmentId(null);
+    setLogs([]);
+
+    addLog("Rozpoczynam przetwarzanie pisma procesowego...", "info");
+
     try {
-      const [allWords, sessions] = await Promise.all([
-        getAllWordProgress(user.uid),
-        getRecentSessions(user.uid, 7),
-      ]);
+      // Step 1: Extract keywords using Gemini
+      addLog("Uruchamiam silnik Gemini 2.5 Flash w celu analizy semantycznej pisma...", "info");
+      const analysis = await extractKeywords(briefText);
+      setBriefAnalysis(analysis);
+      addLog(`Sukces: Wyekstrahowano słowa kluczowe: ${analysis.keywords.join(", ")}`, "success");
+      addLog(`Zidentyfikowane podstawy prawne: ${analysis.legalBases.join(", ")}`, "info");
+      addLog(`Rekomendowany typ sądu: ${analysis.courtType}`, "info");
 
-      const totalReviewed = sessions.reduce((sum, s) => sum + s.wordsReviewed, 0);
-      const avgAccuracy = sessions.length > 0
-        ? sessions.reduce((sum, s) => sum + s.accuracyOverall, 0) / sessions.length
-        : 0;
-      const newWordsCount = sessions.reduce((sum, s) => sum + s.newWordsIntroduced, 0);
-      const masteredCount = allWords.filter(w => w.state === "mastered").length;
+      // Step 2: Search SAOS API
+      setStep("searching_saos");
+      addLog("Budowanie zapytań wyszukiwania dla bazy SAOS...", "info");
 
-      // Aggregate accuracy by domain
-      const domainAcc: Record<string, { total: number; count: number }> = {};
-      for (const s of sessions) {
-        for (const [d, acc] of Object.entries(s.accuracyByDomain)) {
-          if (!domainAcc[d]) domainAcc[d] = { total: 0, count: 0 };
-          if (acc > 0) {
-            domainAcc[d].total += acc;
-            domainAcc[d].count++;
+      let items: SAOSJudgmentSummary[] = [];
+      let total = 0;
+      let successfulQuery = "";
+
+      // Try search queries generated by Gemini one-by-one (from most specific to more general)
+      for (let i = 0; i < analysis.searchQueries.length; i++) {
+        const searchQuery = analysis.searchQueries[i];
+        addLog(`Próba ${i + 1}/${analysis.searchQueries.length}: Wyszukuję dla zapytania: "${searchQuery}"...`, "info");
+
+        try {
+          const response = await fetch(
+            `/api/saos/search?query=${encodeURIComponent(searchQuery)}&courtType=${analysis.courtType}&pageSize=8`
+          );
+
+          if (response.ok) {
+            const searchData = await response.json();
+            const queryItems = searchData.items || [];
+            const queryTotal = searchData.info?.totalCount || 0;
+
+            if (queryItems.length > 0) {
+              items = queryItems;
+              total = queryTotal;
+              successfulQuery = searchQuery;
+              addLog(`Znaleziono ${queryTotal} wyroków dla zapytania: "${searchQuery}"`, "success");
+              break;
+            } else {
+              addLog(`Brak wyników dla zapytania: "${searchQuery}"`, "warning");
+            }
+          } else {
+            addLog(`Błąd API dla zapytania: "${searchQuery}"`, "warning");
+          }
+        } catch {
+          addLog(`Błąd połączenia podczas wyszukiwania dla: "${searchQuery}"`, "warning");
+        }
+      }
+
+      // Fallback to legal bases if still no results
+      if (items.length === 0 && analysis.legalBases && analysis.legalBases.length > 0) {
+        const baseQuery = analysis.legalBases[0]
+          .replace(/art\./gi, "")
+          .replace(/§/g, "")
+          .replace(/\./g, "")
+          .replace(/k\.c\./gi, "kc")
+          .replace(/k\.p\.c\./gi, "kpc")
+          .trim();
+        
+        if (baseQuery) {
+          addLog(`Brak wyników dla dedykowanych fraz. Próba awaryjna: wyszukiwanie według podstawy prawnej: "${baseQuery}"...`, "info");
+          try {
+            const response = await fetch(
+              `/api/saos/search?query=${encodeURIComponent(baseQuery)}&courtType=${analysis.courtType}&pageSize=8`
+            );
+            if (response.ok) {
+              const searchData = await response.json();
+              items = searchData.items || [];
+              total = searchData.info?.totalCount || 0;
+              if (items.length > 0) {
+                successfulQuery = baseQuery;
+                addLog(`Znaleziono ${total} wyroków dla podstawy prawnej: "${baseQuery}"`, "success");
+              }
+            }
+          } catch {
+            addLog("Błąd podczas wyszukiwania awaryjnego po podstawie prawnej.", "warning");
           }
         }
       }
-      const accuracyByDomain: Record<string, number> = {};
-      for (const [d, { total, count }] of Object.entries(domainAcc)) {
-        accuracyByDomain[d] = count > 0 ? total / count : 0;
+
+      // Fallback to first keyword if still no results
+      if (items.length === 0 && analysis.keywords && analysis.keywords.length > 0) {
+        const fallbackQuery = analysis.keywords[0];
+        addLog(`Próba awaryjna: wyszukiwanie według pierwszego słowa kluczowego: "${fallbackQuery}"...`, "info");
+        try {
+          const response = await fetch(
+            `/api/saos/search?query=${encodeURIComponent(fallbackQuery)}&courtType=${analysis.courtType}&pageSize=8`
+          );
+          if (response.ok) {
+            const searchData = await response.json();
+            items = searchData.items || [];
+            total = searchData.info?.totalCount || 0;
+            if (items.length > 0) {
+              successfulQuery = fallbackQuery;
+              addLog(`Znaleziono ${total} wyroków dla słowa kluczowego: "${fallbackQuery}"`, "success");
+            }
+          }
+        } catch {
+          addLog("Błąd podczas wyszukiwania awaryjnego po słowie kluczowym.", "warning");
+        }
       }
 
-      // Find weakest domain
-      const weakestDomain = Object.entries(accuracyByDomain)
-        .sort((a, b) => a[1] - b[1])[0]?.[0] || "finance";
+      setSearchResults(items);
+      setTotalResults(total);
 
-      const report = await generateWeeklyReport({
-        totalSessions: sessions.length,
-        totalWordsReviewed: totalReviewed,
-        averageAccuracy: avgAccuracy,
-        accuracyByDomain,
-        newWordsLearned: newWordsCount,
-        masteredWords: masteredCount,
-        streakDays: profile?.streakDays || 0,
-        weakestDomain,
-        knownWords: allWords.map(w => w.word),
-      });
-
-      if (report) {
-        setWeeklyReport(report.summaryPL);
+      if (items.length === 0) {
+        addLog("Ostateczne ostrzeżenie: Nie znaleziono żadnych pasujących orzeczeń w bazie SAOS dla tej sprawy.", "error");
+        addLog("Spróbuj zmodyfikować pismo procesowe lub upewnij się, że zawiera ono polskie przepisy prawne.", "info");
+        setStep("done");
+        return;
       }
+
+      addLog(`Sukces: Pomyślnie dopasowano wyroki za pomocą zapytania: "${successfulQuery}"`, "success");
+
+      // Step 3: Fetch details for top 5 judgments
+      setStep("fetching_judgments");
+      const topItems = items.slice(0, 5);
+      addLog(`Pobieram pełne uzasadnienia dla top ${topItems.length} wyroków...`, "info");
+
+      const fetchedDetails: SAOSJudgmentDetail[] = [];
+      for (const item of topItems) {
+        const caseNo = item.courtCases?.[0]?.caseNumber || `#${item.id}`;
+        addLog(`Pobieram dane szczegółowe: sygn. ${caseNo}...`, "info");
+
+        try {
+          const detailRes = await fetch(`/api/saos/judgment/${item.id}`);
+          if (!detailRes.ok) {
+            addLog(`Błąd pobierania wyroku ${caseNo}, pomijam.`, "warning");
+            continue;
+          }
+
+          const detail = await detailRes.json();
+          fetchedDetails.push(detail);
+          addLog(`Wyrok ${caseNo} pobrany pomyślnie.`, "success");
+        } catch {
+          addLog(`Błąd połączenia podczas pobierania wyroku ${caseNo}.`, "warning");
+        }
+      }
+
+      setJudgments(fetchedDetails);
+
+      if (fetchedDetails.length === 0) {
+        throw new Error("Nie udało się pobrać treści żadnego ze znalezionych wyroków.");
+      }
+
+      // Step 4: AI Context Analysis
+      setStep("analyzing");
+      addLog(`Przekazuję ${fetchedDetails.length} uzasadnień wyroków do analizy kontekstowej...`, "info");
+      addLog("Gemini przeprowadza analizę argumentów, ryzyk procesowych oraz generuje cytaty...", "info");
+
+      const finalReport = await analyzeJudgments(briefText, analysis, fetchedDetails);
+      setReport(finalReport);
+      
+      addLog("Sukces: Generowanie raportu analizy zakończone pomyślnie!", "success");
+      setStep("done");
     } catch (err) {
-      console.error("Failed to generate weekly report:", err);
-    } finally {
-      setIsGeneratingReport(false);
+      const errMsg = (err as Error).message || "Nieznany błąd podczas procesu analizy.";
+      setError(errMsg);
+      addLog(`BŁĄD: ${errMsg}`, "error");
+      setStep("error");
     }
-  };
+  }, [briefText, addLog]);
 
-  if (loading || !user) {
+  // Loading indicator for authentication
+  if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-bg">
         <motion.div
@@ -149,318 +296,339 @@ export default function DashboardPage() {
     );
   }
 
-  const today = new Date().toLocaleDateString("pl-PL", {
-    weekday: "long",
-    day: "numeric",
-    month: "long",
-  });
-
-  const chartData = stats?.weeklyProgress?.slice(-7).map((wp) => ({
-    date: new Date(wp.date).toLocaleDateString("pl-PL", { day: "2-digit", month: "2-digit" }),
-    słowa: wp.wordsReviewed,
-    celność: Math.round(wp.accuracy * 100),
-  })) || [];
-
-  const hasData = stats && (stats.totalWords > 0 || recentSessions.length > 0);
+  if (!user) return null;
 
   return (
-    <div className="min-h-screen bg-bg">
-      <Navbar />
+    <div className="min-h-screen bg-bg text-text-primary flex flex-col font-body antialiased relative overflow-hidden">
+      {/* Background gradients */}
+      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-success/5 rounded-full blur-[120px] pointer-events-none" />
 
-      <main className="md:ml-64 pb-24 md:pb-8">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
-          {/* Header */}
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mb-8"
+      {/* Navigation Bar */}
+      <header className="border-b border-border bg-bg-surface/50 backdrop-blur-md sticky top-0 z-50 px-6 py-4 flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-accent to-purple-600 flex items-center justify-center font-heading text-lg font-bold text-white shadow-lg shadow-accent/25">
+            AV
+          </div>
+          <div>
+            <h1 className="font-heading text-lg leading-tight font-bold text-white tracking-tight">
+              Analiza Wyroków AI
+            </h1>
+            <p className="text-[10px] text-text-secondary leading-none uppercase tracking-wider font-mono">
+              System Analizy Orzecznictwa
+            </p>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-4">
+          <div className="hidden sm:flex flex-col items-end">
+            <span className="text-sm font-medium text-text-primary">
+              {profile?.displayName || user.displayName || "Użytkownik"}
+            </span>
+            <span className="text-[11px] text-text-secondary font-mono">{user.email}</span>
+          </div>
+
+          <button
+            onClick={() => signOut()}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border text-text-secondary hover:text-text-primary hover:bg-bg-surface-hover transition-all text-xs font-medium cursor-pointer"
           >
-            <div className="flex items-center justify-between mb-1">
-              <h1 className="text-3xl sm:text-4xl font-heading text-text-primary">
-                Cześć, {profile?.displayName?.split(" ")[0] || "Użytkowniku"}!
-              </h1>
-              {(profile?.streakDays || 0) > 0 && (
-                <motion.div
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ type: "spring", delay: 0.3 }}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-warning-muted border border-warning/30"
-                >
-                  <span className="text-lg">🔥</span>
-                  <span className="text-sm font-body font-bold text-warning">
-                    {profile?.streakDays} dni
-                  </span>
-                </motion.div>
-              )}
-            </div>
-            <p className="text-sm font-body text-text-secondary">{today}</p>
-          </motion.div>
-
-          {/* Main CTA */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2, type: "spring", stiffness: 300, damping: 20 }}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className="mb-8"
-          >
-            <Link href="/learn">
-              <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-indigo-600 via-indigo-700 to-indigo-900 border border-indigo-400/30 p-8 sm:p-10 cursor-pointer group shadow-[0_0_40px_rgba(99,102,241,0.2)] hover:shadow-[0_0_80px_rgba(99,102,241,0.4)] transition-all duration-500">
-                {/* Glow effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 group-hover:translate-x-full transition-transform duration-700 ease-in-out" />
-
-                <div className="relative z-10">
-                  <h2 className="text-2xl sm:text-3xl font-heading text-white mb-2">
-                    Rozpocznij sesję
-                  </h2>
-                  <p className="text-sm text-white/80 font-body mb-4">
-                    {dueWordsCount > 0
-                      ? `${dueWordsCount} słów czeka na powtórkę`
-                      : "Zacznij naukę nowych słów"}
-                  </p>
-                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/20 backdrop-blur-sm text-white font-body font-medium text-sm">
-                    Zaczynamy →
-                  </div>
-                </div>
-              </div>
-            </Link>
-          </motion.div>
-
-          {hasData ? (
-            <>
-              {/* Stats cards */}
-              <motion.div 
-                className="grid grid-cols-3 gap-3 mb-8"
-                initial="hidden"
-                animate="visible"
-                variants={{
-                  hidden: { opacity: 0 },
-                  visible: {
-                    opacity: 1,
-                    transition: { staggerChildren: 0.1, delayChildren: 0.3 }
-                  }
-                }}
-              >
-                <StatCard
-                  label="Opanowane"
-                  value={stats?.masteredWords || 0}
-                  color="#22C55E"
-                  icon={
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                  }
-                />
-                <StatCard
-                  label="Do powtórki"
-                  value={dueWordsCount}
-                  color="#F59E0B"
-                  icon={
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                  }
-                />
-                <StatCard
-                  label="Celność"
-                  value={
-                    stats
-                      ? `${Math.round(
-                          Object.values(stats.accuracyByDomain).reduce(
-                            (a, b) => a + b,
-                            0
-                          ) /
-                            Math.max(
-                              Object.values(stats.accuracyByDomain).filter(
-                                (v) => v > 0
-                              ).length,
-                              1
-                            ) *
-                            100
-                        )}%`
-                      : "—"
-                  }
-                  color="#6366F1"
-                  icon={
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                    </svg>
-                  }
-                />
-              </motion.div>
-
-              {/* V2: Dual-track knowledge counters */}
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.35 }}
-                className="grid grid-cols-2 gap-3 mb-4"
-              >
-                <div className="glass-card p-4">
-                  <div className="flex items-center gap-2 mb-2">
-                    <div className="w-2.5 h-2.5 rounded-full bg-blue-400" />
-                    <span className="text-xs font-body text-text-secondary">Rozpoznajesz</span>
-                  </div>
-                  <p className="text-2xl font-body font-bold text-blue-400">{recognizedCount}</p>
-                  <p className="text-xs text-text-secondary mt-0.5">EN → PL ≥80%</p>
-                </div>
-                <div className="glass-card p-4">
-                  <div className="flex items-center gap-2 mb-2">
-                    <div className="w-2.5 h-2.5 rounded-full bg-purple-400" />
-                    <span className="text-xs font-body text-text-secondary">Aktywnie używasz</span>
-                  </div>
-                  <p className="text-2xl font-body font-bold text-purple-400">{activelyUsedCount}</p>
-                  <p className="text-xs text-text-secondary mt-0.5">PL → EN ≥80%</p>
-                </div>
-              </motion.div>
-
-              {/* V2: Leech counter */}
-              {leechCount > 0 && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.38 }}
-                  className="glass-card p-4 mb-4 border-error/20"
-                >
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <span className="text-lg">🔴</span>
-                      <div>
-                        <p className="text-sm font-body text-text-primary font-medium">
-                          {leechCount} {leechCount === 1 ? 'słowo wymaga' : 'słów wymaga'} uwagi
-                        </p>
-                        <p className="text-xs font-body text-text-secondary">
-                          Te słowa są powtarzane wielokrotnie z niską celnością
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              )}
-
-              {/* Mini chart */}
-              {chartData.length > 0 && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4 }}
-                  className="glass-card p-4 sm:p-6"
-                >
-                  <h3 className="text-sm font-body text-text-secondary mb-4">
-                    Ostatnie 7 dni
-                  </h3>
-                  <ResponsiveContainer width="100%" height={160}>
-                    <AreaChart data={chartData}>
-                      <defs>
-                        <linearGradient id="colorWords" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="5%" stopColor="#6366F1" stopOpacity={0.3} />
-                          <stop offset="95%" stopColor="#6366F1" stopOpacity={0} />
-                        </linearGradient>
-                      </defs>
-                      <XAxis
-                        dataKey="date"
-                        tick={{ fill: "#A1A1AA", fontSize: 11 }}
-                        axisLine={false}
-                        tickLine={false}
-                      />
-                      <YAxis hide />
-                      <Tooltip
-                        contentStyle={{
-                          backgroundColor: "#141416",
-                          border: "1px solid #27272A",
-                          borderRadius: 12,
-                          color: "#FAFAFA",
-                          fontSize: 12,
-                        }}
-                      />
-                      <Area
-                        type="monotone"
-                        dataKey="słowa"
-                        stroke="#6366F1"
-                        fill="url(#colorWords)"
-                        strokeWidth={2}
-                      />
-                      <Line
-                        type="monotone"
-                        dataKey="celność"
-                        stroke="#22C55E"
-                        strokeWidth={2}
-                        dot={false}
-                      />
-                    </AreaChart>
-                  </ResponsiveContainer>
-                </motion.div>
-              )}
-
-              {/* Weekly AI Report */}
-              {recentSessions.length >= 1 && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5 }}
-                  className="glass-card p-5 sm:p-6 mt-6"
-                >
-                  <div className="flex items-center justify-between mb-3">
-                    <h3 className="text-sm font-body text-text-secondary flex items-center gap-2">
-                      <span className="text-lg">🤖</span>
-                      Raport tygodniowy AI
-                    </h3>
-                    <Button
-                      size="sm"
-                      variant={weeklyReport ? "secondary" : "primary"}
-                      onClick={handleGenerateReport}
-                      disabled={isGeneratingReport}
-                    >
-                      {isGeneratingReport ? "Generuję..." : weeklyReport ? "Odśwież" : "Generuj"}
-                    </Button>
-                  </div>
-                  {weeklyReport ? (
-                    <p className="text-sm font-body text-text-primary leading-relaxed">
-                      {weeklyReport}
-                    </p>
-                  ) : (
-                    <p className="text-xs font-body text-text-secondary">
-                      Gemini AI przeanalizuje Twoje postępy z ostatnich 7 dni i poda rekomendacje.
-                    </p>
-                  )}
-                </motion.div>
-              )}
-            </>
-          ) : (
-            /* Empty state */
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.3 }}
-              className="glass-card p-8 text-center"
+            <svg
+              className="w-3.5 h-3.5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
             >
-              <div className="text-5xl mb-4">📚</div>
-              <h3 className="text-xl font-heading text-text-primary mb-2">
-                Zacznij swoją pierwszą sesję!
-              </h3>
-              <p className="text-sm font-body text-text-secondary mb-6 max-w-sm mx-auto">
-                Mamy 40 słów z finansów, prawa, tech i codziennych rozmów
-                gotowych do nauki. Kliknij przycisk powyżej, aby rozpocząć.
-              </p>
-              <div className="flex justify-center gap-2">
-                {["Finanse", "Prawo", "Tech", "Rozmowa"].map((label, i) => (
-                  <span
-                    key={label}
-                    className="px-3 py-1 rounded-full text-xs font-body"
-                    style={{
-                      backgroundColor: ["#3B82F620", "#8B5CF620", "#06B6D420", "#F9731620"][i],
-                      color: ["#3B82F6", "#8B5CF6", "#06B6D4", "#F97316"][i],
-                    }}
-                  >
-                    {label}
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"
+              />
+            </svg>
+            Wyloguj
+          </button>
+        </div>
+      </header>
+
+      {/* Main Grid Layout */}
+      <main className="flex-1 w-full max-w-7xl mx-auto px-4 py-6 md:px-6 lg:py-10 grid grid-cols-1 lg:grid-cols-12 gap-6 relative z-10">
+        
+        {/* Left Column: Brief Input, Logs, Search Results */}
+        <section className="lg:col-span-6 flex flex-col gap-6">
+          <BriefInput
+            value={briefText}
+            onChange={setBriefText}
+            onAnalyze={handleStartAnalysis}
+            isAnalyzing={
+              step !== "idle" && step !== "done" && step !== "error"
+            }
+          />
+
+          {/* Real-time System Logs Console */}
+          {step !== "idle" && (
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="bg-bg-surface border border-border rounded-2xl p-5 font-mono text-xs"
+            >
+              <div className="flex items-center justify-between border-b border-border/50 pb-3 mb-3">
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-accent animate-ping" />
+                  <span className="font-semibold text-text-primary text-[11px] uppercase tracking-wider">
+                    Logi Systemowe AI & API
                   </span>
+                </div>
+                <span className="text-[10px] text-text-secondary">
+                  Stan: {step}
+                </span>
+              </div>
+
+              <div className="max-h-48 overflow-y-auto space-y-2 pr-1 scrollbar-thin scrollbar-thumb-border scrollbar-track-transparent">
+                {logs.map((log, idx) => (
+                  <div key={idx} className="leading-relaxed flex items-start gap-2">
+                    <span className="text-text-secondary shrink-0 font-medium select-none">
+                      [{log.timestamp}]
+                    </span>
+                    <span
+                      className={
+                        log.type === "success"
+                          ? "text-success"
+                          : log.type === "error"
+                          ? "text-error"
+                          : log.type === "warning"
+                          ? "text-warning"
+                          : "text-text-primary"
+                      }
+                    >
+                      {log.message}
+                    </span>
+                  </div>
                 ))}
+                <div ref={consoleEndRef} />
               </div>
             </motion.div>
           )}
-        </div>
+
+          {/* Brief Analysis Summary */}
+          {briefAnalysis && (
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="bg-bg-surface border border-border rounded-2xl p-5"
+            >
+              <h3 className="font-heading text-lg text-text-primary mb-2 flex items-center gap-2">
+                <span>🔍</span> Wyniki ekstrakcji pisma
+              </h3>
+              <p className="text-text-secondary text-sm leading-relaxed mb-4">
+                {briefAnalysis.summary}
+              </p>
+              <div className="flex flex-wrap gap-2 mb-3">
+                {briefAnalysis.keywords.map((kw) => (
+                  <span
+                    key={kw}
+                    className="px-2.5 py-1 rounded-lg bg-accent-muted border border-accent/25 text-accent text-xs font-medium"
+                  >
+                    {kw}
+                  </span>
+                ))}
+              </div>
+              <div className="flex flex-wrap gap-2 text-xs text-text-secondary">
+                <span className="px-2 py-1 rounded-md bg-bg border border-border font-mono">
+                  Podstawy prawne: {briefAnalysis.legalBases.join(", ") || "brak wprost"}
+                </span>
+                <span className="px-2 py-1 rounded-md bg-bg border border-border font-mono">
+                  Sąd: {briefAnalysis.courtType}
+                </span>
+                <span className="px-2 py-1 rounded-md bg-bg border border-border font-mono">
+                  Sprawa: {briefAnalysis.caseType}
+                </span>
+              </div>
+            </motion.div>
+          )}
+
+          {/* Search Results Orzecznictwo */}
+          {(step === "fetching_judgments" || step === "analyzing" || step === "done") &&
+            searchResults.length > 0 && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="space-y-4"
+              >
+                <div className="flex items-center justify-between px-1">
+                  <h2 className="font-heading text-xl text-text-primary">
+                    Powiązane orzecznictwo SAOS ({totalResults})
+                  </h2>
+                  <span className="text-xs text-text-secondary font-mono">
+                    Pokazuję top {searchResults.length}
+                  </span>
+                </div>
+
+                <div className="space-y-4">
+                  {searchResults.map((result) => {
+                    const isPreFetched = judgments.some((j) => j.id === result.id);
+                    const tag: "high" | "medium" | "low" = isPreFetched
+                      ? "high"
+                      : "medium";
+
+                    return (
+                      <JudgmentCard
+                        key={result.id}
+                        judgment={result}
+                        isExpanded={expandedJudgmentId === result.id}
+                        onExpand={handleExpandJudgment}
+                        expandedContent={
+                          judgments.find((j) => j.id === result.id)?.textContent
+                        }
+                        relevanceTag={tag}
+                      />
+                    );
+                  })}
+                </div>
+              </motion.div>
+            )}
+        </section>
+
+        {/* Right Column: AI Analysis Report / Welcome Panel */}
+        <section className="lg:col-span-6 flex flex-col gap-6">
+          <AnimatePresence mode="wait">
+            {step === "idle" && (
+              <motion.div
+                key="welcome"
+                initial={{ opacity: 0, scale: 0.98 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.98 }}
+                transition={{ duration: 0.3 }}
+                className="bg-bg-surface border border-border rounded-2xl p-8 space-y-6 backdrop-blur flex-1 flex flex-col justify-center"
+              >
+                <div className="w-14 h-14 rounded-2xl bg-accent-muted flex items-center justify-center mb-2 mx-auto">
+                  <svg
+                    className="w-7 h-7 text-accent"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={1.5}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m12.728 12.728l.707.707M12 8a4 4 0 100 8 4 4 0 000-8z"
+                    />
+                  </svg>
+                </div>
+
+                <div className="text-center space-y-2 max-w-md mx-auto">
+                  <h2 className="font-heading text-2xl text-white">
+                    Inteligentny Asystent Orzecznictwa
+                  </h2>
+                  <p className="text-text-secondary text-sm leading-relaxed">
+                    Wklej pismo procesowe po lewej stronie, aby system automatycznie odnalazł kluczowe wyroki w bazie SAOS i przeanalizował je pod kątem Twojej sprawy.
+                  </p>
+                </div>
+
+                <hr className="border-border/50" />
+
+                <div className="space-y-4">
+                  <h3 className="text-xs font-semibold text-text-primary uppercase tracking-wider font-mono">
+                    Jak to działa:
+                  </h3>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="p-4 rounded-xl bg-bg/50 border border-border/50 space-y-1">
+                      <div className="text-accent font-semibold text-sm">1. Ekstrakcja AI</div>
+                      <p className="text-xs text-text-secondary leading-relaxed">
+                        Gemini analizuje pismo, wyodrębniając pojęcia prawne oraz podstawy prawne.
+                      </p>
+                    </div>
+
+                    <div className="p-4 rounded-xl bg-bg/50 border border-border/50 space-y-1">
+                      <div className="text-accent font-semibold text-sm">2. SAOS Querying</div>
+                      <p className="text-xs text-text-secondary leading-relaxed">
+                        System automatycznie wyszukuje najnowsze wyroki w polskiej bazie orzecznictwa.
+                      </p>
+                    </div>
+
+                    <div className="p-4 rounded-xl bg-bg/50 border border-border/50 space-y-1">
+                      <div className="text-accent font-semibold text-sm">3. Analiza Treści</div>
+                      <p className="text-xs text-text-secondary leading-relaxed">
+                        Sztuczna inteligencja pobiera uzasadnienia wyroków i wyciąga tezy wspierające oraz ryzyka.
+                      </p>
+                    </div>
+
+                    <div className="p-4 rounded-xl bg-bg/50 border border-border/50 space-y-1">
+                      <div className="text-accent font-semibold text-sm">4. Gotowe Fragmenty</div>
+                      <p className="text-xs text-text-secondary leading-relaxed">
+                        Otrzymujesz gotowe, profesjonalnie sformułowane cytaty z sygnaturami do wklejenia.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+
+            {step === "error" && (
+              <motion.div
+                key="error"
+                initial={{ opacity: 0, scale: 0.98 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.98 }}
+                className="bg-bg-surface border border-error/30 rounded-2xl p-6 backdrop-blur flex-1 flex flex-col justify-center items-center text-center space-y-4"
+              >
+                <div className="w-12 h-12 rounded-xl bg-error-muted flex items-center justify-center">
+                  <svg
+                    className="w-6 h-6 text-error"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"
+                    />
+                  </svg>
+                </div>
+                <div className="space-y-1">
+                  <h2 className="text-lg font-heading font-medium text-white">
+                    Wystąpił błąd analizy
+                  </h2>
+                  <p className="text-text-secondary text-sm max-w-sm">
+                    {error || "Nie udało się zakończyć procesu analizy orzecznictwa."}
+                  </p>
+                </div>
+                <button
+                  onClick={handleStartAnalysis}
+                  className="px-5 py-2 rounded-lg bg-accent text-white text-xs font-semibold hover:bg-accent-hover transition-colors duration-200 cursor-pointer"
+                >
+                  Spróbuj ponownie
+                </button>
+              </motion.div>
+            )}
+
+            {step !== "idle" && step !== "error" && (
+              <motion.div
+                key="report-view"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="flex-1 flex flex-col justify-start"
+              >
+                <AnalysisReport
+                  report={report || {
+                    summary: "",
+                    supportingArguments: [],
+                    counterArguments: [],
+                    citations: [],
+                    recommendation: "",
+                  }}
+                  isLoading={step !== "done"}
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </section>
       </main>
     </div>
   );
 }
+

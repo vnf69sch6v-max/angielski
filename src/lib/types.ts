@@ -1,369 +1,157 @@
 import { Timestamp } from "firebase/firestore";
 
-// ─── Core Enums ───────────────────────────────────────
-
-export type Domain = "finance" | "legal" | "smalltalk" | "tech";
-export type WordState = "new" | "learning" | "review" | "relearning" | "mastered";
-export type ExerciseLevel = 1 | 2 | 3 | 4 | 5 | 6 | 7;
-export type ExerciseType =
-  | "flashcard"
-  | "reverse_typing"
-  | "matching"
-  | "listening"
-  | "quiz"
-  | "translation"
-  | "context_production";
-export type TrackDirection = "recognition" | "production";
-export type OverallMastery = "passive" | "partial" | "active" | "mastered";
-export type FatigueSensitivity = "low" | "medium" | "high";
-
-// ─── Domain Metadata ──────────────────────────────────
-
-export const DOMAIN_CONFIG: Record<Domain, { label: string; labelPL: string; color: string }> = {
-  finance: { label: "Finance", labelPL: "Finanse", color: "#3B82F6" },
-  legal: { label: "Legal", labelPL: "Prawo", color: "#8B5CF6" },
-  smalltalk: { label: "Small Talk", labelPL: "Rozmowa", color: "#F97316" },
-  tech: { label: "Tech", labelPL: "Technologia", color: "#06B6D4" },
-};
-
-export const EXERCISE_TYPE_MAP: Record<ExerciseLevel, ExerciseType> = {
-  1: "flashcard",
-  2: "reverse_typing",
-  3: "matching",
-  4: "listening",
-  5: "quiz",
-  6: "translation",
-  7: "context_production",
-};
-
-export const EXERCISE_LEVEL_LABELS: Record<ExerciseLevel, string> = {
-  1: "Fiszka",
-  2: "Pisanie",
-  3: "Dopasowanie",
-  4: "Słuchanie",
-  5: "Quiz",
-  6: "Tłumaczenie",
-  7: "Kontekst",
-};
-
-export const MASTERY_LABELS: Record<WordState, { label: string; color: string }> = {
-  new: { label: "Nowe", color: "#A1A1AA" },
-  learning: { label: "W nauce", color: "#F59E0B" },
-  review: { label: "Powtórka", color: "#3B82F6" },
-  relearning: { label: "Ponowna nauka", color: "#EF4444" },
-  mastered: { label: "Opanowane", color: "#22C55E" },
-};
-
-export const OVERALL_MASTERY_LABELS: Record<OverallMastery, { label: string; color: string }> = {
-  passive: { label: "Pasywne", color: "#F59E0B" },
-  partial: { label: "Częściowe", color: "#3B82F6" },
-  active: { label: "Aktywne", color: "#8B5CF6" },
-  mastered: { label: "Opanowane", color: "#22C55E" },
-};
-
-// ─── Dual-Track Data (V2) ─────────────────────────────
-
-export interface TrackData {
-  stability: number;
-  difficulty: number;
-  retrievability: number;
-  nextReview: Timestamp;
-  lastReview: Timestamp | null;
-  state: WordState;
-  learningStep: number;
-  totalAttempts: number;
-  correctAttempts: number;
-  accuracy: number;
-}
-
-// ─── Word Data (from seed JSON) ───────────────────────
-
-export interface SeedWord {
-  word: string;
-  translation: string;
-  partOfSpeech: string;
-  level: "B1" | "B2" | "C1";
-  frequency: number; // 1-10
-  tags: string[];
-  synonymPair?: string; // Group ID for synonym/antonym pairing (§4.3)
-}
-
-export interface WordList {
-  domain: Domain;
-  words: SeedWord[];
-}
-
-// ─── Word Progress (Firestore) ────────────────────────
-
-export interface WordProgress {
-  wordId: string;
-  word: string;
-  translation: string;
-  domain: Domain;
-  level: "B1" | "B2" | "C1";
-  partOfSpeech: string;
-  source: "seed" | "ai" | "manual";
-  state: WordState;
-  // Legacy FSRS fields (kept for backward compat)
-  stability: number;
-  difficulty: number;
-  retrievability: number;
-  nextReview: Timestamp;
-  lastReview: Timestamp | null;
-  learningStep: number;
-  // Exercise escalation
-  exerciseLevel: ExerciseLevel;
-  consecutiveCorrect: number;
-  // Stats
-  totalAttempts: number;
-  correctAttempts: number;
-  accuracy: number;
-  averageResponseTime: number;
-  timesWrongTotal: number;
-  // AI cache
-  exampleSentences: string[];
-  mnemonic: string | null;
-  quizCache: QuizData | null;
-  // Weekly repeat limiter (§9.3)
-  weeklyReviewCount: number;
-  lastWeeklyReset: Timestamp | null;
-  // Synonym/antonym pairing
-  synonymPair: string | null;
-  // Dates
-  dateAdded: Timestamp;
-  dateFirstCorrect: Timestamp | null;
-  dateMastered: Timestamp | null;
-
-  // ─── V2: DUAL-TRACK — new fields ───────────────────
-  tracks?: {
-    recognition: TrackData;
-    production: TrackData;
-  };
-  overallMastery?: OverallMastery;
-
-  // ─── V2: LEECH — new fields ────────────────────────
-  isLeech?: boolean;
-  leechTrack?: TrackDirection | null;
-
-  // ─── V2: Context Production cache ──────────────────
-  contextCache?: string | null;
-
-  // ─── V3: consecutiveEasy tracker ───────────────────
-  consecutiveEasy?: number;
-}
-
-// ─── Quiz Data ────────────────────────────────────────
-
-export interface QuizData {
-  sentence: string;
-  options: string[];
-  correctIndex: number;
-  explanationPL: string;
-}
-
-// ─── Translation Evaluation ──────────────────────────
-
-export interface TranslationEval {
-  score: number;
-  feedbackPL: string;
-  alternatives: string[];
-}
-
-// ─── Context Production Evaluation (V2) ──────────────
-
-export interface ContextProductionEval {
-  wordUsed: number;       // 0-30
-  grammar: number;        // 0-40
-  naturalness: number;    // 0-30
-  totalScore: number;     // 0-100
-  feedbackPL: string;
-}
-
-// ─── Fatigue Data (V2) ───────────────────────────────
-
-export interface SessionFatigueData {
-  fatigueOnsetMinute: number | null;
-  wordsBeforeFatigue: number;
-  accuracyBeforeFatigue: number;
-  accuracyAfterFatigue: number;
-  timeOfDay: number; // hour of session start
-  peakFatigueScore: number;
-}
-
-// ─── Session ──────────────────────────────────────────
-
-export interface Session {
-  sessionId: string;
-  date: Timestamp;
-  durationMs: number;
-  wordsReviewed: number;
-  newWordsIntroduced: number;
-  accuracyOverall: number;
-  accuracyByDomain: Record<Domain, number>;
-  wrongWords: { wordId: string; word: string; exercise: ExerciseType }[];
-  exerciseBreakdown: Record<string, number>;
-  aiAnalysis: {
-    weakDomains: string[];
-    sessionQuality: string;
-    suggestions: string;
-  } | null;
-  // V2 additions
-  recognitionAccuracy?: number;
-  productionAccuracy?: number;
-  fatigueData?: SessionFatigueData;
-  leechWordsReviewed?: number;
-  // V3.1 additions
-  enjoymentScore?: number;
-  localDate?: string;
-  localStartHour?: number;
-  dayOfWeek?: number;
-  timezone?: string;
-  difficultyStrategy?: string;
-}
-
 // ─── User Profile ─────────────────────────────────────
 
 export interface UserProfile {
   displayName: string;
   email: string;
   photoURL: string | null;
-  streakDays: number;
-  lastSessionDate: Timestamp | null;
-  settings: UserSettings;
   createdAt: Timestamp;
-  // V3: Streak
-  streakLastActiveDate?: string;  // "2026-04-04" date string, timezone-aware
-  longestStreak?: number;
-  // V3.1: Streak history (last 90 active dates for heatmap)
-  streakHistory?: string[];
 }
 
-export interface UserSettings {
-  domainWeights: Record<Domain, number>;
-  dailyGoal: number; // new words per day (3-10) — legacy, still used as minimum
-  targetRetention: number; // 0.95 default
-  // V2 additions
-  ttsVoice?: "en-US" | "en-GB";
-  fatigueSensitivity?: FatigueSensitivity;
-  dailyNewWordCap?: number; // 10-50, default 50
+// ─── SAOS API Types ───────────────────────────────────
+
+export type CourtType =
+  | "COMMON"
+  | "SUPREME"
+  | "ADMINISTRATIVE"
+  | "CONSTITUTIONAL_TRIBUNAL"
+  | "NATIONAL_APPEAL_CHAMBER";
+
+export type JudgmentType =
+  | "SENTENCE"
+  | "DECISION"
+  | "RESOLUTION"
+  | "REGULATION"
+  | "REASONS";
+
+export interface SAOSSearchParams {
+  query: string;
+  courtType?: CourtType;
+  dateFrom?: string; // YYYY-MM-DD
+  dateTo?: string;   // YYYY-MM-DD
+  keyword?: string;
+  judgmentType?: JudgmentType;
+  pageSize?: number;  // 10-100, default 20
+  pageNumber?: number; // 0-based
 }
 
-export const DEFAULT_SETTINGS: UserSettings = {
-  domainWeights: {
-    finance: 0.25,
-    legal: 0.25,
-    smalltalk: 0.25,
-    tech: 0.25,
-  },
-  dailyGoal: 7,
-  targetRetention: 0.95,
-  ttsVoice: "en-US",
-  fatigueSensitivity: "medium",
-  dailyNewWordCap: 50,
-};
-
-// ─── User Stats ───────────────────────────────────────
-
-export interface UserStats {
-  totalWords: number;
-  masteredWords: number;
-  learningWords: number;
-  reviewWords: number;
-  accuracyByDomain: Record<Domain, number>;
-  streakDays: number;
-  weeklyProgress: WeeklyDataPoint[];
-  totalSessions: number;
-  totalStudyTimeMs: number;
-  // V2 additions
-  recognizedWords?: number;
-  activelyUsedWords?: number;
-  leechCount?: number;
+export interface SAOSCourtCase {
+  caseNumber: string;
 }
 
-export interface WeeklyDataPoint {
-  date: string; // ISO date string
-  wordsReviewed: number;
-  accuracy: number;
+export interface SAOSCourt {
+  id: number;
+  code?: string;
+  name: string;
+  type?: string;
 }
 
-// ─── Session Item (for learn page) ───────────────────
-
-export interface SessionItem {
-  wordProgress: WordProgress;
-  exerciseType: ExerciseType;
-  trackDirection?: TrackDirection;
+export interface SAOSDivision {
+  id: number;
+  name: string;
+  court: SAOSCourt;
 }
 
-// ─── Answer Result ───────────────────────────────────
-
-export interface AnswerResult {
-  wordId: string;
-  exerciseType: ExerciseType;
-  wasCorrect: boolean;
-  rawRating: number; // 1-4
-  responseTimeMs: number;
-  trackDirection?: TrackDirection;
-  reFlipUsed?: boolean; // V3: re-flip tracking
+export interface SAOSJudgmentSummary {
+  id: number;
+  courtType: CourtType;
+  courtCases: SAOSCourtCase[];
+  judgmentType: JudgmentType;
+  judgmentDate: string;
+  division?: SAOSDivision;
+  textContent?: string;
+  keywords?: string[];
+  // Enriched fields from search
+  snippet?: string;
 }
 
-// ─── V3: Learner Profile ─────────────────────────────
-
-export interface DomainStrength {
-  accuracy: number;
-  wordsKnown: number;
-  weakestArea: string;
-}
-
-export interface TimeSlotStats {
-  avgAccuracy: number;
-  sessionsCount: number;
-  avgSessionLength?: number;
-  avgNewWordsRetained?: number;
-}
-
-export type LearningVelocity = "slow" | "moderate" | "fast" | "unknown";
-export type DifficultyStrategyName = "wave" | "ascending" | "descending" | "random";
-
-export interface StrategyScore {
-  retention1d: number;
-  retention7d: number;
-  trials: number;
-}
-
-export interface LearnerProfile {
-  domainStrength: Record<Domain, DomainStrength>;
-  sessionsByDayOfWeek: Record<number, TimeSlotStats>;
-  sessionsByHour: Record<number, TimeSlotStats>;
-  optimalTimeOfDay: number | null;
-  optimalSessionLength: number | null;
-  avgNewWordsPerDay: number;
-  avgRetentionRate1d: number;
-  avgRetentionRate7d: number;
-  learningVelocity: LearningVelocity;
-  commonMistakePatterns: string[];
-  difficultyStrategy: {
-    currentStrategy: DifficultyStrategyName;
-    strategyScores: Record<DifficultyStrategyName, StrategyScore>;
+export interface SAOSJudgmentDetail extends SAOSJudgmentSummary {
+  textContent: string;
+  judges?: { name: string; function?: string; specialRoles?: string[] }[];
+  courtReporters?: string[];
+  legalBases?: string[];
+  referencedRegulations?: {
+    journalTitle: string;
+    journalNo: number;
+    journalYear: number;
+    journalEntry: number;
+    text: string;
+  }[];
+  source?: {
+    code: string;
+    judgmentUrl?: string;
   };
-  totalSessions: number;
-  totalWordsEverSeen: number;
-  profileLastUpdated: Timestamp;
 }
 
-// ─── V3: Word Graph ──────────────────────────────────
-
-export type RelationType = "synonym" | "antonym" | "colocation" | "same_topic" | "false_friend" | "derivative";
-
-export interface WordConnection {
-  wordId: string;
-  word: string;
-  relationType: RelationType;
-  strength: number; // 0-1
+export interface SAOSSearchResponse {
+  items: SAOSJudgmentSummary[];
+  info: {
+    totalCount: number;
+  };
+  links: { rel: string; href: string }[];
 }
 
-export interface WordGraphEntry {
-  wordId: string;
-  word: string;
-  connections: WordConnection[];
+// ─── AI Analysis Types ────────────────────────────────
+
+export interface BriefAnalysis {
+  keywords: string[];
+  searchQueries: string[];
+  legalBases: string[];
+  caseType: string;
+  courtType: CourtType;
+  summary: string;
 }
 
+export interface SupportingArgument {
+  thesis: string;
+  caseNumber: string;
+  court: string;
+  date: string;
+  relevance: "high" | "medium" | "low";
+}
+
+export interface CounterArgument {
+  thesis: string;
+  caseNumber: string;
+  court: string;
+  date: string;
+  risk: "high" | "medium" | "low";
+}
+
+export interface CitationFragment {
+  text: string;
+  caseNumber: string;
+  court: string;
+  date: string;
+}
+
+export interface AnalysisReport {
+  summary: string;
+  supportingArguments: SupportingArgument[];
+  counterArguments: CounterArgument[];
+  citations: CitationFragment[];
+  recommendation: string;
+}
+
+// ─── App State Types ──────────────────────────────────
+
+export type AnalysisStep =
+  | "idle"
+  | "extracting_keywords"
+  | "searching_saos"
+  | "fetching_judgments"
+  | "analyzing"
+  | "done"
+  | "error";
+
+export interface AnalysisState {
+  step: AnalysisStep;
+  briefText: string;
+  briefAnalysis: BriefAnalysis | null;
+  judgments: SAOSJudgmentDetail[];
+  searchResults: SAOSJudgmentSummary[];
+  totalResults: number;
+  report: AnalysisReport | null;
+  error: string | null;
+}

@@ -9,6 +9,7 @@ import {
 } from "firebase/auth";
 import { auth, googleProvider, getUserProfile, createUserProfile, isFirebaseConfigured } from "@/lib/firebase";
 import { UserProfile } from "@/lib/types";
+import { Timestamp } from "firebase/firestore";
 
 interface AuthContextType {
   user: User | null;
@@ -38,25 +39,40 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
 
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
-      setUser(firebaseUser);
+      try {
+        setUser(firebaseUser);
 
-      if (firebaseUser) {
-        // Fetch or create profile
-        let userProfile = await getUserProfile(firebaseUser.uid);
-        if (!userProfile) {
-          userProfile = await createUserProfile(
-            firebaseUser.uid,
-            firebaseUser.displayName || "Użytkownik",
-            firebaseUser.email || "",
-            firebaseUser.photoURL
-          );
+        if (firebaseUser) {
+          try {
+            // Fetch or create profile
+            let userProfile = await getUserProfile(firebaseUser.uid);
+            if (!userProfile) {
+              userProfile = await createUserProfile(
+                firebaseUser.uid,
+                firebaseUser.displayName || "Użytkownik",
+                firebaseUser.email || "",
+                firebaseUser.photoURL
+              );
+            }
+            setProfile(userProfile);
+          } catch (profileError) {
+            console.error("Failed to load user profile from Firestore, using fallback:", profileError);
+            // Fallback profile if Firestore is blocked/unreachable
+            setProfile({
+              displayName: firebaseUser.displayName || "Użytkownik",
+              email: firebaseUser.email || "",
+              photoURL: firebaseUser.photoURL,
+              createdAt: Timestamp.now(),
+            });
+          }
+        } else {
+          setProfile(null);
         }
-        setProfile(userProfile);
-      } else {
-        setProfile(null);
+      } catch (authError) {
+        console.error("Auth state change error:", authError);
+      } finally {
+        setLoading(false);
       }
-
-      setLoading(false);
     });
 
     return () => unsubscribe();
